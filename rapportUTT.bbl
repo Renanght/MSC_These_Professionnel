@@ -1,0 +1,296 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global/global}
+    \entry{aristote}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=e5b4c03713aa9c1417fce7ac33208057}{%
+           family={Aristote},
+           familyi={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{e5b4c03713aa9c1417fce7ac33208057}
+      \strng{fullhash}{e5b4c03713aa9c1417fce7ac33208057}
+      \strng{fullhashraw}{e5b4c03713aa9c1417fce7ac33208057}
+      \strng{bibnamehash}{e5b4c03713aa9c1417fce7ac33208057}
+      \strng{authorbibnamehash}{e5b4c03713aa9c1417fce7ac33208057}
+      \strng{authornamehash}{e5b4c03713aa9c1417fce7ac33208057}
+      \strng{authorfullhash}{e5b4c03713aa9c1417fce7ac33208057}
+      \strng{authorfullhashraw}{e5b4c03713aa9c1417fce7ac33208057}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{La Politique}
+      \field{year}{299}
+      \field{dateera}{bce}
+      \true{nocite}
+    \endentry
+    \entry{ThinkerviewBarrau}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=15785c9d676c9e1deb9d90bdc8feb58a}{%
+           family={Barrau},
+           familyi={B\bibinitperiod},
+           given={Aurélien},
+           giveni={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Thinkerview}%
+      }
+      \strng{namehash}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \strng{fullhash}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \strng{fullhashraw}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \strng{bibnamehash}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \strng{authorbibnamehash}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \strng{authornamehash}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \strng{authorfullhash}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \strng{authorfullhashraw}{15785c9d676c9e1deb9d90bdc8feb58a}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{14}
+      \field{month}{9}
+      \field{note}{\shortUrl{https://youtu.be/XO4q9oVrWWw}}
+      \field{title}{Quand la Science appelle à l'aide pour l'humanité}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \true{nocite}
+    \endentry
+    \entry{climatM}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=0ba804f262d6ff1c5952a48351828b17}{%
+           family={Correia},
+           familyi={C\bibinitperiod},
+           given={Mickael},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{0ba804f262d6ff1c5952a48351828b17}
+      \strng{fullhash}{0ba804f262d6ff1c5952a48351828b17}
+      \strng{fullhashraw}{0ba804f262d6ff1c5952a48351828b17}
+      \strng{bibnamehash}{0ba804f262d6ff1c5952a48351828b17}
+      \strng{authorbibnamehash}{0ba804f262d6ff1c5952a48351828b17}
+      \strng{authornamehash}{0ba804f262d6ff1c5952a48351828b17}
+      \strng{authorfullhash}{0ba804f262d6ff1c5952a48351828b17}
+      \strng{authorfullhashraw}{0ba804f262d6ff1c5952a48351828b17}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{22}
+      \field{journaltitle}{Mediapart}
+      \field{month}{4}
+      \field{note}{\shortUrl{https://www.mediapart.fr/journal/france/220421/loi-climat-les-pauvres-et-la-planete-attendront}}
+      \field{title}{Loi "climat": les pauvres et la planète attendront}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \true{nocite}
+    \endentry
+    \entry{dirac}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=59342ede3a101402b34939644b51ad06}{%
+           family={Dirac},
+           familyi={D\bibinitperiod},
+           given={Paul\bibnamedelimb Adrien\bibnamedelima Maurice},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Clarendon Press}%
+      }
+      \strng{namehash}{59342ede3a101402b34939644b51ad06}
+      \strng{fullhash}{59342ede3a101402b34939644b51ad06}
+      \strng{fullhashraw}{59342ede3a101402b34939644b51ad06}
+      \strng{bibnamehash}{59342ede3a101402b34939644b51ad06}
+      \strng{authorbibnamehash}{59342ede3a101402b34939644b51ad06}
+      \strng{authornamehash}{59342ede3a101402b34939644b51ad06}
+      \strng{authorfullhash}{59342ede3a101402b34939644b51ad06}
+      \strng{authorfullhashraw}{59342ede3a101402b34939644b51ad06}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{9780198520115}
+      \field{series}{International series of monographs on physics}
+      \field{title}{The Principles of Quantum Mechanics}
+      \field{year}{1981}
+      \true{nocite}
+      \keyw{physics}
+    \endentry
+    \entry{guiragossian:hal-02115427}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=147176ad6799dac4bd78ac47cdb0ffb6}{%
+           family={Guiragossian},
+           familyi={G\bibinitperiod},
+           given={Pauline},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Aix-en-Provence, France}%
+      }
+      \strng{namehash}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \strng{fullhash}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \strng{fullhashraw}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \strng{bibnamehash}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \strng{authorbibnamehash}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \strng{authornamehash}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \strng{authorfullhash}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \strng{authorfullhashraw}{147176ad6799dac4bd78ac47cdb0ffb6}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{L'éducation des citoyens, l'éducation des gouvernants}
+      \field{month}{9}
+      \field{title}{{Former le citoyen-soldat sous la République jacobine}}
+      \field{year}{2019}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal-amu.archives-ouvertes.fr/hal-02115427
+      \endverb
+      \verb{url}
+      \verb https://hal-amu.archives-ouvertes.fr/hal-02115427
+      \endverb
+    \endentry
+    \entry{topdown}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=b905b78c01f208bba85ce9931e369116}{%
+           family={Kurose},
+           familyi={K\bibinitperiod},
+           given={James\bibnamedelima W.},
+           giveni={J\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=c2e119f22d4ef9df7cfb63c82975b459}{%
+           family={Ross},
+           familyi={R\bibinitperiod},
+           given={Keith\bibnamedelima W.},
+           giveni={K\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Pearson}%
+      }
+      \strng{namehash}{4d5f22bbedd82579ef1668596dc19587}
+      \strng{fullhash}{4d5f22bbedd82579ef1668596dc19587}
+      \strng{fullhashraw}{4d5f22bbedd82579ef1668596dc19587}
+      \strng{bibnamehash}{4d5f22bbedd82579ef1668596dc19587}
+      \strng{authorbibnamehash}{4d5f22bbedd82579ef1668596dc19587}
+      \strng{authornamehash}{4d5f22bbedd82579ef1668596dc19587}
+      \strng{authorfullhash}{4d5f22bbedd82579ef1668596dc19587}
+      \strng{authorfullhashraw}{4d5f22bbedd82579ef1668596dc19587}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{8}
+      \field{note}{url : \shortUrl{http://gen.lib.rus.ec/book/index.php?md5=8B547BCDF967B08655D6360F6FE9D809}}
+      \field{title}{Computer Networking: A Top-Down Approach}
+      \field{year}{2021}
+      \true{nocite}
+    \endentry
+    \entry{arteAnar}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=b28d4e67f9d0b2a4df3a70cc4ffc5710}{%
+           family={Ramonet},
+           familyi={R\bibinitperiod},
+           given={Tancrède},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {ARTE}%
+      }
+      \strng{namehash}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \strng{fullhash}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \strng{fullhashraw}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \strng{bibnamehash}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \strng{authorbibnamehash}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \strng{authornamehash}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \strng{authorfullhash}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \strng{authorfullhashraw}{b28d4e67f9d0b2a4df3a70cc4ffc5710}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{1:20:48 \shortUrl{https://www.youtube.com/watch?v=yxre_Cd5TAI} - Editorial Moscou}
+      \field{title}{Ni Dieu ni maître, une histoire de l'anarchisme}
+      \field{year}{2019}
+      \true{nocite}
+    \endentry
+    \entry{entraide}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=7e728bea96b7cf7f5ab1916a17c85b60}{%
+           family={Servigne},
+           familyi={S\bibinitperiod},
+           given={Pablo},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e92a2fda48fa5d031b86ecdb81d5e806}{%
+           family={Chapelle},
+           familyi={C\bibinitperiod},
+           given={Gauthier},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Les Liens qui Libèrent}%
+      }
+      \strng{namehash}{84fe829724b1542315e7423f8394d2e2}
+      \strng{fullhash}{84fe829724b1542315e7423f8394d2e2}
+      \strng{fullhashraw}{84fe829724b1542315e7423f8394d2e2}
+      \strng{bibnamehash}{84fe829724b1542315e7423f8394d2e2}
+      \strng{authorbibnamehash}{84fe829724b1542315e7423f8394d2e2}
+      \strng{authornamehash}{84fe829724b1542315e7423f8394d2e2}
+      \strng{authorfullhash}{84fe829724b1542315e7423f8394d2e2}
+      \strng{authorfullhashraw}{84fe829724b1542315e7423f8394d2e2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{bookpagination}{page}
+      \field{title}{L'entraide, l'autre loi de la jungle}
+      \field{year}{2019}
+      \true{nocite}
+    \endentry
+    \entry{crypto}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=030bd0fa2faebea3a5543e5242f1569f}{%
+           family={Wikipédia},
+           familyi={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{030bd0fa2faebea3a5543e5242f1569f}
+      \strng{fullhash}{030bd0fa2faebea3a5543e5242f1569f}
+      \strng{fullhashraw}{030bd0fa2faebea3a5543e5242f1569f}
+      \strng{bibnamehash}{030bd0fa2faebea3a5543e5242f1569f}
+      \strng{authorbibnamehash}{030bd0fa2faebea3a5543e5242f1569f}
+      \strng{authornamehash}{030bd0fa2faebea3a5543e5242f1569f}
+      \strng{authorfullhash}{030bd0fa2faebea3a5543e5242f1569f}
+      \strng{authorfullhashraw}{030bd0fa2faebea3a5543e5242f1569f}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{[En ligne; page disponible]}
+      \field{title}{Portail de Cryptologie}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://fr.wikipedia.org/wiki/Portail:Cryptologie
+      \endverb
+      \verb{url}
+      \verb https://fr.wikipedia.org/wiki/Portail:Cryptologie
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
