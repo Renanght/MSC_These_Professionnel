@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  12 MAR 2026 21:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  12 MAR 2026 21:49
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2076,7 +2076,17 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 93.
  (C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-) [1
+)
+Overfull \hbox (5.58548pt too wide) in paragraph at lines 108--109
+[][]\T1/lmr/bx/n/10 (-20) Lieu :[] [][]\T1/lmr/bx/it/10 (-20) 199 Bu-reaux de la Col-line, 92210
+ []
+
+
+Overfull \hbox (8.06715pt too wide) in paragraph at lines 115--116
+[][]\T1/lmr/bx/n/10 (-20) Responsable :[] Jean-Christophe PILLET 
+ []
+
+[1
 
 {C:/Users/gohau/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc} <./ressources-graphiques/Pdg_corner.png> <./ressources-graphiques/logos/UTT-eps-converted-to.pdf> <./ressources-graphiques/logos/entreprise.png> <./ressources-graphiques/keywords-panel.png>]) [0
 
@@ -2201,17 +2211,17 @@ Package logreq Info: Writing requests to 'rapportUTT.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 65934 strings out of 467871
- 1423198 string characters out of 5418376
- 2473901 words of memory out of 5000000
+ 65932 strings out of 467871
+ 1423174 string characters out of 5418376
+ 2473873 words of memory out of 5000000
  93537 multiletter control sequences out of 15000+600000
- 718957 words of font info for 171 fonts, out of 8000000 for 9000
+ 718812 words of font info for 170 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  114i,13n,131p,2517b,1913s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on rapportUTT.pdf (15 pages, 938253 bytes).
+Output written on rapportUTT.pdf (15 pages, 934913 bytes).
 PDF statistics:
- 381 PDF objects out of 1000 (max. 8388607)
+ 380 PDF objects out of 1000 (max. 8388607)
  47 named destinations out of 1000 (max. 500000)
  52103 words of extra memory for PDF output out of 61914 (max. 10000000)
 
