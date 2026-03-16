@@ -790,6 +790,8 @@ INPUT .\latex-files\two.tex
 INPUT latex-files\two.tex
 INPUT .\latex-files\two.tex
 INPUT latex-files\two.tex
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
 INPUT .\latex-files\three.tex
 INPUT latex-files\three.tex
 INPUT .\latex-files\three.tex
@@ -819,6 +821,8 @@ INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbxi10
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmbxi10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmcsc10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmcsc10.pfb
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmmi10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
