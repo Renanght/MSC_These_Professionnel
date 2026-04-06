@@ -1,15 +1,15 @@
 [0] Config.pm:328> INFO - This is Biber 2.21
-[0] Config.pm:331> INFO - Logfile is 'rapportUTT.blg'
-[169] biber-MSWIN64:342> INFO - === 
-[221] Biber.pm:421> INFO - Reading 'rapportUTT.bcf'
-[390] Biber.pm:999> INFO - Using all citekeys in bib section 0
-[416] Biber.pm:4487> INFO - Processing section 0
-[436] Biber.pm:4678> INFO - Looking for bibtex file 'latex-files/bibliography.bib' for section 0
-[503] bibtex.pm:1713> INFO - LaTeX decoding ...
-[527] bibtex.pm:1519> INFO - Found BibTeX data source 'latex-files/bibliography.bib'
-[662] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[663] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
-[663] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
-[663] Biber.pm:4313> INFO - No sort tailoring available for locale 'fr-FR'
-[684] bbl.pm:676> INFO - Writing 'rapportUTT.bbl' with encoding 'UTF-8'
-[690] bbl.pm:779> INFO - Output to rapportUTT.bbl
+[1] Config.pm:331> INFO - Logfile is 'rapportUTT.blg'
+[295] biber-MSWIN64:342> INFO - === 
+[419] Biber.pm:421> INFO - Reading 'rapportUTT.bcf'
+[734] Biber.pm:999> INFO - Using all citekeys in bib section 0
+[775] Biber.pm:4487> INFO - Processing section 0
+[797] Biber.pm:4678> INFO - Looking for bibtex file 'latex-files/bibliography.bib' for section 0
+[949] bibtex.pm:1713> INFO - LaTeX decoding ...
+[1006] bibtex.pm:1519> INFO - Found BibTeX data source 'latex-files/bibliography.bib'
+[1230] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1230] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1230] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
+[1230] Biber.pm:4313> INFO - No sort tailoring available for locale 'fr-FR'
+[1252] bbl.pm:676> INFO - Writing 'rapportUTT.bbl' with encoding 'UTF-8'
+[1258] bbl.pm:779> INFO - Output to rapportUTT.bbl

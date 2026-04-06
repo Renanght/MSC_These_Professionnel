@@ -1,33 +1,158 @@
-\chapter{Premier point important}
+\chapter{État de l'art de la menace logicielle et mécanismes d'évasion}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper congue, euismod non, mi. 
+%---------------------------------------------------------------
+\section{Définition et taxonomie du malware moderne}
 
-\section{Un sous-point intéressant}
+Un malware (malicious software) ne se limite plus aujourd'hui à sa simple capacité de réplication, comme pouvaient l'être les premiers virus informatiques des années 1980. Sa définition repose désormais sur son intention malveillante : tout code, script ou programme conçu pour infiltrer un système, perturber son fonctionnement, en extraire des données sensibles ou obtenir un accès non autorisé --- sans le consentement de son propriétaire.
 
-Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae, consequat in, pretium a, enim. Pellentesque congue. Ut in risus volutpat libero pharetra tempor.
+Cette évolution reflète une transformation profonde de la menace : d'un phénomène essentiellement expérimental, elle est devenue une activité structurée, souvent pilotée par des objectifs financiers, stratégiques ou géopolitiques.
 
-\begin{itemize}
-    \item Premier argument de poids pour étayer cette section.
-    \item Deuxième point clé basé sur l'analyse des données.
-    \item Conclusion intermédiaire de ce sous-point.
-\end{itemize}
+%---------------------------------------------------------------
+\subsection{Nomenclature et standards d'identification}
 
-\section{Un deuxième sous-point intéressant}
+Pour analyser et communiquer efficacement sur les malwares, le secteur s'appuie sur des conventions de nommage standardisées. Microsoft, comme la grande majorité des éditeurs de sécurité, adopte le schéma défini par le CARO (Computer Antivirus Research Organization), qui structure le nom d'un malware selon le format suivant :
 
-Quisque congue tristique diam. Phasellus iaculis, lorem id varius pellentesque, felis nisl euismod purus, ut elementum velit velit id sem. Nullam adipiscing sapien sit amet odio. Aliquam sodes, lacus a facilisis scelerisque, nisi tellus elementum urna, a bibendum quam sem at ante.
+\begin{center}
+\texttt{Type : Plateforme / Famille . Variante ! Suffixe}
+\end{center}
 
-$$ E = mc^2 $$
+Chaque composant a une signification précise.
 
-Duis ac enim. Fusce dibus, urna ut faucibus laoreet, ante curus convallis neque, eget pretium massa nisl quis lectus. Donec sit amet nisl. Aliquam semper ipsum sit amet velit. 
+Le type décrit ce que le malware fait sur la machine infectée. Microsoft distingue plusieurs grandes catégories, parmi lesquelles : \texttt{Backdoor}, \texttt{Exploit}, \texttt{Ransom}, \texttt{Trojan}, \texttt{TrojanDownloader}, \texttt{Worm}, \texttt{Virus}, ou encore \texttt{PWS} (Password Stealer). À cela s'ajoutent des catégories pour les logiciels indésirables (\texttt{Adware}, \texttt{BrowserModifier}) et les applications potentiellement indésirables (\texttt{PUAMiner}, \texttt{PUATorrent}).
 
-\section{Un troisième sous-point intéressant}
+La plateforme guide le malware vers son environnement d'exécution compatible. Elle peut désigner un système d'exploitation (\texttt{Win32}, \texttt{Win64}, \texttt{Linux}, \texttt{AndroidOS}, \texttt{macOS\_X}), un langage de script (\texttt{JS}, \texttt{Python}, \texttt{VBS}), ou encore un format de fichier spécifique (\texttt{XML}, \texttt{HTML}). Cette précision est importante : un même malware peut exister en plusieurs versions ciblant des plateformes différentes.
 
-Suspendisse potenti. In hac habitasse platea dictumst. Ut egestas erat pretium nisl. Vivamus quis pede at ante faucibus interdum. In est nulla, lacinia ut, placerat vel, laoreet vitae, lorem. 
+La famille correspond au nom attribué lors de la découverte initiale de la menace, regroupant des échantillons partageant des caractéristiques communes --- souvent une attribution aux mêmes auteurs. Il est courant que différents éditeurs de sécurité utilisent des noms de famille différents pour désigner le même malware, ce qui souligne l'importance du partage de renseignements sur les menaces (Threat Intelligence).
 
-\begin{enumerate}
-    \item Observation numéro une.
-    \item Analyse comparative.
-    \item Recommandation stratégique.
-\end{enumerate}
+La variante est une lettre attribuée séquentiellement à chaque version distincte d'une même famille. Par exemple, la variante \texttt{.AF} est créée après la variante \texttt{.AE}, permettant de suivre précisément l'évolution d'une menace dans le temps.
 
-Cras sagittis. Etiam vel neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Fusce id purus. Ut varius tincidunt libero. Phasellus dolor. Maecenas vestibulum mollis diam.
+Le suffixe, précédé d'un point d'exclamation (\texttt{!}), est un indicateur interne qualifiant une caractéristique technique particulière de l'échantillon : usage d'un packer, mécanisme d'obfuscation spécifique, ou composant de machine learning (\texttt{!ml}).
+
+À titre d'exemple, l'identifiant \texttt{Trojan:Win32/Emotet.AF!ml} se lit ainsi : un trojan ciblant les systèmes Windows 32-bit, appartenant à la famille Emotet, dans sa variante AF, détecté via un mécanisme de machine learning.
+
+%---------------------------------------------------------------
+\subsection{Distinction fondamentale : tactique, technique, vecteur et charge utile}
+
+Avant de classifier les menaces, il est essentiel de distinguer plusieurs notions souvent confondues --- une confusion qui fausse l'analyse de risque. Le framework MITRE ATT\&CK, référence internationale pour l'analyse des comportements malveillants, propose une grille de lecture structurée en tactiques et techniques.
+
+La tactique représente l'objectif stratégique de l'attaquant à une étape donnée de l'intrusion. Par exemple, Initial Access (TA0001) désigne la tactique consistant à pénétrer dans un système cible.
+
+La technique décrit comment l'attaquant réalise cet objectif. Par exemple, le Phishing (T1566) est la technique utilisée pour obtenir un accès initial, l'email en étant le vecteur concret d'exécution. De même, l'exploitation d'une vulnérabilité exposée sur internet (T1190) est une autre technique relevant de cette même tactique.
+
+Le vecteur est le support physique ou logique par lequel la technique est mise en oeuvre : un email, une clé USB, une page web compromise.
+
+La fonctionnalité (Capability) regroupe les outils dont dispose le malware pour accomplir sa mission : enregistrement de frappes clavier (keylogging), capture d'écran, mouvement latéral dans le réseau.
+
+La charge utile (Payload) est l'action finale recherchée par l'attaquant : chiffrement des données pour un ransomware, exfiltration de mots de passe pour un infostealer.
+
+Le mécanisme d'évasion (Defense Evasion) recouvre toutes les techniques permettant au malware de rester invisible : obfuscation du code (T1027), détection de sandboxes, désactivation des outils de sécurité.
+
+Cette grille de lecture permet de raisonner non plus sur ce qu'est un malware, mais sur ce qu'il fait --- ce qui est fondamental pour concevoir des défenses adaptées.
+
+%---------------------------------------------------------------
+\section{Classification par objectifs opérationnels}
+
+Les malwares peuvent être classés selon les objectifs poursuivis par leurs auteurs. Cette approche fonctionnelle est plus utile en pratique qu'une simple taxonomie par type de fichier.
+
+Parmi les grandes familles, le ransomware chiffre les données de la victime et exige une rançon pour les restituer. C'est aujourd'hui l'un des modèles économiques dominants de la cybercriminalité organisée. L'infostealer est conçu pour extraire discrètement des informations sensibles --- identifiants, cookies de session, portefeuilles de cryptomonnaies --- en restant aussi silencieux que possible. Le RAT (Remote Access Trojan) permet une prise de contrôle complète à distance, facilitant l'espionnage, la surveillance ou le déplacement latéral au sein d'un réseau d'entreprise. Enfin, le loader ou dropper joue un rôle d'infrastructure dans la chaîne d'attaque : sa seule mission est de télécharger, installer et maintenir d'autres charges malveillantes plus complexes.
+
+On distingue également plusieurs sous-catégories notables. Le spyware surveille les activités de l'utilisateur à son insu (keylogging, capture d'écran, collecte de données de navigation) et est utilisé dans des contextes d'espionnage industriel ou de surveillance ciblée. Le banker, ou trojan bancaire, est spécialisé dans le vol d'informations financières : il peut intercepter des identifiants bancaires ou injecter du contenu malveillant directement dans les pages web (web injects). Le bot intègre la machine compromise à un réseau contrôlé à distance (botnet), utilisé pour lancer des attaques DDoS, envoyer du spam ou miner des cryptomonnaies. L'exploit tire parti d'une vulnérabilité spécifique d'un logiciel pour y exécuter du code arbitraire et sert généralement de point d'entrée dans une chaîne d'infection plus large.
+
+Ces catégories ne doivent pas être perçues comme étanches. En pratique, un même échantillon combine fréquemment plusieurs fonctionnalités --- un trojan bancaire intégrant des capacités d'évasion et de propagation réseau, par exemple. C'est précisément cette polyvalence qui complexifie les stratégies de détection modernes.
+
+%---------------------------------------------------------------
+\section{Mécanismes d'obfuscation et d'auto-édition}
+
+L'un des défis majeurs du reverse engineering est d'analyser un code qui change de forme de manière autonome. On parle d'auto-édition pour désigner l'ensemble des techniques permettant à un malware de modifier sa propre structure afin d'échapper à la détection, qu'elle soit statique (lecture du code sans l'exécuter) ou dynamique (observation du comportement en temps réel).
+
+%---------------------------------------------------------------
+\subsection{Du polymorphisme au métamorphisme}
+
+Le polymorphisme est la technique la plus répandue : le malware chiffre son corps principal et change sa clé de déchiffrement à chaque nouvelle exécution. Le contenu malveillant reste identique en mémoire, mais son empreinte sur disque est différente à chaque fois. Des familles comme Virut ou Virlock illustrent bien cette approche.
+
+Le métamorphisme va beaucoup plus loin : le malware réécrit entièrement son propre code à chaque infection, en substituant des instructions équivalentes (\texttt{ADD EAX, 1} $\rightarrow$ \texttt{INC EAX}), en permutant les registres ou en dispersant le code en fragments reliés par des sauts. Analyser un échantillon de Zmist --- l'un des métamorphes les plus avancés --- revient à tenter de stabiliser du mercure : la logique de contrôle de flux change à chaque infection, rendant la création de signatures génériques extrêmement difficile.
+
+%---------------------------------------------------------------
+\subsection{Virtualisation de code}
+
+Des outils comme VMProtect, et certains malwares sur mesure, poussent l'obfuscation encore plus loin via la virtualisation de code : les instructions CPU classiques (x86/x64) sont transformées en un bytecode propriétaire, exécuté par une mini machine virtuelle intégrée au malware. Lors de l'analyse, on ne voit plus les instructions habituelles (\texttt{MOV}, \texttt{PUSH}, \texttt{CALL}), mais une boucle d'interprétation opaque. L'analyste doit alors reconstruire ce bytecode --- opération appelée lifting --- pour comprendre la logique sous-jacente.
+
+%---------------------------------------------------------------
+\subsection{Prédicats opaques et junk code}
+
+Une autre technique courante consiste à insérer des prédicats opaques : des structures conditionnelles (\texttt{if/else}) dont le résultat est connu à l'avance par l'attaquant, mais indéchiffrable pour un désassembleur automatique. Cela force l'outil d'analyse à explorer des chemins d'exécution qui n'existent pas en pratique (code mort), rendant le graphe de flot de contrôle (CFG) totalement illisible.
+
+\begin{table}[h!]
+\centering
+\caption{Principales techniques d'auto-édition}
+\begin{tabular}{|l|p{6cm}|p{4cm}|}
+\hline
+Technique & Principe & Exemples \\
+\hline
+Polymorphisme & Chiffrement du corps, clé variable à chaque exécution & Virut, Storm Worm, Virlock \\
+\hline
+Métamorphisme & Réécriture complète du code à chaque infection & Zmist, Simile, Win32/Expiro \\
+\hline
+Virtualisation & Conversion en bytecode propriétaire + VM intégrée & VMProtect, malwares custom \\
+\hline
+Prédicats opaques & Conditions insolubles pour les désassembleurs & Courant dans les packers avancés \\
+\hline
+Obfuscation dynamique & Décompression multi-étapes en mémoire & Emotet, TrickBot \\
+\hline
+Génération par IA & Réécriture sémantique via LLM & PromptFlux, QuietVault \\
+\hline
+\end{tabular}
+\end{table}
+
+%---------------------------------------------------------------
+\section{L'émergence de la génération PromptFlux : une rupture paradigmatique}
+
+L'apparition de malwares exploitant des modèles de langage (LLM) marque une rupture majeure dans l'histoire des cybermenaces. La génération dite PromptFlux en est l'illustration la plus avancée.
+
+%---------------------------------------------------------------
+\subsection{Ce qui distingue PromptFlux des métamorphes classiques}
+
+Un moteur métamorphique traditionnel repose sur des règles mathématiques finies et déterministes : une fois l'algorithme de mutation compris, il devient possible de créer une signature générique capable de détecter toutes ses variantes. La limite est donc mathématiquement contournable.
+
+PromptFlux rompt avec cette logique. Plutôt que de permuter des instructions selon des règles prédéfinies, il utilise un modèle de langage génératif --- via API distante ou modèle embarqué localement --- pour rédiger ses fonctions en temps réel. Le résultat est radicalement différent à chaque itération, non plus syntaxiquement mais sémantiquement : la logique de la fonction peut être entièrement repensée à chaque exécution.
+
+\begin{table}[h!]
+\centering
+\caption{Comparaison : métamorphisme classique vs génération PromptFlux}
+\begin{tabular}{|l|p{5cm}|p{5cm}|}
+\hline
+Critère & Métamorphisme classique & Génération PromptFlux \\
+\hline
+Logique & Algorithmique / Déterministe & Sémantique / Probabiliste \\
+\hline
+Structure & Identique (même graphe déformé) & Radicalement différente à chaque itération \\
+\hline
+Adaptabilité & Nulle face au contexte & Réécriture ciblée selon l'EDR détecté \\
+\hline
+Détection & Signature heuristique possible & Nécessite une analyse comportementale (IA contre IA) \\
+\hline
+\end{tabular}
+\end{table}
+
+%---------------------------------------------------------------
+\subsection{L'adaptation contextuelle}
+
+La capacité la plus redoutable de PromptFlux n'est pas simplement de changer de forme, mais de s'adapter à son environnement. En analysant les outils de sécurité présents sur la machine cible (version de l'EDR, politique de sécurité, système d'exploitation), il peut générer un code spécifiquement optimisé pour contourner les défenses en place --- à la manière d'un serrurier qui fabriquerait une clé sur mesure après avoir observé la serrure.
+
+%---------------------------------------------------------------
+\subsection{L'asymétrie économique}
+
+Un facteur aggravant souvent sous-estimé est l'asymétrie du coût : produire une nouvelle mutation via un LLM coûte quelques centimes à l'attaquant, tandis que l'analyser demande plusieurs heures de travail à un expert hautement qualifié. Cette inversion du rapport coût/effort change profondément l'économie de la cybermenace.
+
+%---------------------------------------------------------------
+\section{État actuel de la détection et ses limites}
+
+Face à ces menaces, les solutions de cybersécurité reposent sur trois approches complémentaires, chacune présentant des angles morts face aux techniques modernes.
+
+La détection par signatures est basée sur des empreintes cryptographiques (SHA-256) des fichiers connus. Elle reste efficace pour identifier des malwares déjà répertoriés, mais est totalement inopérante face au polymorphisme ou à la génération par IA.
+
+L'analyse heuristique tente de détecter des structures de code suspectes ou des appels système caractéristiques, sans se fier à une empreinte précise. Elle représente une avancée, mais reste contournable par des techniques d'obfuscation suffisamment sophistiquées.
+
+L'analyse comportementale (EDR/XDR) observe les actions du programme en temps réel : tentative de chiffrement massif de fichiers, injection de code dans des processus légitimes, communications réseau anormales. C'est l'approche la plus robuste, mais elle se heurte à un problème fondamental face à PromptFlux : si le malware change subtilement et en permanence sa manière de se comporter --- en imitant les patterns de mises à jour logicielles légitimes par exemple --- il se fond progressivement dans le bruit de fond, rendant la détection par dérive (drift analysis) de plus en plus difficile.
+
+La conclusion de cet état de l'art est sans appel : les défenses actuelles ont été conçues pour un adversaire dont le comportement est modélisable. L'introduction de la génération sémantique par LLM introduit une plasticité fondamentalement nouvelle, qui appelle des réponses défensives tout aussi innovantes --- notamment l'opposition IA contre IA.
