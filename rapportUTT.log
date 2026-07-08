@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.30)  6 APR 2026 17:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.30)  8 JUL 2026 17:57
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2132,12 +2132,14 @@ l.152     \clearpage
                      [3
 
 ] (latex-files/introduction.tex
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 5.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 5.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 5.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 11.
+ (C:\Users\RenanGOHAUT\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
 )
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
@@ -2146,24 +2148,12 @@ l.158     \clearpage
                      [1
 
 
-] (latex-files/presentation.tex
+] (latex-files/one.tex
 Chapitre 1.
-) (latex-files/one.tex [2
+[2
 
 
-]
-Chapitre 2.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 16.
-(C:\Users\RenanGOHAUT\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
- [3
-
-] [4] [5]
+] [3] [4]
 Underfull \hbox (badness 2799) in paragraph at lines 94--94
 []|\T1/lmr/m/n/10.95 (+20) Réécriture com-plète du code à
  []
@@ -2183,27 +2173,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 102--103
 []|\T1/lmr/m/n/10.95 (+20) PromptFlux, Quiet-
  []
 
-[6]
+[5]
 Underfull \hbox (badness 10000) in paragraph at lines 128--129
 []|\T1/lmr/m/n/10.95 (+20) Radicalement dif-fé-rente à
  []
 
-[7]) (latex-files/two.tex [8]
-Chapitre 3.
-) (latex-files/three.tex [9
+[6]) (latex-files/two.tex [7]
+Chapitre 2.
+) (latex-files/three.tex [8
 
 ]
-Chapitre 4.
-) [10
+Chapitre 3.
+) [9
 
-] (latex-files/conclusion.tex) [11
+] (latex-files/conclusion.tex) [10
 
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.183     \clearpage
+l.182     \clearpage
                      [1
 
 
@@ -2216,14 +2206,14 @@ Annexe A.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.194     \myfinaltoc
+l.193     \myfinaltoc
                       [0
 
 ]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.197     \myemptypage
+l.196     \myemptypage
                        [0
 
 ] (rapportUTT.aux)
@@ -2236,17 +2226,17 @@ Package logreq Info: Writing requests to 'rapportUTT.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 66225 strings out of 467871
- 1438705 string characters out of 5415472
- 2486623 words of memory out of 5000000
- 93765 multiletter control sequences out of 15000+600000
- 725344 words of font info for 196 fonts, out of 8000000 for 9000
+ 66143 strings out of 467871
+ 1437306 string characters out of 5415472
+ 2485611 words of memory out of 5000000
+ 93715 multiletter control sequences out of 15000+600000
+ 708340 words of font info for 172 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  114i,13n,131p,2565b,1915s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on rapportUTT.pdf (20 pages, 977275 bytes).
+Output written on rapportUTT.pdf (19 pages, 972944 bytes).
 PDF statistics:
- 441 PDF objects out of 1000 (max. 8388607)
- 64 named destinations out of 1000 (max. 500000)
- 54167 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 411 PDF objects out of 1000 (max. 8388607)
+ 59 named destinations out of 1000 (max. 500000)
+ 45943 words of extra memory for PDF output out of 51595 (max. 10000000)
 
