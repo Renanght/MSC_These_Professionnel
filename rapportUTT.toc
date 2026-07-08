@@ -22,11 +22,7 @@
 \contentsline {section}{\numberline {2.1}Un sous-point intéressant}{8}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Un deuxième sous-point intéressant}{8}{section.2.2}%
 \contentsline {section}{\numberline {2.3}Un trosième sous-point intéressant}{8}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Troisième point important}{9}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Un sous-point intéressant}{9}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Un deuxième sous-point intéressant}{9}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Un trosième sous-point intéressant}{9}{section.3.3}%
-\contentsline {chapter}{Conclusion et perspectives}{10}{chapter*.6}%
+\contentsline {chapter}{Conclusion et perspectives}{9}{chapter*.6}%
 \contentsline {chapter}{Bibliographie}{}{chapter*.8}%
 \contentsline {chapter}{\numberline {A}Annexes}{I}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Captures d'écran}{I}{section.A.1}%
