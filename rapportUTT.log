@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.30)  8 JUL 2026 18:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.30)  26 JUL 2026 22:32
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2180,9 +2180,19 @@ Underfull \hbox (badness 10000) in paragraph at lines 122--123
 
 [6]) (latex-files/two.tex [7]
 Chapitre 2.
-) [8
 
-] (latex-files/conclusion.tex) [9
+Overfull \hbox (211.7812pt too wide) in paragraph at lines 15--16
+[]\T1/lmr/m/n/10.95 (-20) C'est sur l'échan-tillon do-cu-menté par ESET (SHA-256 : \T1/lmtt/m/n/10.95 09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb769c006f\T1/lmr/m/n/10.95 (-20) )
+ []
+
+[8
+
+]
+Overfull \hbox (32.34546pt too wide) in paragraph at lines 65--66
+[]\T1/lmr/bx/n/10.95 (-20) Modèles \T1/lmr/m/n/10.95 (-20) : dé-tec-tion de che-mins de mo-dèles pré-sents en mé-moire (ré-per-toires \T1/lmtt/m/n/10.95 .ollama\models\T1/lmr/m/n/10.95 (-20) ,
+ []
+
+[9]) [10] (latex-files/conclusion.tex) [11
 
 
 ]
@@ -2222,17 +2232,17 @@ Package logreq Info: Writing requests to 'rapportUTT.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 66133 strings out of 467871
- 1437063 string characters out of 5415472
- 2485598 words of memory out of 5000000
+ 66150 strings out of 467871
+ 1437275 string characters out of 5415472
+ 2485601 words of memory out of 5000000
  93707 multiletter control sequences out of 15000+600000
- 708683 words of font info for 175 fonts, out of 8000000 for 9000
+ 709120 words of font info for 179 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 114i,13n,131p,2565b,1915s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 114i,14n,131p,2565b,1915s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/RenanGOHAUT/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on rapportUTT.pdf (18 pages, 967530 bytes).
+Output written on rapportUTT.pdf (20 pages, 983466 bytes).
 PDF statistics:
- 380 PDF objects out of 1000 (max. 8388607)
- 54 named destinations out of 1000 (max. 500000)
+ 407 PDF objects out of 1000 (max. 8388607)
+ 63 named destinations out of 1000 (max. 500000)
  45911 words of extra memory for PDF output out of 51595 (max. 10000000)
 

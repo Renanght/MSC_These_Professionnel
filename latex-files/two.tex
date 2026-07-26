@@ -1,7 +1,79 @@
-\chapter{Deuxième point important}
+\chapter{Étude de cas : analyse de PromptLock}
 
-\section{Un sous-point intéressant}
+\section{Présentation du cas}
 
-\section{Un deuxième sous-point intéressant}
+\subsection{Contexte et découverte}
 
-\section{Un trosième sous-point intéressant}
+Un mois avant la découverte de PromptLock, le CERT-UA (Computer Emergency Response Team d'Ukraine) avait signalé LameHug, un malware attribué au groupe APT28 et propulsé par un LLM, capable de générer à la volée des commandes Windows malveillantes via l'API Hugging Face. Ce premier cas, bien que limité dans sa sophistication, annonçait déjà la bascule documentée quelques semaines plus tard par un cas autrement plus abouti.
+
+Le 27 août 2025, les chercheurs d'ESET annoncent avoir découvert PromptLock, présenté comme le premier \emph{ransomware} propulsé par l'intelligence artificielle générative jamais observé. L'échantillon, classifié \texttt{Filecoder.PromptLock.A}, a été repéré sur la plateforme d'analyse VirusTotal, où deux variantes — l'une pour Windows, l'autre pour Linux — avaient été téléversées. Anton Cherepanov, chercheur à l'origine de la découverte, souligne d'emblée la portée de cette évolution : l'intelligence artificielle, en abaissant la barrière technique nécessaire à la conception de menaces sophistiquées, rend accessible à un attaquant isolé ce qui nécessitait auparavant une équipe de développeurs expérimentés.
+
+Quelques jours plus tard, le 3 septembre 2025, ESET est contacté par les auteurs d'une étude académique intitulée \emph{Ransomware 3.0: Self-Composing and LLM-Orchestrated}, menée par une équipe de doctorants et post-doctorants de la NYU Tandon School of Engineering. Le prototype de recherche qu'ils décrivent présente des similitudes frappantes avec les échantillons découverts sur VirusTotal, ce qui conduit ESET à revoir son interprétation initiale : PromptLock ne serait pas un outil opérationnel déployé par un groupe cybercriminel, mais très probablement le fruit de ce projet académique, destiné à illustrer les risques posés par cette nouvelle classe de malwares. ESET maintient toutefois la validité de sa découverte technique, PromptLock demeurant le premier cas connu de ransomware piloté par IA, qu'il s'agisse ou non d'une menace active.
+
+PromptLock sera par la suite mentionné, aux côtés d'autres familles de malwares assistés par IA telles que PromptFlux ou PromptSteal, dans le rapport de synthèse \emph{AI Threat Tracker} publié par le Google Threat Intelligence Group (GTIG) en novembre 2025 — rapport qui documente, pour sa part, la découverte de menaces distinctes intégrant des LLM directement dans leur boucle d'exécution.
+
+C'est sur l'échantillon documenté par ESET (SHA-256 : \texttt{09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb769c006f}) que porte l'analyse développée dans ce chapitre.
+
+\subsection{Composition et architecture du malware}
+% Wrapper Go multiplateforme, prompts en dur transmis à gpt-oss:20b 
+% via l'API Ollama, génération de scripts Lua à la volée, 
+% chiffrement SPECK 128-bit.
+% -> schéma de la chaîne d'exécution (Go binary -> Ollama -> Lua -> exécution mémoire)
+
+\section{Analyse technique de l'échantillon}
+
+\subsection{Analyse statique}
+% Basique : hash, type PE/ELF, entropie, strings ("gpt-oss:20b", 
+%   "Ollama", "You are a Lua code generator")
+% Avancée : reverse du binaire Go, désobfuscation des symboles, 
+%   reconstruction du flot d'appel vers Ollama, extraction des prompts
+
+\subsection{Analyse dynamique}
+% Basique : connexions sortantes port 11434, énumération FS, 
+%   appels curl, absence de persistance
+% Avancée : traçage syscall/API, capture réseau (JSON prompts/réponses), 
+%   reconstruction de la boucle génération-exécution en mémoire 
+%   (le Lua n'existe jamais sur disque)
+
+\section{Outils de détection développés}
+
+\subsection{Règle YARA}
+% Logique de détection (gpt-oss:20b + SPECK + fragments de prompt), 
+% pourquoi ces chaînes constantes malgré le code généré variable, 
+% faux positifs testés
+
+
+% Ce qu'il extrait en mémoire : prompt embarqué, interpréteur Lua 
+% chargé, target_file_list.log si mappé
+\subsection{Plugin Volatility3}
+
+Dans le cadre d'un projet de groupe mené au sein de nos cours, nous avons développé un plugin pour le framework \textbf{Volatility 3}, orienté vers la détection de traces d'intelligences artificielles locales en mémoire vive. Ce projet a été l'occasion de faire converger deux axes de travail~: d'une part les enseignements dispensés en analyse forensique mémoire, et d'autre part les travaux menés dans le cadre de ma thèse portant sur l'analyse du ransomware \textbf{PromptLock}, qui exploite des modèles de langage locaux pour générer dynamiquement une partie de son comportement malveillant.
+
+Ce rapprochement a permis de concevoir un outil, nommé \textbf{LlmFinder}, répondant à un besoin concret identifié durant l'analyse de PromptLock~: la difficulté, en réponse à incident, de mettre en évidence qu'un LLM local (Ollama, LM Studio, GPT4All, Jan, llama.cpp, etc.) a été utilisé sur une machine compromise, alors même que ce type d'usage laisse peu de traces disque persistantes et n'est pas couvert par les plugins Volatility 3 existants.
+
+
+
+L'émergence de menaces s'appuyant sur des modèles de langage exécutés localement, à l'image de PromptLock, change la donne pour l'investigation numérique~: la logique malveillante n'est plus figée dans un binaire mais générée à la volée par un LLM interrogé en local, ce qui limite fortement l'intérêt des approches classiques d'analyse statique et de détection par signature.
+
+Dans ce contexte, la mémoire vive devient une source de preuve particulièrement précieuse, car elle peut conserver, au moment de l'acquisition, des éléments qui n'existent jamais sous forme persistante sur le disque~: le prompt envoyé au modèle, la réponse générée, l'endpoint local interrogé, ou encore le processus ayant servi d'interface avec le LLM. LlmFinder a été conçu pour exploiter cette fenêtre d'observation et fournir à l'analyste DFIR des indices exploitables rapidement lors d'une investigation.
+
+
+Le plugin structure ses résultats autour de quatre axes complémentaires, pensés pour couvrir l'ensemble de la chaîne d'usage d'un LLM local sur un système compromis~:
+
+\begin{itemize}
+    \item \textbf{Processus IA} : identification des processus associés à des applications d'IA locale connues (Ollama, LM Studio, GPT4All, Jan, llama.cpp), permettant de confirmer la présence effective d'un moteur de génération sur la machine analysée~;
+    \item \textbf{Modèles} : détection de chemins de modèles présents en mémoire (répertoires \texttt{.ollama\textbackslash models}, LM Studio, Jan, GPT4All, Hugging Face), donnant une indication sur le ou les modèles réellement chargés et utilisés~;
+    \item \textbf{Réseau} : mise en évidence des endpoints locaux liés aux API d'IA (API Ollama, API compatibles OpenAI), révélant les communications internes entre un processus tiers et le moteur LLM, souvent caractéristiques d'une utilisation programmatique plutôt qu'interactive~;
+    \item \textbf{Prompts} : extraction de prompts probables, qu'ils aient été soumis via une interface graphique, une API locale ou un terminal, ce qui constitue l'élément de preuve le plus directement exploitable pour reconstituer l'intention et le comportement du code malveillant.
+\end{itemize}
+
+L'articulation de ces quatre familles d'informations permet de reconstituer, à partir d'une simple image mémoire, une chaîne cohérente~: quel processus a sollicité quel modèle, via quel canal, avec quel contenu. Cette approche transversale est particulièrement adaptée à l'analyse de menaces de type PromptLock, où la preuve de compromission ne réside pas dans un artefact statique mais dans l'interaction dynamique entre un binaire et un LLM local.
+
+
+LlmFinder fournit des indices forensiques et non des conclusions automatiques. Il ne doit pas être utilisé seul pour affirmer qu'une action malveillante a eu lieu~: les résultats doivent systématiquement être corrélés avec d'autres artefacts (timeline, processus, fichiers, connexions réseau, logs) et replacés dans le contexte global de l'investigation.
+
+\subsection{Indices de Compromossions}
+% Tableau IOC hôte (target_file_list.log, note.txt, adresse Bitcoin 
+%   placeholder) / réseau (port 11434)
+% Mise en perspective avec la remarque d'Anton Cherepanov (ESET) 
+%   sur l'empreinte statique constante
