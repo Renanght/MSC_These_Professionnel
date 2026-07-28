@@ -21,16 +21,18 @@
 \contentsline {chapter}{\numberline {2}Étude de cas : analyse de PromptLock}{8}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Présentation du cas}{8}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Contexte et découverte}{8}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Composition et architecture du malware}{8}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}Analyse technique de l'échantillon}{9}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Analyse statique}{9}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Analyse dynamique}{9}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Outils de détection développés}{9}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Règle YARA}{9}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Plugin Volatility3}{9}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Indices de Compromossions}{10}{subsection.2.3.3}%
-\contentsline {chapter}{Conclusion et perspectives}{11}{chapter*.6}%
-\contentsline {chapter}{Bibliographie}{}{chapter*.8}%
+\contentsline {subsection}{\numberline {2.1.2}Composition et architecture du malware}{9}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Analyse technique de l'échantillon}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Analyse statique}{10}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}Analyse de base}{10}{subsubsection.2.2.1.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.2}Analyse avancée}{11}{subsubsection.2.2.1.2}%
+\contentsline {subsection}{\numberline {2.2.2}Analyse dynamique}{13}{subsection.2.2.2}%
+\contentsline {section}{\numberline {2.3}Outils de détection développés}{14}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Règle YARA}{14}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Plugin Volatility3}{15}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Indices de Compromission}{16}{subsection.2.3.3}%
+\contentsline {chapter}{Conclusion et perspectives}{17}{chapter*.7}%
+\contentsline {chapter}{Bibliographie}{}{chapter*.9}%
 \contentsline {chapter}{\numberline {A}Annexes}{I}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Captures d'écran}{I}{section.A.1}%
 \contentsline {section}{\numberline {A.2}Formules chimiques}{I}{section.A.2}%
