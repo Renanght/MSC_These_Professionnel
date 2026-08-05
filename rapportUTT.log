@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  28 JUL 2026 17:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  5 AUG 2026 18:07
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2244,31 +2244,90 @@ Overfull \hbox (58.66902pt too wide) in paragraph at lines 103--103
  []
 
 [12] [13]
-Overfull \hbox (29.92535pt too wide) in paragraph at lines 140--140
+Overfull \hbox (35.15915pt too wide) in paragraph at lines 148--149
+[]\T1/lmr/m/n/10.95 (-20) l'identifiant d'ins-tance suit le for-mat \T1/lmtt/m/n/10.95 "Runtime Instance: rpi_env2_linux_<horodatage>"\T1/lmr/m/n/10.95 (-20) ,
+ []
+
+[14] [15]
+Overfull \hbox (29.92535pt too wide) in paragraph at lines 183--183
 []        \T1/lmtt/m/n/10.95 description = "Detecte le wrapper Go de PromptLock (Filecoder.PromptLock.A)"[] 
  []
 
 
-Overfull \hbox (294.3671pt too wide) in paragraph at lines 142--142
+Overfull \hbox (294.3671pt too wide) in paragraph at lines 185--185
 []        \T1/lmtt/m/n/10.95 reference    = "ESET - Filecoder.PromptLock.A (SHA-256: 09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb769c006f)"[] 
  []
 
 
-Overfull \hbox (127.65382pt too wide) in paragraph at lines 148--148
+Overfull \hbox (127.65382pt too wide) in paragraph at lines 191--191
 []        \T1/lmtt/m/n/10.95 $prompt_1   = "Implement the SPECK 128bit encryption algorithm in ECB mode in pure Lua" ascii[] 
  []
 
 
-Overfull \hbox (24.17662pt too wide) in paragraph at lines 149--149
+Overfull \hbox (24.17662pt too wide) in paragraph at lines 192--192
 []        \T1/lmtt/m/n/10.95 $prompt_2   = "Please provide Lua code wrapped in <code></code> tags" ascii[] 
  []
 
-[14] [15]
-Overfull \hbox (174.86636pt too wide) in paragraph at lines 187--216
+[16]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 219.
+ [17]
+Overfull \hbox (174.86636pt too wide) in paragraph at lines 242--271
  [][] 
  []
 
-) [16] (latex-files/conclusion.tex) [17
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[18]
+Overfull \hbox (263.46873pt too wide) in paragraph at lines 280--301
+ [][] 
+ []
+
+
+Underfull \hbox (badness 3657) in paragraph at lines 316--316
+[]|\T1/lmr/m/n/10.95 (+20) Exécution de code Lua gé-néré
+ []
+
+
+Underfull \hbox (badness 7667) in paragraph at lines 320--320
+[]|\T1/lmr/m/n/10.95 (+20) Collecte d'in-for-ma-tions sys-tème
+ []
+
+
+Underfull \hbox (badness 3525) in paragraph at lines 324--324
+[]|\T1/lmr/m/n/10.95 (+20) Lecture du contenu de fi-chiers
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 324--324
+\T1/lmr/m/n/10.95 (+20) lo-caux pour ana-lyse (tâches
+ []
+
+
+Underfull \hbox (badness 2884) in paragraph at lines 326--326
+[]|\T1/lmr/m/n/10.95 (+20) Communication HTTPS ap-pli-ca-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--328
+[]|\T1/lmr/m/n/10.95 (+20) Upload des fi-chiers cibles
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 328--328
+\T1/lmr/m/n/10.95 (+20) vers le ser-veur dis-tant (\T1/lmtt/m/n/10.95 POST
+ []
+
+
+Overfull \hbox (135.576pt too wide) in paragraph at lines 312--337
+ [][] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) [19] [20] (latex-files/conclusion.tex) [21
 
 
 ]
@@ -2308,17 +2367,17 @@ Package logreq Info: Writing requests to 'rapportUTT.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 66011 strings out of 467871
- 1424224 string characters out of 5418376
- 2477722 words of memory out of 5000000
- 93542 multiletter control sequences out of 15000+600000
- 709992 words of font info for 185 fonts, out of 8000000 for 9000
+ 66028 strings out of 467871
+ 1424474 string characters out of 5418376
+ 2479722 words of memory out of 5000000
+ 93545 multiletter control sequences out of 15000+600000
+ 710404 words of font info for 187 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 114i,13n,131p,2522b,1913s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
-Output written on rapportUTT.pdf (26 pages, 1019308 bytes).
+ 114i,14n,131p,2522b,1913s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb>
+Output written on rapportUTT.pdf (30 pages, 1067045 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
- 72 named destinations out of 1000 (max. 500000)
- 46423 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 491 PDF objects out of 1000 (max. 8388607)
+ 83 named destinations out of 1000 (max. 500000)
+ 46935 words of extra memory for PDF output out of 51595 (max. 10000000)
 

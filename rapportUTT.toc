@@ -27,12 +27,17 @@
 \contentsline {subsubsection}{\numberline {2.2.1.1}Analyse de base}{10}{subsubsection.2.2.1.1}%
 \contentsline {subsubsection}{\numberline {2.2.1.2}Analyse avancée}{11}{subsubsection.2.2.1.2}%
 \contentsline {subsection}{\numberline {2.2.2}Analyse dynamique}{13}{subsection.2.2.2}%
-\contentsline {section}{\numberline {2.3}Outils de détection développés}{14}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}Règle YARA}{14}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Plugin Volatility3}{15}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Indices de Compromission}{16}{subsection.2.3.3}%
-\contentsline {chapter}{Conclusion et perspectives}{17}{chapter*.7}%
-\contentsline {chapter}{Bibliographie}{}{chapter*.9}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}Environnement de laboratoire}{13}{subsubsection.2.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2.2}Simulation de l'API LLM et premières observations}{14}{subsubsection.2.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.3}Test avec un modèle de langage réel}{15}{subsubsection.2.2.2.3}%
+\contentsline {section}{\numberline {2.3}Outils de détection développés}{16}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Règle YARA}{16}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Règles Sigma}{17}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Plugin Volatility3}{17}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Indices de Compromission}{18}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Cartographie MITRE ATT\&CK}{19}{subsection.2.3.5}%
+\contentsline {chapter}{Conclusion et perspectives}{21}{chapter*.9}%
+\contentsline {chapter}{Bibliographie}{}{chapter*.11}%
 \contentsline {chapter}{\numberline {A}Annexes}{I}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Captures d'écran}{I}{section.A.1}%
 \contentsline {section}{\numberline {A.2}Formules chimiques}{I}{section.A.2}%
