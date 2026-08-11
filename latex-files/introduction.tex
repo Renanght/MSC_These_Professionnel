@@ -2,12 +2,56 @@
 \markleft{Introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
-L'année 2025 aura marqué un tournant dans l'histoire de la cybersécurité : celui où l'intelligence artificielle générative a cessé d'être un simple outil au service de l'attaquant utilisé pour la rédaction de courriels de \emph{phishing} et comme une assistance au développement de code malveillant pour devenir un composant actif, intégré au cœur même de l'exécution du \emph{malware}. Cette bascule, documentée par le Google Threat Intelligence Group (GTIG) dans son rapport \emph{AI Threat Tracker} de novembre 2025, invite à reconsidérer en profondeur les paradigmes de détection sur lesquels reposent aujourd'hui les Security Operations Centers.
+L'institut AV-TEST recense chaque jour plus de 450\,000 nouveaux logiciels
+malveillants \cite{avtest}. Le chiffre impressionne moins qu'il n'y paraît. Ces
+échantillons ne sont pas 450\,000 menaces distinctes : ce sont, pour l'essentiel,
+des variantes produites par des moteurs de mutation dont la logique demeure finie.
+Un analyste qui reconstitue cette logique neutralise la famille entière. La
+détection par signature tient tout entière sur ce pari.
 
-C'est dans ce contexte que s'inscrit le présent mémoire, rédigé au terme d'une année d'alternance effectuée au sein de Login Sécurité, \emph{Managed Security Service Provider} (MSSP) et « étoile » du groupe Constellation, en qualité d'analyste SOC/VOC (Security Operations Center / Vulnerability Operations Center). Mes missions y consistent principalement en la surveillance et l'investigation des systèmes d'information de nos clients, au moyen d'une plateforme SIEM assurant la collecte et la corrélation des journaux d'activité. Ce travail s'organise selon un cycle rigoureux : qualification et priorisation des alertes générées par nos outils, investigation forensique approfondie, remédiation et réponse aux incidents, puis amélioration continue des processus de détection et d'analyse cette dernière étape constituant le socle même de la réflexion développée ici.
+Le rapport \emph{AI Threat Tracker} publié le 5 novembre 2025 par le Google Threat
+Intelligence Group (GTIG) documente les premiers programmes qui ne le tiennent
+plus \cite{gtigAI}. GTIG y décrit des familles de \emph{malwares} qui interrogent
+un modèle de langage pendant leur exécution, pour générer des scripts, obscurcir
+leur propre code ou produire des fonctions malveillantes à la demande.
+L'intelligence artificielle générative n'intervient plus seulement en amont, dans
+la rédaction de courriels de \emph{phishing} ou l'écriture assistée de charges
+utiles : elle est appelée par le programme lui-même, sur la machine de la victime.
 
-C'est en effet au cours de cette phase d'amélioration continue qu'est né le questionnement à l'origine de ce travail. L'analyse d'alertes générées par Microsoft Defender m'a confronté à une nomenclature de détection dont la structure associant type, plateforme, famille, variante et suffixe ne m'était alors pas familière. Plutôt que de considérer cette lacune comme un simple détail technique, j'ai fait le choix d'en approfondir la logique, démarche qui constitue l'objet du premier chapitre de l'état de l'art ci-après.
+Trois spécimens jalonnent cette bascule, et leur statut diffère. PROMPTSTEAL,
+employé contre des cibles ukrainiennes, est la première observation par GTIG d'un
+\emph{malware} interrogeant un LLM en opération réelle ; écrit en Python, il
+interroge le modèle Qwen2.5-Coder-32B-Instruct via l'API Hugging Face pour générer
+ses commandes Windows au lieu de les coder en dur. PROMPTFLUX, un \emph{dropper}
+en VBScript identifié en juin 2025, sollicite l'API Gemini pour obtenir des
+techniques d'obscurcissement et d'évasion et se réécrire « \emph{just-in-time} »,
+vraisemblablement pour échapper à la détection statique par signature ; GTIG
+précise toutefois qu'il se trouve en phase de développement et n'est pas, en
+l'état, capable de compromettre un système. Quant à PROMPTLOCK, présenté à l'été
+2025 comme le premier rançongiciel piloté par intelligence artificielle, il s'est
+avéré être un prototype de recherche de la NYU Tandon School of Engineering,
+déposé sur VirusTotal au cours de tests et identifié par ESET sans que son origine
+universitaire soit connue \cite{esetPromptLock}. Un seul de ces trois programmes
+a donc frappé.
 
-Cette investigation a mis en lumière un élément en apparence secondaire mais en réalité révélateur : le suffixe \texttt{!ml}, apposé par Microsoft à certains identifiants de détection pour signaler l'intervention d'un mécanisme de \emph{machine learning}. Ce constat a suscité une interrogation plus large quant au rôle croissant de l'intelligence artificielle dans l'écosystème des cybermenaces non plus seulement comme instrument défensif, mais comme vecteur offensif à part entière. Les recherches menées sur ce sujet m'ont conduit au rapport GTIG précité, qui documente l'émergence d'une nouvelle génération de \emph{malwares} intégrant des modèles de langage (LLM) directement dans leur cycle d'exécution. Deux exemples y sont particulièrement significatifs : PromptFlux, un \emph{dropper} écrit en VBScript interagissant avec l'API Gemini pour réécrire dynamiquement son propre code selon une logique dite « \emph{just-in-time} », et PromptLock, un \emph{ransomware} capable de générer à la volée des scripts Lua de chiffrement et d'exfiltration. L'un comme l'autre rompent avec les logiques déterministes qui caractérisaient jusqu'alors le polymorphisme et le métamorphisme classiques.
+Cette distinction importe, mais elle ne désamorce rien. Les chercheurs de la NYU
+relèvent eux-mêmes que l'alerte initiale, fondée sur la conviction erronée qu'il
+s'agissait d'un rançongiciel en circulation, démontre que de tels systèmes sont
+assez aboutis pour tromper des experts en sécurité \cite{nyuRansomware}. Le
+polymorphisme et le métamorphisme classiques restaient déterministes : le code
+mutait, mais selon des règles finies, qu'un analyste pouvait reconstituer et
+généraliser. C'est ce postulat que la génération à l'exécution abolit. Il n'y a
+plus de moteur de mutation à rétro-concevoir, seulement une invite et un modèle
+dont les sorties varient d'une itération à l'autre.
 
-Cette découverte constitue le fil conducteur de la réflexion développée dans ce mémoire : dans quelle mesure les mécanismes de détection actuels conçus pour un adversaire dont le comportement demeure, \emph{in fine}, modélisable sont-ils en mesure de s'adapter face à des menaces capables de générer, à chaque itération, un code radicalement différent et contextuellement optimisé pour contourner les défenses en place ?
+Ce mémoire est rédigé au terme d'une année d'alternance effectuée chez Login
+Sécurité, \emph{Managed Security Service Provider} (MSSP) et « étoile » du groupe
+Constellation, en qualité d'analyste SOC/VOC (\emph{Security Operations Center} /
+\emph{Vulnerability Operations Center}). J'y qualifie et priorise les alertes
+remontées par les systèmes d'information de nos clients, je conduis les
+investigations forensiques, je participe à la remédiation et à l'amélioration
+continue des règles de détection. C'est depuis ce poste, et sur les outils qu'il
+met entre mes mains, que se pose la question suivante. Nos mécanismes de détection
+supposent un adversaire dont le comportement demeure \emph{in fine} modélisable.
+Que valent-ils face à un code qui change à chaque itération et s'optimise contre
+les défenses qu'il rencontre ?

@@ -1,9 +1,11 @@
 \babel@toc {french}{}\relax 
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Principales techniques d'auto-édition}}{5}{table.caption.4}%
-\contentsline {table}{\numberline {1.2}{\ignorespaces Comparaison : métamorphisme classique vs génération PromptFlux}}{6}{table.caption.5}%
+\contentsline {table}{\numberline {1.1}{\ignorespaces Principales techniques d'auto-édition}}{6}{table.caption.4}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Comparaison : métamorphisme classique vs génération PromptFlux}}{7}{table.caption.5}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Indices de compromission identifiés lors de l'analyse statique de PromptLock}}{19}{table.caption.6}%
-\contentsline {table}{\numberline {2.2}{\ignorespaces Indicateurs réseau complémentaires confirmés lors de l'analyse dynamique}}{19}{table.caption.7}%
-\contentsline {table}{\numberline {2.3}{\ignorespaces Cartographie des techniques observées ou déduites selon le référentiel MITRE ATT\&CK}}{20}{table.caption.8}%
+\contentsline {table}{\numberline {2.1}{\ignorespaces Indices de compromission identifiés lors de l'analyse statique de PromptLock}}{20}{table.caption.6}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Indicateurs réseau complémentaires confirmés lors de l'analyse dynamique}}{20}{table.caption.7}%
+\contentsline {table}{\numberline {2.3}{\ignorespaces Cartographie des techniques observées ou déduites selon le référentiel MITRE ATT\&CK}}{21}{table.caption.8}%
+\contentsline {table}{\numberline {2.4}{\ignorespaces Techniques MITRE ATLAS applicables à PromptLock}}{22}{table.caption.9}%
+\contentsline {table}{\numberline {2.5}{\ignorespaces Analyse comparative ATT\&CK / ATLAS appliquée à PromptLock}}{23}{table.caption.10}%
 \addvspace {10\p@ }

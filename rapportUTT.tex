@@ -23,10 +23,10 @@
 \REntre{Jean-Christophe PILLET}
 
 % Mots clés du Thésaurus ou mots clés pour les metadatas du pdf
-\Kone{Recherche fondamentale} % Nature de l'activité
-\Ktwo{Transport et Télécommunications} % Branche d'activité économique
-\Kthree{Informatique} % Domaines technologiques
-\Kfourth{Produits chimiques} % Application Physique directe
+\Kone{Rétro-ingénierie} % Nature de l'activité
+\Ktwo{Analyse de logiciels malveillants} % Branche d'activité économique
+\Kthree{Détection d'intrusion} % Domaines technologiques
+\Kfourth{Security Operation Center (SOC)} % Application Physique directe
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \Semestre{2025 - 2026}
@@ -38,25 +38,27 @@
 
 \newcommand{\titletext}{
 
-    Ce stage s'est déroulé dans l'entreprise Aperture Science, au sein du
-    service Recherche et Développement. Il a consisté à travailler en
-    coopération avec un groupe d'ingénieur sur un dispositif à effet tunnel
-    quantique, dans le but de fournir, aux cobayes, un outil leur permettant de
-    placer deux portails où des objets peuvent passer au travers.
+    Cette alternance s'est déroulée chez Login Sécurité, prestataire de services
+    de sécurité managés (MSSP) du groupe Constellation. J'y ai occupé le poste d'analyste SOC/VOC.
+
+    Le travail a consisté à caractériser un échantillon malveillant de bout en
+    bout, dans le but de produire des règles de détection réutilisables sur
+    l'ensemble du parc client.
 
     Les différentes phases de travail successivement réalisées sont :
 
     \begin{itemize}
-        \item Déterminer les besoins et les technologies à utiliser
-        \item Réaliser des tests en laboratoire afin de confirmer l'efficacité des portails
-        \item Observer le comportement d'un cobaye lors de l'utilisation du ASHPoD
+        \item Analyser statiquement l'échantillon, pour en extraire les caractéristiques structurelles
+        \item Analyser dynamiquement son comportement en environnement confiné
+        \item Traduire ces observations en détections : règles YARA, règles Sigma et plugin Volatility
     \end{itemize}
 
+    L'étude s'appuie sur la méthode d'analyse de \emph{malware} enseignée au
+    cours de la formation.
 
-    L'étude s'appuie sur des technologies de pointes et l'expérimentation quantique.
-
-    L'enjeu est une amélioration du déplacement de Sapiens en lui permettant
-    d'appréhender d'une façon révolutionnaire son environnement.
+    L'enjeu est de rester au contact des techniques d'attaque et de savoir les
+    traduire en détections, sans attendre la signature de l'éditeur. C'est ce qui
+    distingue une défense proactive d'une défense réactive.
 }
 
 
@@ -77,10 +79,10 @@
 }
 
 % Texte affiché sur le carré bleu
-\newcommand{\jobposition}{Consultant Cybersécurité}
+\newcommand{\jobposition}{}
 %\title{Vous êtes probablement assez bon pour travailler dans cette entreprise pour laquelle vous pensez ne pas être assez bon.}
 
-\title{Analyse de Malwares utilisants le Machine Learning}
+\title{Détection de malwares à l'ère des menaces génératives en environnement SOC}
 
 %%%%%%% Pour les métadonnées
 % Fonctionne, seulement il y a un warning à cause des "\\" dans le title

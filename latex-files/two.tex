@@ -338,3 +338,110 @@ Persistence & --- & Aucun mécanisme de persistance identifié dans les fonction
 \end{table}
 
 L'absence de technique de persistance documentée reflète ici une limite de couverture de l'analyse — certaines fonctions n'ont pas été intégralement désassemblées — plutôt qu'une conclusion négative définitivement établie ; ce point mériterait d'être vérifié explicitement si une couverture exhaustive du binaire venait à être requise.
+
+% --- Modification suggérée dans la table ATT&CK ci-dessus ---
+% Ligne "Defense Evasion" : remplacer T1027 par T1027.014, cf. justification en 2.3.6
+% Defense Evasion & T1027.014 & Binaire Go compilé statiquement et partiellement strippé ;
+% logique malveillante générée à l'exécution plutôt qu'écrite en dur (Polymorphic Code),
+% rendant la signature de contenu peu pertinente & S \\
+
+\subsection{Cartographie MITRE ATLAS}
+
+Publié par MITRE sur le même modèle structurel qu'ATT\&CK, le référentiel \textbf{ATLAS}
+(\textit{Adversarial Threat Landscape for Artificial-Intelligence Systems}) documente,
+à travers quatorze tactiques et des techniques identifiées par le préfixe \texttt{AML.T},
+les surfaces d'attaque propres aux systèmes d'intelligence artificielle : jeux de données
+d'entraînement, poids des modèles, API d'inférence, espaces d'embedding. Sa pertinence
+pour ce mémoire est immédiate : PromptLock ne se contente pas d'être \textit{développé}
+à l'aide d'une IA, il en interroge une \textit{au cours de son exécution même}, ce qui
+invite à vérifier si ATLAS en capture le comportement plus finement qu'ATT\&CK.
+
+\subsubsection{Techniques applicables}
+
+Deux techniques ATLAS se rattachent directement au comportement observé lors de
+l'analyse statique et dynamique (sections 2.2.1 et 2.2.2) :
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|p{6cm}|}
+\hline
+\textbf{Tactique} & \textbf{Technique} & \textbf{Application à PromptLock} \\
+\hline
+ML Model Access (\texttt{AML.TA0000}) & \texttt{AML.T0040} --- AI Model Inference API Access &
+Interrogation systématique de l'API compatible Ollama (\texttt{/ollama/v1/chat/completions})
+pour chacune des six tâches \\
+\hline
+Execution (\texttt{AML.TA0005}) & \texttt{AML.T0050} --- Command and Scripting Interpreter &
+Transformation directe de la sortie du modèle en code Lua exécuté par l'interpréteur
+embarqué \\
+\hline
+\end{tabular}
+\caption{Techniques MITRE ATLAS applicables à PromptLock}
+\end{table}
+
+\subsubsection{Une limite de couverture révélée plutôt que comblée}
+
+Au-delà de ces deux correspondances, la tentative de cartographie complète se heurte
+à une limite structurelle du référentiel : la quasi-totalité des techniques ATLAS suppose
+un scénario où le système d'IA constitue la \textit{cible} de l'attaque --- extraction de
+modèle par requêtes répétées, empoisonnement de données d'entraînement, contournement
+par prompt injection d'un modèle tiers. Le cas de PromptLock est inverse : le modèle de
+langage n'est pas attaqué, il est \textit{instrumentalisé} comme ressource légitime au
+service d'un autre objectif malveillant, au même titre qu'un malware pourrait s'appuyer
+sur une API cloud publique sans en exploiter de faille.
+
+Ce constat n'est pas isolé. Le rapport \textit{AI Threat Tracker} de novembre 2025 du
+Google Threat Intelligence Group (GTIG), qui documente pourtant PromptFlux et PromptSteal
+--- deux familles reposant sur le même principe d'appel à un LLM en cours d'exécution ---
+ne les cartographie pas sur ATLAS, mais sur des sous-techniques ATT\&CK précises :
+\texttt{T1027.014} (\textit{Polymorphic Code}) pour la réécriture dynamique de PromptFlux,
+et \texttt{T1027.016} (\textit{Junk Code Insertion}) pour ses motifs de code leurre. Ce
+choix, fait par l'équipe même à l'origine de la découverte de ces menaces, confirme
+empiriquement que le référentiel ATLAS, dans son état actuel, ne propose pas encore de
+vocabulaire dédié à ce schéma précis de « logiciel malveillant utilisant une IA comme
+composant d'exécution », par opposition à son cœur de cible historique, le « système
+d'IA en tant que victime ».
+
+\subsubsection{Analyse comparative}
+
+Les deux référentiels s'avèrent en réalité complémentaires plutôt que concurrents,
+chacun modélisant une couche distincte de la même chaîne d'attaque.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|p{5cm}|p{5cm}|}
+\hline
+\textbf{Critère} & \textbf{MITRE ATT\&CK} & \textbf{MITRE ATLAS} \\
+\hline
+Objet modélisé & Le comportement de l'attaquant, indépendamment de l'outillage utilisé &
+La surface d'attaque propre aux systèmes d'IA \\
+\hline
+Pertinence pour PromptLock & Élevée --- couvre l'intégralité de la chaîne (section 2.3.5) &
+Partielle --- seules deux techniques s'appliquent (accès API, exécution de commandes) \\
+\hline
+Cas d'usage idéal & Malware générique, y compris à composant IA &
+Attaque \textit{contre} un modèle (extraction, empoisonnement, jailbreak) \\
+\hline
+Limite observée & Aucune sous-technique dédiée à la génération de code par LLM au
+moment de la rédaction & Absence de technique couvrant l'IA comme \textit{outil}
+plutôt que comme \textit{cible} \\
+\hline
+\end{tabular}
+\caption{Analyse comparative ATT\&CK / ATLAS appliquée à PromptLock}
+\end{table}
+
+\subsubsection{Conséquence pour la cartographie ATT\&CK}
+
+Cette comparaison invite à affiner la technique \texttt{T1027} (Defense Evasion) déjà
+recensée en table 2.3 : le comportement observé --- code malveillant généré à l'exécution
+plutôt qu'écrit en dur --- correspond plus précisément à la sous-technique
+\texttt{T1027.014} (\textit{Polymorphic Code}), reprenant ainsi la même classification
+que celle retenue par le GTIG pour PromptFlux et renforçant la cohérence de cette
+cartographie avec la littérature de référence.
+
+En définitive, l'exercice de cartographie ATLAS constitue moins un enrichissement direct
+de la table d'indicateurs qu'un résultat méthodologique à part entière : il objective, à
+partir d'un cas concret, un angle mort documenté du référentiel face à cette classe
+émergente de menaces --- angle mort que seule l'évolution future d'ATLAS, ou
+l'introduction de nouvelles sous-techniques ATT\&CK dédiées à la génération de code par
+LLM, permettrait de combler.

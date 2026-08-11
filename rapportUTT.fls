@@ -728,6 +728,7 @@ INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-msb.cf
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-msb.cfg
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
@@ -762,17 +763,16 @@ INPUT .\latex-files\introduction.tex
 INPUT latex-files\introduction.tex
 INPUT .\latex-files\introduction.tex
 INPUT latex-files\introduction.tex
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt10.tfm
 INPUT .\latex-files\one.tex
 INPUT latex-files\one.tex
 INPUT .\latex-files\one.tex
 INPUT latex-files\one.tex
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbxi10.tfm
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt10.tfm
 INPUT .\latex-files\two.tex
 INPUT latex-files\two.tex
 INPUT .\latex-files\two.tex
@@ -787,7 +787,6 @@ INPUT .\latex-files\conclusion.tex
 INPUT latex-files\conclusion.tex
 INPUT .\latex-files\conclusion.tex
 INPUT latex-files\conclusion.tex
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr8.tfm
 INPUT .\latex-files\annexes\annexes.tex
 INPUT latex-files\annexes\annexes.tex
 INPUT .\latex-files\annexes\annexes.tex
@@ -807,8 +806,6 @@ INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr10.p
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmri10.pfb
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy10.pfb
