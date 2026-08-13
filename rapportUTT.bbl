@@ -19,6 +19,132 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
+    \entry{anssiIA}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=4c13de1b2831555c6563462e5de6942d}{%
+           family={ANSSI},
+           familyi={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {CERT-FR, Agence nationale de la sécurité des systèmes d'information}%
+      }
+      \strng{namehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{fullhash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{fullhashraw}{4c13de1b2831555c6563462e5de6942d}
+      \strng{bibnamehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authorbibnamehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authornamehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authorfullhash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authorfullhashraw}{4c13de1b2831555c6563462e5de6942d}
+      \field{extraname}{1}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{4}
+      \field{month}{2}
+      \field{note}{Rapport CERTFR-2026-CTI-001. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/}}
+      \field{title}{L'intelligence artificielle générative face aux attaques informatiques}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \true{nocite}
+    \endentry
+    \entry{anssiPanorama}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=4c13de1b2831555c6563462e5de6942d}{%
+           family={ANSSI},
+           familyi={A\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {CERT-FR, Agence nationale de la sécurité des systèmes d'information}%
+      }
+      \strng{namehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{fullhash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{fullhashraw}{4c13de1b2831555c6563462e5de6942d}
+      \strng{bibnamehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authorbibnamehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authornamehash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authorfullhash}{4c13de1b2831555c6563462e5de6942d}
+      \strng{authorfullhashraw}{4c13de1b2831555c6563462e5de6942d}
+      \field{extraname}{2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{3}
+      \field{note}{Rapport CERTFR-2026-CTI-002. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-002/}}
+      \field{title}{Panorama de la cybermenace 2025}
+      \field{year}{2026}
+      \field{dateera}{ce}
+    \endentry
+    \entry{bontchev2005}{inproceedings}{}{}
+      \name{author}{1}{}{%
+        {{hash=3de0c463d75fe1c6410a337d58556e91}{%
+           family={Bontchev},
+           familyi={B\bibinitperiod},
+           given={Vesselin},
+           giveni={V\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Dublin, Irlande}%
+      }
+      \strng{namehash}{3de0c463d75fe1c6410a337d58556e91}
+      \strng{fullhash}{3de0c463d75fe1c6410a337d58556e91}
+      \strng{fullhashraw}{3de0c463d75fe1c6410a337d58556e91}
+      \strng{bibnamehash}{3de0c463d75fe1c6410a337d58556e91}
+      \strng{authorbibnamehash}{3de0c463d75fe1c6410a337d58556e91}
+      \strng{authornamehash}{3de0c463d75fe1c6410a337d58556e91}
+      \strng{authorfullhash}{3de0c463d75fe1c6410a337d58556e91}
+      \strng{authorfullhashraw}{3de0c463d75fe1c6410a337d58556e91}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 15th Virus Bulletin International Conference}
+      \field{month}{10}
+      \field{note}{\shortUrl{https://bontchev.nlcv.bas.bg/papers/naming.html}}
+      \field{title}{Current Status of the {CARO} Malware Naming Scheme}
+      \field{year}{2005}
+    \endentry
+    \entry{collberg1997}{report}{}{}
+      \name{author}{3}{}{%
+        {{hash=028cbd59b46688ed431f75f79cace82e}{%
+           family={Collberg},
+           familyi={C\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=fdb5d60cad6c130613ab18e47c19d63c}{%
+           family={Thomborson},
+           familyi={T\bibinitperiod},
+           given={Clark},
+           giveni={C\bibinitperiod}}}%
+        {{hash=03f01f5d65633b6d0d8fcea5ee790341}{%
+           family={Low},
+           familyi={L\bibinitperiod},
+           given={Douglas},
+           giveni={D\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Department of Computer Science, University of Auckland}%
+      }
+      \strng{namehash}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \strng{fullhash}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \strng{fullhashraw}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \strng{bibnamehash}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \strng{authorbibnamehash}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \strng{authornamehash}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \strng{authorfullhash}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \strng{authorfullhashraw}{e472593b6e7a09ec3ca5b00638f2ad54}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{7}
+      \field{number}{148}
+      \field{title}{A Taxonomy of Obfuscating Transformations}
+      \field{type}{Technical Report}
+      \field{year}{1997}
+    \endentry
     \entry{nyuRansomware}{online}{}{}
       \name{author}{1}{}{%
         {{hash=9fcf4da543b7d25ee7de26eaebbf9330}{%
@@ -47,6 +173,47 @@
       \field{title}{Large language models can execute complete ransomware attacks autonomously}
       \field{year}{2025}
       \field{dateera}{ce}
+    \endentry
+    \entry{gaber2024}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=e050e335001fed17f7af760e546d08ed}{%
+           family={Gaber},
+           familyi={G\bibinitperiod},
+           given={Matthew\bibnamedelima G.},
+           giveni={M\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=7fb2375082bc9ad06db36522c8341d67}{%
+           family={Ahmed},
+           familyi={A\bibinitperiod},
+           given={Mohiuddin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a21888b04086be611234eea6ad6b3e35}{%
+           family={Janicke},
+           familyi={J\bibinitperiod},
+           given={Helge},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \strng{fullhash}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \strng{fullhashraw}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \strng{bibnamehash}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \strng{authorbibnamehash}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \strng{authornamehash}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \strng{authorfullhash}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \strng{authorfullhashraw}{2cd320fcc68ccdf7bd008906073e2fd9}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{ACM Computing Surveys}
+      \field{number}{6}
+      \field{title}{Malware Detection with Artificial Intelligence: A Systematic Literature Review}
+      \field{volume}{56}
+      \field{year}{2024}
+      \field{pages}{1\bibrangedash 33}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1145/3638552
+      \endverb
     \endentry
     \entry{avtest}{online}{}{}
       \name{author}{1}{}{%
@@ -94,6 +261,7 @@
       \strng{authornamehash}{8e629be8aeed61650f573029bf3b6eeb}
       \strng{authorfullhash}{8e629be8aeed61650f573029bf3b6eeb}
       \strng{authorfullhashraw}{8e629be8aeed61650f573029bf3b6eeb}
+      \field{extraname}{1}
       \field{sortinit}{G}
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
@@ -104,6 +272,280 @@
       \field{title}{GTIG AI Threat Tracker: Advances in Threat Actor Usage of AI Tools}
       \field{year}{2025}
       \field{dateera}{ce}
+    \endentry
+    \entry{gtig2026b}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=8e629be8aeed61650f573029bf3b6eeb}{%
+           family={Group},
+           familyi={G\bibinitperiod},
+           given={Google\bibnamedelimb Threat\bibnamedelima Intelligence},
+           giveni={G\bibinitperiod\bibinitdelim T\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Google Cloud}%
+      }
+      \strng{namehash}{8e629be8aeed61650f573029bf3b6eeb}
+      \strng{fullhash}{8e629be8aeed61650f573029bf3b6eeb}
+      \strng{fullhashraw}{8e629be8aeed61650f573029bf3b6eeb}
+      \strng{bibnamehash}{8e629be8aeed61650f573029bf3b6eeb}
+      \strng{authorbibnamehash}{8e629be8aeed61650f573029bf3b6eeb}
+      \strng{authornamehash}{8e629be8aeed61650f573029bf3b6eeb}
+      \strng{authorfullhash}{8e629be8aeed61650f573029bf3b6eeb}
+      \strng{authorfullhashraw}{8e629be8aeed61650f573029bf3b6eeb}
+      \field{extraname}{2}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{11}
+      \field{month}{5}
+      \field{note}{\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access}}
+      \field{title}{GTIG AI Threat Tracker: Adversaries Leverage AI for Vulnerability Exploitation, Augmented Operations, and Initial Access}
+      \field{year}{2026}
+      \field{dateera}{ce}
+    \endentry
+    \entry{ember2024}{inproceedings}{}{}
+      \name{author}{8}{}{%
+        {{hash=a0bfdf50b28b0f899fddbe8251b2a973}{%
+           family={Joyce},
+           familyi={J\bibinitperiod},
+           given={Robert\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=f5763851eeedac1c8e492eeb4f7a383d}{%
+           family={Miller},
+           familyi={M\bibinitperiod},
+           given={Gideon},
+           giveni={G\bibinitperiod}}}%
+        {{hash=19ff65b8ed8ab95652a6588a676032ab}{%
+           family={Roth},
+           familyi={R\bibinitperiod},
+           given={Phil},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c1fc7f635df3a0a4965a694908f62936}{%
+           family={Zak},
+           familyi={Z\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=11cc2330b187b6368edd93474faa54ad}{%
+           family={Zaresky-Williams},
+           familyi={Z\bibinithyphendelim W\bibinitperiod},
+           given={Elliott},
+           giveni={E\bibinitperiod}}}%
+        {{hash=fc0aa80f94bc81afe67e9976d93a2b65}{%
+           family={Anderson},
+           familyi={A\bibinitperiod},
+           given={Hyrum},
+           giveni={H\bibinitperiod}}}%
+        {{hash=db35e12d9d15263d499e410761247d51}{%
+           family={Raff},
+           familyi={R\bibinitperiod},
+           given={Edward},
+           giveni={E\bibinitperiod}}}%
+        {{hash=337fe0f14ca7cc788919fbe053a23a93}{%
+           family={Holt},
+           familyi={H\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \strng{fullhash}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \strng{fullhashraw}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \strng{bibnamehash}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \strng{authorbibnamehash}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \strng{authornamehash}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \strng{authorfullhash}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \strng{authorfullhashraw}{0cb87aa661aae9cba51f8c1eee9dbd5a}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining}
+      \field{title}{{EMBER2024}: A Benchmark Dataset for Holistic Evaluation of Malware Classifiers}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.1145/3711896.3737431
+      \endverb
+    \endentry
+    \entry{elasticRootkits}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=94e972cdd2b7bf6ea7da8bef89552257}{%
+           family={Labs},
+           familyi={L\bibinitperiod},
+           given={Elastic\bibnamedelima Security},
+           giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Elastic}%
+      }
+      \strng{namehash}{94e972cdd2b7bf6ea7da8bef89552257}
+      \strng{fullhash}{94e972cdd2b7bf6ea7da8bef89552257}
+      \strng{fullhashraw}{94e972cdd2b7bf6ea7da8bef89552257}
+      \strng{bibnamehash}{94e972cdd2b7bf6ea7da8bef89552257}
+      \strng{authorbibnamehash}{94e972cdd2b7bf6ea7da8bef89552257}
+      \strng{authornamehash}{94e972cdd2b7bf6ea7da8bef89552257}
+      \strng{authorfullhash}{94e972cdd2b7bf6ea7da8bef89552257}
+      \strng{authorfullhashraw}{94e972cdd2b7bf6ea7da8bef89552257}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{5}
+      \field{month}{3}
+      \field{note}{Partie 1 sur 2. \shortUrl{https://www.elastic.co/security-labs/linux-rootkits-1-hooked-on-linux}}
+      \field{title}{Hooked on {Linux}: Rootkit Taxonomy, Hooking Techniques and Tradecraft}
+      \field{year}{2026}
+      \field{dateera}{ce}
+    \endentry
+    \entry{msnaming}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=140864078aeca1c7c35b4beb33c53c34}{%
+           family={Microsoft},
+           familyi={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Microsoft Learn}%
+      }
+      \strng{namehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{fullhash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{fullhashraw}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{bibnamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorbibnamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authornamehash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorfullhash}{140864078aeca1c7c35b4beb33c53c34}
+      \strng{authorfullhashraw}{140864078aeca1c7c35b4beb33c53c34}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{\shortUrl{https://learn.microsoft.com/fr-fr/unified-secops/malware-naming}}
+      \field{title}{How {Microsoft} names malware}
+      \field{year}{2025}
+    \endentry
+    \entry{attack}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=ed5f36b0c6246bf884830c7836478e39}{%
+           family={MITRE},
+           familyi={M\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {MITRE Corporation}%
+      }
+      \strng{namehash}{ed5f36b0c6246bf884830c7836478e39}
+      \strng{fullhash}{ed5f36b0c6246bf884830c7836478e39}
+      \strng{fullhashraw}{ed5f36b0c6246bf884830c7836478e39}
+      \strng{bibnamehash}{ed5f36b0c6246bf884830c7836478e39}
+      \strng{authorbibnamehash}{ed5f36b0c6246bf884830c7836478e39}
+      \strng{authornamehash}{ed5f36b0c6246bf884830c7836478e39}
+      \strng{authorfullhash}{ed5f36b0c6246bf884830c7836478e39}
+      \strng{authorfullhashraw}{ed5f36b0c6246bf884830c7836478e39}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{note}{Version à préciser. \shortUrl{https://attack.mitre.org/}}
+      \field{title}{{MITRE ATT\&CK} Enterprise Matrix}
+      \field{year}{2026}
+    \endentry
+    \entry{pierazzi2020}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=241a5f0d2b011a84cb16bce6f40c57ae}{%
+           family={Pierazzi},
+           familyi={P\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=22e6077fa3ac226c5f391a575cf6b258}{%
+           family={Pendlebury},
+           familyi={P\bibinitperiod},
+           given={Feargus},
+           giveni={F\bibinitperiod}}}%
+        {{hash=b52b985ad8069233f2a21e52b9611681}{%
+           family={Cortellazzi},
+           familyi={C\bibinitperiod},
+           given={Jacopo},
+           giveni={J\bibinitperiod}}}%
+        {{hash=297d871509bb8af6aef82c3caf336bbf}{%
+           family={Cavallaro},
+           familyi={C\bibinitperiod},
+           given={Lorenzo},
+           giveni={L\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {San Francisco, CA}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \strng{fullhash}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \strng{fullhashraw}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \strng{bibnamehash}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \strng{authorbibnamehash}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \strng{authornamehash}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \strng{authorfullhash}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \strng{authorfullhashraw}{aa06d2e2b07c6e2f70b395cb3fb60524}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2020 IEEE Symposium on Security and Privacy}
+      \field{title}{Intriguing Properties of Adversarial {ML} Attacks in the Problem Space}
+      \field{year}{2020}
+      \field{pages}{1332\bibrangedash 1349}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1109/SP40000.2020.00073
+      \endverb
+    \endentry
+    \entry{crossArchSurvey}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=7812cb922a98d00e922ed53b48f39ee8}{%
+           family={Raju},
+           familyi={R\bibinitperiod},
+           given={Anandharaju\bibnamedelima Durai},
+           giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=8a1a6bf8d32aa234e0008fd3c1534a93}{%
+           family={Abualhaol},
+           familyi={A\bibinitperiod},
+           given={Ibrahim\bibnamedelima Y.},
+           giveni={I\bibinitperiod\bibinitdelim Y\bibinitperiod}}}%
+        {{hash=ab6d74dd05ad6233777c0c364874f7b3}{%
+           family={Giagone},
+           familyi={G\bibinitperiod},
+           given={Ronnie\bibnamedelima Salvador},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=2ba74e19a950c5a40b85cc136538f42b}{%
+           family={Zhou},
+           familyi={Z\bibinitperiod},
+           given={Yang},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=457c524094ff16b2e44dcda38ce7cb31}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Shengqiang},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{9b974fc9ba90ab2eed784088d8381d22}
+      \strng{fullhash}{9b974fc9ba90ab2eed784088d8381d22}
+      \strng{fullhashraw}{9b974fc9ba90ab2eed784088d8381d22}
+      \strng{bibnamehash}{9b974fc9ba90ab2eed784088d8381d22}
+      \strng{authorbibnamehash}{9b974fc9ba90ab2eed784088d8381d22}
+      \strng{authornamehash}{9b974fc9ba90ab2eed784088d8381d22}
+      \strng{authorfullhash}{9b974fc9ba90ab2eed784088d8381d22}
+      \strng{authorfullhashraw}{9b974fc9ba90ab2eed784088d8381d22}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Access}
+      \field{note}{Préprint : arXiv:2306.07989}
+      \field{title}{A Survey on Cross-Architectural {IoT} Malware Threat Hunting}
+      \field{volume}{9}
+      \field{year}{2021}
+      \field{pages}{91686\bibrangedash 91709}
+      \range{pages}{24}
     \endentry
     \entry{esetPromptLock}{online}{}{}
       \name{author}{1}{}{%
@@ -134,6 +576,153 @@
       \field{title}{First known AI-powered ransomware uncovered by ESET Research}
       \field{year}{2025}
       \field{dateera}{ce}
+    \endentry
+    \entry{synacktiv2025}{online}{}{}
+      \name{author}{1}{}{%
+        {{hash=fa06c4a651680c7b419393e89bd3b2e5}{%
+           family={Synacktiv},
+           familyi={S\bibinitperiod}}}%
+      }
+      \list{organization}{1}{%
+        {Synacktiv}%
+      }
+      \strng{namehash}{fa06c4a651680c7b419393e89bd3b2e5}
+      \strng{fullhash}{fa06c4a651680c7b419393e89bd3b2e5}
+      \strng{fullhashraw}{fa06c4a651680c7b419393e89bd3b2e5}
+      \strng{bibnamehash}{fa06c4a651680c7b419393e89bd3b2e5}
+      \strng{authorbibnamehash}{fa06c4a651680c7b419393e89bd3b2e5}
+      \strng{authornamehash}{fa06c4a651680c7b419393e89bd3b2e5}
+      \strng{authorfullhash}{fa06c4a651680c7b419393e89bd3b2e5}
+      \strng{authorfullhashraw}{fa06c4a651680c7b419393e89bd3b2e5}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{14}
+      \field{month}{10}
+      \field{note}{\shortUrl{https://www.synacktiv.com/en/publications/linkpro-ebpf-rootkit-analysis}}
+      \field{title}{{LinkPro}: {eBPF} rootkit analysis}
+      \field{year}{2025}
+      \field{dateera}{ce}
+    \endentry
+    \entry{szor2005}{book}{}{}
+      \name{author}{1}{}{%
+        {{hash=0ba142f6aebfe482a0c72d790ed0532b}{%
+           family={Ször},
+           familyi={S\bibinitperiod},
+           given={Péter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Addison-Wesley}%
+      }
+      \strng{namehash}{0ba142f6aebfe482a0c72d790ed0532b}
+      \strng{fullhash}{0ba142f6aebfe482a0c72d790ed0532b}
+      \strng{fullhashraw}{0ba142f6aebfe482a0c72d790ed0532b}
+      \strng{bibnamehash}{0ba142f6aebfe482a0c72d790ed0532b}
+      \strng{authorbibnamehash}{0ba142f6aebfe482a0c72d790ed0532b}
+      \strng{authornamehash}{0ba142f6aebfe482a0c72d790ed0532b}
+      \strng{authorfullhash}{0ba142f6aebfe482a0c72d790ed0532b}
+      \strng{authorfullhashraw}{0ba142f6aebfe482a0c72d790ed0532b}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0321304544}
+      \field{title}{The Art of Computer Virus Research and Defense}
+      \field{year}{2005}
+    \endentry
+    \entry{ugartepedrero2015}{inproceedings}{}{}
+      \name{author}{4}{}{%
+        {{hash=f6aa2a71c1891e6fbe542ef4684738a4}{%
+           family={Ugarte-Pedrero},
+           familyi={U\bibinithyphendelim P\bibinitperiod},
+           given={Xabier},
+           giveni={X\bibinitperiod}}}%
+        {{hash=14cb44e160bd085923d2216f78867ae2}{%
+           family={Balzarotti},
+           familyi={B\bibinitperiod},
+           given={Davide},
+           giveni={D\bibinitperiod}}}%
+        {{hash=5aebc62df20c56da945f583a9009ff06}{%
+           family={Santos},
+           familyi={S\bibinitperiod},
+           given={Igor},
+           giveni={I\bibinitperiod}}}%
+        {{hash=2049d6a1a25e7d13476d6684973a5072}{%
+           family={Bringas},
+           familyi={B\bibinitperiod},
+           given={Pablo\bibnamedelima G.},
+           giveni={P\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{914a0a005e5998e98fa1999aa3aef4ca}
+      \strng{fullhash}{914a0a005e5998e98fa1999aa3aef4ca}
+      \strng{fullhashraw}{914a0a005e5998e98fa1999aa3aef4ca}
+      \strng{bibnamehash}{914a0a005e5998e98fa1999aa3aef4ca}
+      \strng{authorbibnamehash}{914a0a005e5998e98fa1999aa3aef4ca}
+      \strng{authornamehash}{914a0a005e5998e98fa1999aa3aef4ca}
+      \strng{authorfullhash}{914a0a005e5998e98fa1999aa3aef4ca}
+      \strng{authorfullhashraw}{914a0a005e5998e98fa1999aa3aef4ca}
+      \field{sortinit}{U}
+      \field{sortinithash}{6901a00e45705986ee5e7ca9fd39adca}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2015 IEEE Symposium on Security and Privacy}
+      \field{title}{{SoK}: Deep Packer Inspection: A Longitudinal Study of the Complexity of Run-Time Packers}
+      \field{year}{2015}
+      \field{pages}{659\bibrangedash 673}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/SP.2015.46
+      \endverb
+    \endentry
+    \entry{bodmas}{inproceedings}{}{}
+      \name{author}{5}{}{%
+        {{hash=c00c5566a318bb826525dcbc4d2d883b}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Limin},
+           giveni={L\bibinitperiod}}}%
+        {{hash=08f5ed2c2a8ebad55376b55ec98c3a1f}{%
+           family={Ciptadi},
+           familyi={C\bibinitperiod},
+           given={Arridhana},
+           giveni={A\bibinitperiod}}}%
+        {{hash=570a5db4573d50a52e0ff48f2da87332}{%
+           family={Laziuk},
+           familyi={L\bibinitperiod},
+           given={Ihar},
+           giveni={I\bibinitperiod}}}%
+        {{hash=f591c1da966c09da423b9f9e5ddf4a6c}{%
+           family={Ahmadzadeh},
+           familyi={A\bibinitperiod},
+           given={Ali},
+           giveni={A\bibinitperiod}}}%
+        {{hash=3d33b99ab2b9fa2c7987e1d7f5873222}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Gang},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{68d9a559557b34d8edd40f16e013a653}
+      \strng{fullhash}{68d9a559557b34d8edd40f16e013a653}
+      \strng{fullhashraw}{68d9a559557b34d8edd40f16e013a653}
+      \strng{bibnamehash}{68d9a559557b34d8edd40f16e013a653}
+      \strng{authorbibnamehash}{68d9a559557b34d8edd40f16e013a653}
+      \strng{authornamehash}{68d9a559557b34d8edd40f16e013a653}
+      \strng{authorfullhash}{68d9a559557b34d8edd40f16e013a653}
+      \strng{authorfullhashraw}{68d9a559557b34d8edd40f16e013a653}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{4th Deep Learning and Security Workshop (DLS), co-localisé avec IEEE Symposium on Security and Privacy}
+      \field{note}{\shortUrl{https://whyisyoung.github.io/BODMAS/}}
+      \field{title}{{BODMAS}: An Open Dataset for Learning based Temporal Analysis of {PE} Malware}
+      \field{year}{2021}
     \endentry
   \enddatalist
 \endrefsection

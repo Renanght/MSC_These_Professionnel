@@ -2376,9 +2376,30 @@
   <bcf:section number="0">
     <bcf:citekey order="1" intorder="1">avtest</bcf:citekey>
     <bcf:citekey order="2" intorder="1">gtigAI</bcf:citekey>
-    <bcf:citekey order="3" intorder="1">esetPromptLock</bcf:citekey>
-    <bcf:citekey order="4" intorder="1">nyuRansomware</bcf:citekey>
-    <bcf:citekey order="5" intorder="1" nocite="1">*</bcf:citekey>
+    <bcf:citekey order="3" intorder="1">crossArchSurvey</bcf:citekey>
+    <bcf:citekey order="4" intorder="1">avtest</bcf:citekey>
+    <bcf:citekey order="5" intorder="1">msnaming</bcf:citekey>
+    <bcf:citekey order="6" intorder="1">bontchev2005</bcf:citekey>
+    <bcf:citekey order="7" intorder="1">attack</bcf:citekey>
+    <bcf:citekey order="8" intorder="1">anssiPanorama</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">ugartepedrero2015</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">szor2005</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">collberg1997</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">elasticRootkits</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">synacktiv2025</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">gtigAI</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">esetPromptLock</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">nyuRansomware</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">gtigAI</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">gtig2026b</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">gtigAI</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">synacktiv2025</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">gaber2024</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">bodmas</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">ember2024</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">crossArchSurvey</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">pierazzi2020</bcf:citekey>
+    <bcf:citekey order="26" intorder="1" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

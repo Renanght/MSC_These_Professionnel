@@ -1,149 +1,381 @@
 \chapter{État de l'art de la menace logicielle et mécanismes d'évasion}
 
-%---------------------------------------------------------------
-\section{Définition et taxonomie du malware moderne}
+%===============================================================
+\section*{Périmètre}
+\addcontentsline{toc}{section}{Périmètre}
 
-Un malware (malicious software) ne se limite plus aujourd'hui à sa simple capacité de réplication, comme pouvaient l'être les premiers virus informatiques des années 1980. Sa définition repose désormais sur son intention malveillante : tout code, script ou programme conçu pour infiltrer un système, perturber son fonctionnement, en extraire des données sensibles ou obtenir un accès non autorisé sans le consentement de son propriétaire.
+La souche analysée dans la suite de ce mémoire est un binaire ELF destiné à un environnement GNU/Linux. Cet état de l'art est donc construit autour des systèmes Linux, en particulier dans leurs usages serveur et cloud, et ne mobilise l'écosystème Windows qu'à titre de contrepoint lorsque la comparaison éclaire un mécanisme.
 
-Cette évolution reflète une transformation profonde de la menace : d'un phénomène essentiellement expérimental, elle est devenue une activité structurée, souvent pilotée par des objectifs financiers, stratégiques ou géopolitiques.
+Ce choix n'est pas seulement dicté par l'objet d'étude. La littérature disponible est très déséquilibrée : les travaux sur la détection de binaires PE forment un corpus mature, doté de jeux de données publics et de protocoles d'évaluation partagés, tandis que la recherche équivalente sur les binaires ELF reste dispersée et beaucoup moins outillée \cite{crossArchSurvey}. Ce déséquilibre a une conséquence directe sur le travail présenté ici, puisqu'il interdit de reprendre telles quelles les méthodes d'évaluation du monde Windows, et il constitue en lui-même une partie de la justification du sujet.
+
+Les sources mobilisées relèvent de trois registres qui n'ont pas la même valeur probante : travaux académiques évalués par les pairs, rapports d'investigation publiés par des équipes de réponse à incident, et documentation de référence des cadres d'analyse. Le texte signale explicitement les cas où une capacité relève de l'hypothèse plutôt que de l'observation.
+
+%===============================================================\section{Définition et taxonomie du malware moderne}
+
+Un malware ne se définit plus par sa capacité de réplication, comme pouvaient l'être les premiers virus des années 1980. Ce qui le caractérise est l'intention : tout code conçu pour s'introduire dans un système, en perturber le fonctionnement, en extraire des données ou y maintenir un accès non autorisé, sans le consentement de son propriétaire.
+
+Le critère est bien l'intention, et non la technique employée. Un outil de prise en main à distance est un logiciel d'administration parfaitement légitime quand un exploitant l'installe sur ses serveurs, et une porte dérobée quand un attaquant l'y dépose. Les deux peuvent être le même programme. Cette ambiguïté traverse tout ce chapitre : elle explique pourquoi la détection est difficile, et pourquoi elle ne se ramène jamais à reconnaître un objet dans une liste.
+
+Le déplacement de définition accompagne un changement de nature de l'activité. La production de code malveillant, longtemps portée par des motivations de démonstration technique, s'est structurée en filière, avec une division du travail et des objectifs financiers ou stratégiques. Le volume de nouveaux échantillons recensés quotidiennement par les observatoires du secteur donne la mesure de cette industrialisation \cite{avtest}.
 
 %---------------------------------------------------------------
 \subsection{Nomenclature et standards d'identification}
 
-Pour analyser et communiquer efficacement sur les malwares, le secteur s'appuie sur des conventions de nommage standardisées. Microsoft, comme la grande majorité des éditeurs de sécurité, adopte le schéma défini par le CARO (Computer Antivirus Research Organization), qui structure le nom d'un malware selon le format suivant :
+Deux analystes qui examinent le même fichier dans deux entreprises différentes doivent pouvoir établir qu'ils parlent bien du même objet. C'est le rôle des conventions de nommage, dont la plus ancienne et la plus diffusée est celle du CARO, définie au début des années 1990 et que Microsoft déclare suivre pour ses propres détections \cite{msnaming}. Un identifiant y est composé de cinq champs, à la manière d'un nom d'espèce en biologie, du plus général au plus précis :
 
 \begin{center}
 \texttt{Type : Plateforme / Famille . Variante ! Suffixe}
 \end{center}
 
-Chaque composant a une signification précise.
+Le tableau \ref{tab:nommage} décompose un identifiant réel selon ce schéma.
 
-Le type décrit ce que le malware fait sur la machine infectée. Microsoft distingue plusieurs grandes catégories, parmi lesquelles : \texttt{Backdoor}, \texttt{Exploit}, \texttt{Ransom}, \texttt{Trojan}, \texttt{TrojanDownloader}, \texttt{Worm}, \texttt{Virus}, ou encore \texttt{PWS} (Password Stealer). À cela s'ajoutent des catégories pour les logiciels indésirables (\texttt{Adware}, \texttt{BrowserModifier}) et les applications potentiellement indésirables (\texttt{PUAMiner}, \texttt{PUATorrent}).
+\begin{table}[h!]
+\centering
+\caption{Lecture de l'identifiant \texttt{Trojan:Linux/XorDDoS.A!ml}}
+\label{tab:nommage}
+\begin{tabular}{|l|l|p{7cm}|}
+\hline
+Champ & Valeur & Signification \\
+\hline
+Type & \texttt{Trojan} & Ce que le code fait : il se présente comme légitime pour être exécuté. Autres valeurs courantes : \texttt{Backdoor} (accès distant), \texttt{Ransom} (rançongiciel), \texttt{Worm} (propagation autonome), \texttt{PWS} (vol de mots de passe). \\
+\hline
+Plateforme & \texttt{Linux} & L'environnement visé. Peut aussi désigner un langage interprété (\texttt{Python}, \texttt{Shell}) ou une version de Windows. \\
+\hline
+Famille & \texttt{XorDDoS} & Le nom donné à la découverte, partagé par tous les échantillons dont le code est jugé assez proche pour supposer une origine commune. \\
+\hline
+Variante & \texttt{A} & Une lettre attribuée dans l'ordre des versions successives : \texttt{.AF} succède à \texttt{.AE}. \\
+\hline
+Suffixe & \texttt{!ml} & Une précision technique facultative. Ici, la détection provient d'un modèle d'apprentissage automatique et non d'une règle écrite à la main. \\
+\hline
+\end{tabular}
+\end{table}
 
-La plateforme guide le malware vers son environnement d'exécution compatible. Elle peut désigner un système d'exploitation (\texttt{Win32}, \texttt{Win64}, \texttt{Linux}, \texttt{AndroidOS}, \texttt{macOS\_X}), un langage de script (\texttt{JS}, \texttt{Python}, \texttt{VBS}), ou encore un format de fichier spécifique (\texttt{XML}, \texttt{HTML}). Cette précision est importante : un même malware peut exister en plusieurs versions ciblant des plateformes différentes.
+Sur les cibles Linux, le champ plateforme masque une difficulté propre au reste de ce mémoire. Un même code source y est fréquemment compilé pour plusieurs architectures matérielles, x86-64 pour les serveurs, ARM ou MIPS pour les équipements embarqués. Les binaires produits sont différents alors que le comportement est identique, et le champ plateforme n'en rend pas compte.
 
-La famille correspond au nom attribué lors de la découverte initiale de la menace, regroupant des échantillons partageant des caractéristiques communes souvent une attribution aux mêmes auteurs. Il est courant que différents éditeurs de sécurité utilisent des noms de famille différents pour désigner le même malware, ce qui souligne l'importance du partage de renseignements sur les menaces (Threat Intelligence).
+\paragraph{Les limites du schéma.} Présenter cette convention comme un standard sectoriel serait inexact. L'un de ses auteurs reconnaît qu'aucun produit n'en respecte intégralement les règles et que le CARO n'a jamais disposé de l'autorité nécessaire pour les imposer \cite{bontchev2005}. Deux éditeurs attribuent donc régulièrement des noms différents au même échantillon, et les tentatives ultérieures d'unification ont toutes échoué.
 
-La variante est une lettre attribuée séquentiellement à chaque version distincte d'une même famille. Par exemple, la variante \texttt{.AF} est créée après la variante \texttt{.AE}, permettant de suivre précisément l'évolution d'une menace dans le temps.
-
-Le suffixe, précédé d'un point d'exclamation (\texttt{!}), est un indicateur interne qualifiant une caractéristique technique particulière de l'échantillon : usage d'un packer, mécanisme d'obfuscation spécifique, ou composant de machine learning (\texttt{!ml}).
-
-À titre d'exemple, l'identifiant \texttt{Trojan:Win32/Emotet.AF!ml} se lit ainsi : un trojan ciblant les systèmes Windows 32-bit, appartenant à la famille Emotet, dans sa variante AF, détecté via un mécanisme de machine learning.
+Le problème n'est pas seulement documentaire. Entraîner un modèle à reconnaître des familles suppose de disposer d'échantillons correctement étiquetés ; or l'étiquette de référence, en pratique, est le verdict des antivirus. Si ces verdicts se contredisent, les étiquettes sont bruitées, et le modèle apprend en partie ce désaccord. Des outils de consolidation existent, mais ils héritent des divergences qu'ils agrègent.
 
 %---------------------------------------------------------------
-\subsection{Distinction fondamentale : tactique, technique, vecteur et charge utile}
+\subsection{Tactique, technique, vecteur, capacité et charge utile}
 
-Avant de classifier les menaces, il est essentiel de distinguer plusieurs notions souvent confondues une confusion qui fausse l'analyse de risque. Le framework MITRE ATT\&CK, référence internationale pour l'analyse des comportements malveillants, propose une grille de lecture structurée en tactiques et techniques.
+Cinq notions se confondent couramment, et leur confusion fausse l'analyse de risque : on croit se protéger d'une menace quand on ne se protège que d'un de ses outils. Le cadre MITRE ATT\&CK \cite{attack} fournit une grille qui les sépare. Une comparaison avec un cambriolage en rend la logique immédiate, et le tableau \ref{tab:attack} la transpose sur un cas informatique.
 
-La tactique représente l'objectif stratégique de l'attaquant à une étape donnée de l'intrusion. Par exemple, Initial Access (TA0001) désigne la tactique consistant à pénétrer dans un système cible.
+\begin{table}[h!]
+\centering
+\caption{Les cinq niveaux d'analyse d'une intrusion}
+\label{tab:attack}
+\begin{tabular}{|l|p{3.6cm}|p{3.4cm}|p{4.2cm}|}
+\hline
+Niveau & Question posée & Cambriolage & Intrusion sur un serveur Linux \\
+\hline
+Tactique & Que cherche l'attaquant à cette étape ? & Entrer dans la maison & Obtenir un premier accès (TA0001) \\
+\hline
+Technique & Comment s'y prend-il ? & Crocheter la serrure & Exploiter une application exposée (T1190) \\
+\hline
+Vecteur & Par quel support concret ? & La porte de service & Un service web accessible depuis internet \\
+\hline
+Capacité & Que sait-il faire une fois entré ? & Ouvrir un coffre & Élever ses privilèges, se dissimuler \\
+\hline
+Charge utile & Qu'emporte-t-il au final ? & Les bijoux & Chiffrer les données, exfiltrer des clés \\
+\hline
+\end{tabular}
+\end{table}
 
-La technique décrit comment l'attaquant réalise cet objectif. Par exemple, le Phishing (T1566) est la technique utilisée pour obtenir un accès initial, l'email en étant le vecteur concret d'exécution. De même, l'exploitation d'une vulnérabilité exposée sur internet (T1190) est une autre technique relevant de cette même tactique.
+Une sixième notion traverse les autres : l'évasion défensive (TA0005), qui regroupe tout ce que l'attaquant met en \oe uvre pour ne pas être vu pendant qu'il agit. Elle constitue l'objet principal de ce chapitre, et son cambrioleur porterait des gants.
 
-Le vecteur est le support physique ou logique par lequel la technique est mise en oeuvre : un email, une clé USB, une page web compromise.
+L'intérêt de cette grille est pratique. Une signature protège d'un échantillon, c'est-à-dire d'un cambrioleur précis dont on possède la photographie ; une détection comportementale protège d'une technique, donc de quiconque crochète une serrure. La première approche est exacte mais s'échappe dès que l'apparence change, la seconde tolère la variation mais produit des faux positifs, puisque le propriétaire aussi manipule sa serrure. Tout l'état de l'art de la détection tient dans cet arbitrage, et la section \ref{sec:detection} y revient.
 
-La fonctionnalité (Capability) regroupe les outils dont dispose le malware pour accomplir sa mission : enregistrement de frappes clavier (keylogging), capture d'écran, mouvement latéral dans le réseau.
-
-La charge utile (Payload) est l'action finale recherchée par l'attaquant : chiffrement des données pour un ransomware, exfiltration de mots de passe pour un infostealer.
-
-Le mécanisme d'évasion (Defense Evasion) recouvre toutes les techniques permettant au malware de rester invisible : obfuscation du code (T1027), détection de sandboxes, désactivation des outils de sécurité.
-
-Cette grille de lecture permet de raisonner non plus sur ce qu'est un malware, mais sur ce qu'il fait ce qui est fondamental pour concevoir des défenses adaptées.
-
+%===============================================================
 \section{Classification par objectifs opérationnels}
 
-Les malwares peuvent être classés selon les objectifs poursuivis par leurs auteurs. Cette approche fonctionnelle est plus utile en pratique qu'une simple taxonomie par type de fichier.
+Classer les menaces par l'objectif de leurs auteurs est plus utile en pratique qu'une taxonomie par type de fichier.
 
-Parmi les grandes familles, le ransomware chiffre les données de la victime et exige une rançon pour les restituer. C'est aujourd'hui l'un des modèles économiques dominants de la cybercriminalité organisée. L'infostealer est conçu pour extraire discrètement des informations sensibles identifiants, cookies de session, portefeuilles de cryptomonnaies en restant aussi silencieux que possible. Le RAT (Remote Access Trojan) permet une prise de contrôle complète à distance, facilitant l'espionnage, la surveillance ou le déplacement latéral au sein d'un réseau d'entreprise. Enfin, le loader ou dropper joue un rôle d'infrastructure dans la chaîne d'attaque : sa seule mission est de télécharger, installer et maintenir d'autres charges malveillantes plus complexes.
+Le rançongiciel chiffre les données et monnaye leur restitution. Sur Linux, il a suivi la valeur : les variantes ELF visant les hyperviseurs de virtualisation permettent de rendre indisponibles des dizaines de machines virtuelles par une seule exécution, ce qui déplace le rapport coût-bénéfice en faveur de l'attaquant.
 
-On distingue également plusieurs sous-catégories notables. Le spyware surveille les activités de l'utilisateur à son insu (keylogging, capture d'écran, collecte de données de navigation) et est utilisé dans des contextes d'espionnage industriel ou de surveillance ciblée. Le banker, ou trojan bancaire, est spécialisé dans le vol d'informations financières : il peut intercepter des identifiants bancaires ou injecter du contenu malveillant directement dans les pages web (web injects). Le bot intègre la machine compromise à un réseau contrôlé à distance (botnet), utilisé pour lancer des attaques DDoS, envoyer du spam ou miner des cryptomonnaies. L'exploit tire parti d'une vulnérabilité spécifique d'un logiciel pour y exécuter du code arbitraire et sert généralement de point d'entrée dans une chaîne d'infection plus large.
+Le voleur d'informations extrait discrètement des données valorisables. Sur un poste de travail il vise des cookies et des identifiants ; sur un serveur ou une machine de développement, il vise des secrets d'infrastructure, jetons d'API, clés SSH, variables d'environnement d'intégration continue, dont la compromission ouvre un accès bien plus large que la machine elle-même.
 
-Ces catégories ne doivent pas être perçues comme étanches. En pratique, un même échantillon combine fréquemment plusieurs fonctionnalités un trojan bancaire intégrant des capacités d'évasion et de propagation réseau, par exemple. C'est précisément cette polyvalence qui complexifie les stratégies de détection modernes.
+La porte dérobée assure un accès persistant à distance. C'est la catégorie la plus représentée dans les compromissions de serveurs, et celle qui concentre l'essentiel des techniques de dissimulation étudiées en section \ref{sec:runtime}.
 
+Le mineur de cryptomonnaie détourne les ressources de calcul. Longtemps considéré comme une nuisance mineure, il sert en pratique de révélateur : sa présence signale une chaîne d'accès qui aurait tout aussi bien pu porter une charge destructive.
 
-\section{Mécanismes d'obfuscation et d'auto-édition}
+Le bot enrôle la machine dans un réseau contrôlé à distance. Les familles visant les équipements embarqués sous Linux, dérivées pour beaucoup d'un même code source diffusé publiquement, illustrent le problème de la compilation croisée : un même comportement se décline en dizaines de binaires dont la structure varie selon l'architecture cible.
 
-L'un des défis majeurs du reverse engineering est d'analyser un code qui change de forme de manière autonome. On parle d'auto-édition pour désigner l'ensemble des techniques permettant à un malware de modifier sa propre structure afin d'échapper à la détection, qu'elle soit statique (lecture du code sans l'exécuter) ou dynamique (observation du comportement en temps réel).
+Ces catégories ne sont pas étanches, et un échantillon combine ordinairement plusieurs fonctions.
 
-\subsection{Du polymorphisme au métamorphisme}
+%---------------------------------------------------------------
+\subsection{L'écosystème économique}
+\label{sec:economie}
 
-Le polymorphisme est la technique la plus répandue : le malware chiffre son corps principal et change sa clé de déchiffrement à chaque nouvelle exécution. Le contenu malveillant reste identique en mémoire, mais son empreinte sur disque est différente à chaque fois. Des familles comme Virut ou Virlock illustrent bien cette approche.
+La spécialisation des acteurs explique une part de cette polyvalence. Le modèle du
+rançongiciel comme service sépare ceux qui écrivent le code de ceux qui conduisent
+les intrusions. En amont, des courtiers revendent des accès déjà obtenus sans
+participer à l'exploitation ; l'ANSSI en fait des intermédiaires devenus
+indispensables à l'écosystème, en particulier pour les rançongiciels
+\cite{anssiPanorama}.
 
-Le métamorphisme va beaucoup plus loin : le malware réécrit entièrement son propre code à chaque infection, en substituant des instructions équivalentes (\texttt{ADD EAX, 1} $\rightarrow$ \texttt{INC EAX}), en permutant les registres ou en dispersant le code en fragments reliés par des sauts. Analyser un échantillon de Zmist l'un des métamorphes les plus avancés revient à tenter de stabiliser du mercure : la logique de contrôle de flux change à chaque infection, rendant la création de signatures génériques extrêmement difficile.
+Le mode opératoire Houken l'illustre. L'exploitation des vulnérabilités initiales y
+est nettement plus soignée que la suite de la compromission, écart qui trahit le
+passage de relais entre un courtier et les acteurs venus après lui. Autrement dit,
+la charge finale ne renseigne plus sur le niveau technique de celui qui a ouvert la
+porte.
 
-\subsection{Virtualisation de code}
+Les volumes du CERT-FR donnent l'échelle. L'agence a connu 1~366 incidents sur
+l'exercice 2025, contre 831 en 2022. Le rançongiciel recule légèrement, à 128
+compromissions, et aucune souche ne domine : Qilin pèse 21~\% des cas, Akira 9~\%,
+LockBit 5~\%, et plus d'une dizaine de souches inédites apparaissent sur au moins un
+incident dans l'année. L'exfiltration de données, elle, passe de 130 à 196
+incidents.
 
-Des outils comme VMProtect, et certains malwares sur mesure, poussent l'obfuscation encore plus loin via la virtualisation de code : les instructions CPU classiques (x86/x64) sont transformées en un bytecode propriétaire, exécuté par une mini machine virtuelle intégrée au malware. Lors de l'analyse, on ne voit plus les instructions habituelles (\texttt{MOV}, \texttt{PUSH}, \texttt{CALL}), mais une boucle d'interprétation opaque. L'analyste doit alors reconstruire ce bytecode opération appelée lifting pour comprendre la logique sous-jacente.
+Le déplacement le plus gênant pour la détection est ailleurs. Plusieurs courtiers en
+accès, dont TA577, TA571 et TA544, ont abandonné les chargeurs et les botnets au
+profit d'outils d'administration à distance légitimes et de binaires natifs du
+système. Lumma Stealer, de son côté, renouvelle ses domaines de commande et contrôle
+plusieurs fois par semaine, un même échantillon pouvant en embarquer une dizaine.
 
-\subsection{Prédicats opaques et junk code}
+Deux pressions pèsent donc sur une défense construite sur des artefacts figés. La
+fragmentation d'abord : sans souche dominante, il faut couvrir une longue traîne de
+familles pour un rendement décroissant. Le reste est plus radical. Quand
+l'attaquant se sert d'un outil d'administration signé plutôt que d'un programme
+malveillant, il n'y a plus d'artefact à reconnaître.
 
-Une autre technique courante consiste à insérer des prédicats opaques : des structures conditionnelles (\texttt{if/else}) dont le résultat est connu à l'avance par l'attaquant, mais indéchiffrable pour un désassembleur automatique. Cela force l'outil d'analyse à explorer des chemins d'exécution qui n'existent pas en pratique (code mort), rendant le graphe de flot de contrôle (CFG) totalement illisible.
+%===============================================================
+\section{Évasion statique : rendre le binaire illisible}
+
+L'analyse statique consiste à examiner un fichier sans l'exécuter. Les techniques qui la contrarient forment la première ligne d'évasion.
+
+%---------------------------------------------------------------
+\subsection{Réduction de la surface d'analyse}
+
+Sur ELF, les mesures les plus efficaces sont souvent les plus élémentaires. La suppression des symboles prive l'analyste des noms de fonctions et de variables. La liaison statique fusionne les bibliothèques dans le binaire et supprime la table d'importation, qui constitue par ailleurs l'un des indicateurs les plus utilisés pour caractériser un exécutable. Le recours à des langages compilés modernes, Go ou Rust, produit des binaires volumineux dont l'exécution est dominée par le code de la bibliothèque standard, ce qui noie la logique métier dans un bruit considérable sans qu'aucune intention d'obfuscation ait été nécessaire.
+
+L'altération volontaire des en-têtes et des tables de sections complète l'ensemble : le chargeur du noyau tolère des structures que les outils d'analyse refusent, et cet écart de tolérance suffit à mettre en échec un outillage automatisé.
+
+%---------------------------------------------------------------
+\subsection{Empaquetage}
+
+Un packer compresse ou chiffre l'exécutable original et lui adjoint une routine de déballage exécutée au lancement. Sur ELF, l'usage d'un packer public dont les marqueurs ont été modifiés reste très répandu, précisément parce qu'il neutralise les outils de déballage automatique sans exiger de développement propre.
+
+Une taxonomie des structures de déballage a été établie sur le monde PE, distinguant les modèles à couche unique des schémas incrémentaux où le code original n'est jamais entièrement reconstitué en mémoire à un instant donné \cite{ugartepedrero2015}. Cette dernière catégorie invalide l'hypothèse implicite de nombreuses chaînes d'analyse automatisée, celle d'un instant de capture où le code complet serait disponible.
+
+%---------------------------------------------------------------
+\subsection{Polymorphisme, métamorphisme et virtualisation}
+
+Le polymorphisme chiffre le corps du code et fait varier la clé à chaque exécution : l'empreinte sur disque diffère, le contenu déchiffré en mémoire reste identique. Le métamorphisme va plus loin en réécrivant le code lui-même à chaque infection, par substitution d'instructions équivalentes, permutation de registres ou dispersion en fragments reliés par des sauts \cite{szor2005}.
+
+Ces moteurs ont été développés et documentés dans le contexte des virus DOS et Windows. Ils sont nettement plus rares sur ELF, pour une raison économique : maintenir un moteur de réécriture correct sur plusieurs jeux d'instructions coûte cher, alors que l'écosystème Linux offre des voies d'évasion moins onéreuses, décrites en section \ref{sec:runtime}. L'observation mérite d'être retenue, car elle indique où porter l'effort défensif.
+
+La virtualisation de code, qui traduit les instructions en un bytecode propriétaire interprété par une machine virtuelle embarquée, et les prédicats opaques, conditions dont le résultat est connu de l'auteur mais indécidable pour un désassembleur \cite{collberg1997}, complètent l'arsenal. Ces deux techniques restent surtout associées aux protecteurs commerciaux.
 
 \begin{table}[h!]
 \centering
-\caption{Principales techniques d'auto-édition}
-\begin{tabular}{|l|p{6cm}|p{4cm}|}
+\caption{Techniques d'évasion statique observées sur ELF}
+\label{tab:evasion-statique}
+\begin{tabular}{|l|p{5.5cm}|p{3.5cm}|}
 \hline
-Technique & Principe & Exemples \\
+Technique & Principe & Fréquence sur ELF \\
 \hline
-Polymorphisme & Chiffrement du corps, clé variable à chaque exécution & Virut, Storm Worm, Virlock \\
+Suppression des symboles & Retrait des noms de fonctions et variables & Très courante \\
 \hline
-Métamorphisme & Réécriture complète du code à chaque infection & Zmist, Simile, Win32/Expiro \\
+Liaison statique & Suppression de la table d'importation & Très courante \\
 \hline
-Virtualisation & Conversion en bytecode propriétaire + VM intégrée & VMProtect, malwares custom \\
+En-têtes altérés & Structures tolérées par le noyau, refusées par l'outillage & Courante \\
 \hline
-Prédicats opaques & Conditions insolubles pour les désassembleurs & Courant dans les packers avancés \\
+Empaquetage & Compression ou chiffrement, déballage au lancement & Courante \\
 \hline
-Obfuscation dynamique & Décompression multi-étapes en mémoire & Emotet, TrickBot \\
+Déballage incrémental & Reconstitution partielle et successive en mémoire & Peu fréquente \\
 \hline
-Génération par IA & Réécriture sémantique via LLM & PromptFlux, QuietVault \\
+Polymorphisme & Chiffrement du corps, clé variable & Peu fréquente \\
+\hline
+Métamorphisme & Réécriture du code à chaque infection & Rare (coût multi-architectures) \\
+\hline
+Virtualisation & Bytecode propriétaire et interpréteur embarqué & Rare \\
 \hline
 \end{tabular}
 \end{table}
 
-\section{L'émergence de la génération PromptFlux : une rupture paradigmatique}
+%===============================================================
+\section{Évasion à l'exécution : échapper à l'observation}
+\label{sec:runtime}
 
-L'apparition de malwares exploitant des modèles de langage (LLM) marque une rupture majeure dans l'histoire des cybermenaces. La génération dite PromptFlux en est l'illustration la plus avancée.
+L'obfuscation traite le problème de la lecture du code. Elle ne dit rien du second front, celui de l'exécution sous surveillance, où se joue l'essentiel des compromissions de serveurs. Un code parfaitement obfusqué qui déclenche un chiffrement massif sera arrêté ; un code trivial qui n'émet aucun signal observable ne le sera pas.
 
-\subsection{Ce qui distingue PromptFlux des métamorphes classiques}
+%---------------------------------------------------------------
+\subsection{Anti-analyse et conditionnement de l'environnement}
 
-Un moteur métamorphique traditionnel repose sur des règles mathématiques finies et déterministes : une fois l'algorithme de mutation compris, il devient possible de créer une signature générique capable de détecter toutes ses variantes. La limite est donc mathématiquement contournable.
+Avant de déployer sa charge, un code cherche à établir s'il s'exécute sur une cible réelle ou dans un environnement d'analyse. Sous Linux, les vérifications les plus simples passent par le pseudo-système de fichiers \texttt{/proc}, qui expose l'état du processus, y compris la présence d'un débogueur attaché. L'auto-attachement par \texttt{ptrace} produit le même résultat par un autre chemin : un processus ne pouvant être tracé qu'une fois, réussir à se tracer soi-même prouve l'absence d'observateur.
 
-PromptFlux rompt avec cette logique. Plutôt que de permuter des instructions selon des règles prédéfinies, il utilise un modèle de langage génératif via API distante ou modèle embarqué localement pour rédiger ses fonctions en temps réel. Le résultat est radicalement différent à chaque itération, non plus syntaxiquement mais sémantiquement : la logique de la fonction peut être entièrement repensée à chaque exécution.
+D'autres contrôles portent sur la nature de l'hôte, avec la recherche d'indices de virtualisation ou de conteneurisation, sur la temporisation, une exécution instrumentée étant plus lente d'un facteur mesurable, ou sur des caractéristiques d'environnement propres à la cible visée. Le conditionnement environnemental (T1480.001) pousse la logique jusqu'au bout : la clé de déchiffrement est dérivée de propriétés de la machine ciblée, de sorte que le code ne se déchiffre nulle part ailleurs, y compris entre les mains du défenseur.
 
-\begin{table}[h!]
-\centering
-\caption{Comparaison : métamorphisme classique vs génération PromptFlux}
-\begin{tabular}{|l|p{5cm}|p{5cm}|}
-\hline
-Critère & Métamorphisme classique & Génération PromptFlux \\
-\hline
-Logique & Algorithmique / Déterministe & Sémantique / Probabiliste \\
-\hline
-Structure & Identique (même graphe déformé) & Radicalement différente à chaque itération \\
-\hline
-Adaptabilité & Nulle face au contexte & Réécriture ciblée selon l'EDR détecté \\
-\hline
-Détection & Signature heuristique possible & Nécessite une analyse comportementale (IA contre IA) \\
-\hline
-\end{tabular}
-\end{table}
+%---------------------------------------------------------------
+\subsection{Exécution sans fichier}
 
-\subsection{L'adaptation contextuelle}
+L'analyse statique suppose un fichier à analyser. L'appel système \texttt{memfd\_create} crée un objet mémoire anonyme utilisable comme descripteur exécutable, ce qui permet de charger et d'exécuter un binaire sans jamais l'écrire sur le système de fichiers. Le montage en mémoire vive de \texttt{/dev/shm} offre une variante moins discrète mais tout aussi accessible.
 
-La capacité la plus redoutable de PromptFlux n'est pas simplement de changer de forme, mais de s'adapter à son environnement. En analysant les outils de sécurité présents sur la machine cible (version de l'EDR, politique de sécurité, système d'exploitation), il peut générer un code spécifiquement optimisé pour contourner les défenses en place à la manière d'un serrurier qui fabriquerait une clé sur mesure après avoir observé la serrure.
+Le corollaire est important pour la démarche défensive : sur un hôte ainsi compromis, il n'existe pas d'échantillon à collecter par les moyens habituels, et la détection doit reposer entièrement sur la télémétrie d'exécution.
 
+%---------------------------------------------------------------
+\subsection{Dissimulation par rootkit : trois couches}
+
+Les rootkits Linux se répartissent selon la couche où ils s'insèrent, chacune offrant un compromis différent entre furtivité et fragilité \cite{elasticRootkits}.
+
+La couche utilisateur repose sur le détournement de l'éditeur de liens dynamique. En déclarant une bibliothèque partagée dans \texttt{/etc/ld.so.preload}, l'attaquant impose que ses propres implémentations soient résolues avant celles de la bibliothèque C standard. Les fonctions de parcours de répertoires ou d'énumération de processus renvoient alors des résultats filtrés, et les outils d'administration usuels deviennent aveugles. La technique est ancienne et triviale à mettre en \oe uvre ; elle reste efficace contre un défenseur qui interroge le système avec les outils du système.
+
+La couche noyau par module chargeable offre une furtivité supérieure au prix d'une contrainte forte : le module doit être compatible avec le noyau cible, et les mécanismes de signature en compliquent le chargement.
+
+La couche eBPF constitue le développement le plus notable des dernières années. Conçue pour permettre l'exécution de programmes vérifiés dans le noyau, cette infrastructure sert désormais aussi à y accrocher des routines de dissimulation. Un rootkit peut intercepter les appels d'énumération de répertoires pour masquer fichiers et processus, et intercepter l'interface de gestion eBPF elle-même pour se soustraire aux outils censés inventorier les programmes chargés.
+
+\paragraph{Un cas instructif.} L'analyse d'une porte dérobée découverte sur une infrastructure cloud compromise, publiée par une équipe de réponse à incident française, documente une architecture en deux modules eBPF, l'un dédié à la dissimulation, l'autre à l'activation du canal de commande sur réception d'un paquet réseau caractéristique \cite{synacktiv2025}. Le point remarquable tient au mécanisme de repli : lorsque la configuration du noyau ne permet pas le fonctionnement des accroches eBPF, le code bascule automatiquement sur la technique de préchargement de bibliothèque décrite plus haut.
+
+Ce comportement mérite d'être souligné, car il documente une capacité d'adaptation à l'environnement d'exécution, obtenue sans aucun recours à l'intelligence artificielle, par une simple logique de repli programmée à l'avance. On y reviendra en section \ref{sec:llm}.
+
+%---------------------------------------------------------------
+\subsection{Neutralisation de la télémétrie}
+
+Un agent de sécurité ne voit que ce que le système lui expose. Sous Linux, la télémétrie d'exécution provient principalement du sous-système d'audit du noyau et, pour les outils récents, de sondes eBPF placées sur les points d'entrée des appels système.
+
+Cette dépendance crée une vulnérabilité structurelle. Des travaux récents montrent qu'un code disposant des privilèges suffisants peut agir sur le flux d'événements lui-même, en filtrant ou en supprimant des enregistrements avant qu'ils n'atteignent le tampon lu par l'outil de sécurité. L'agent continue de fonctionner, ses tableaux de bord restent alimentés, et son silence sur une activité donnée est interprété comme une absence d'activité.
+
+La difficulté est ici de nature différente de celle posée par l'obfuscation. Elle ne concerne pas la capacité d'analyse mais la fiabilité de la source, et aucune amélioration du moteur de détection ne la corrige.
+
+%---------------------------------------------------------------
+\subsection{Persistance et mimétisme}
+
+Les mécanismes de persistance sous Linux sont nombreux et légitimes, ce qui les rend difficiles à surveiller sans générer de bruit : unités \texttt{systemd}, tâches planifiées, fichiers d'initialisation de shell, préchargement de bibliothèques.
+
+Le mimétisme s'y ajoute. Un service malveillant nommé de manière à évoquer un composant système standard, installé dans une arborescence plausible, ne se distingue d'un service légitime par aucune propriété observable en dehors de son comportement. Le cas cité plus haut recourait précisément à ce procédé. La question n'est donc pas de détecter une anomalie, mais de discriminer entre deux objets dont la seule différence est l'intention.
+
+%---------------------------------------------------------------
+\subsection{Commande, contrôle et exfiltration}
+
+Le canal de commande reste le point le plus exposé, et les techniques de dissimulation y visent toutes à réduire la fenêtre d'observation.
+
+L'activation sur paquet caractéristique, dont le cas analysé plus haut fournit une illustration, supprime toute activité réseau tant que le déclencheur n'a pas été reçu : la porte dérobée n'ouvre son port qu'après signal, ce qui la rend invisible à toute cartographie de services. L'usage de services web légitimes comme relais place le trafic dans des flux qu'une organisation ne peut pas bloquer sans coût opérationnel. La génération algorithmique de domaines rend le blocage par liste impraticable.
+
+Une remarque prépare la section suivante : le trafic vers les interfaces de programmation de modèles de langage réunit désormais les propriétés qui font un bon canal de dissimulation, à savoir un volume chiffré, des destinations réputées et un usage professionnel banalisé.
+
+%---------------------------------------------------------------
+\subsection{Contrepoint : les spécificités Windows}
+
+Sur Windows, l'évasion à l'exécution s'organise autour de trois surfaces d'observation dont l'équivalent n'existe pas sous Linux. L'interface d'analyse antimalware, qui permet l'inspection des contenus scriptés avant exécution, le mécanisme de traçage d'événements, qui alimente la télémétrie des agents, et l'interception en espace utilisateur, que les agents mettent en place dans les bibliothèques système et que le code malveillant cherche à défaire.
+
+La comparaison éclaire une différence de fond. Sur Windows, l'observation repose largement sur des points d'accroche installés en espace utilisateur, que le code observé peut atteindre. Sous Linux, elle repose sur des primitives noyau, ce qui élève le niveau de privilège requis pour la neutraliser, mais concentre toute la confiance sur une infrastructure unique dont la compromission est d'autant plus lourde de conséquences.
+
+%===============================================================
+\section{Intégration de modèles de langage dans la chaîne offensive}
+\label{sec:llm}
+
+L'usage de modèles de langage pendant l'exécution d'un code malveillant a été largement commenté depuis 2025. Cette section examine ce que les cas documentés établissent, en séparant les observations des projections.
+
+%---------------------------------------------------------------
+\subsection{Les cas documentés}
+
+Un inventaire publié fin 2025 recense les premiers échantillons interrogeant un modèle pendant leur exécution \cite{gtigAI}. Quatre logiques distinctes s'y dégagent, que la vulgarisation confond souvent.
+
+La première est l'auto-réécriture : un chargeur écrit en VBScript interroge périodiquement une interface de modèle pour obtenir de nouvelles variantes obfusquées de son propre code source. C'est le seul cas relevant strictement de cette catégorie, et il vise Windows.
+
+La deuxième est la génération d'instructions à la demande : un outil de collecte attribué à un acteur étatique interroge un modèle hébergé pour produire les commandes à exécuter, sans que son propre code soit modifié.
+
+La troisième détourne les ressources de l'hôte : un voleur de jetons de développement exploite les outils d'IA en ligne de commande déjà installés sur la machine pour rechercher d'autres secrets. Le modèle n'est ici ni embarqué ni distant, mais emprunté.
+
+La quatrième, la plus pertinente pour un environnement Linux, concerne un rançongiciel écrit en Go qui interroge un modèle hébergé localement pour produire à la volée les scripts d'énumération, d'exfiltration et de chiffrement. Présenté d'abord comme le premier rançongiciel assisté par IA \cite{esetPromptLock}, il s'est avéré être le prototype d'un travail académique \cite{nyuRansomware}. Son intérêt tient au modèle local : la détection fondée sur l'observation d'un trafic vers une interface distante y est sans effet, et rien n'interdit ce schéma sur un serveur disposant de ressources de calcul.
+
+%---------------------------------------------------------------
+\subsection{Ce que ces cas établissent, et ce qu'ils n'établissent pas}
+
+L'évaluation doit rester mesurée, sous peine de fragiliser le raisonnement défensif qu'elle fonde.
+
+Le chargeur auto-réécrivant est évalué par ses découvreurs comme relevant du développement ou du test, sans capacité de compromettre une cible, et son accès à l'interface du modèle a été révoqué \cite{gtigAI}. Le rançongiciel à modèle local n'a jamais été observé en opération. Plusieurs de ces échantillons étaient détectés par une part significative des moteurs du marché au moment de leur publication.
+
+Ces cas n'établissent donc pas l'existence d'une génération opérationnelle de codes autonomes. Ils établissent trois points plus modestes et plus solides. La faisabilité technique de l'intégration d'un modèle dans la boucle d'exécution est démontrée sur quatre logiques distinctes. Le recours à un modèle local supprime l'indicateur réseau qui constituait la contre-mesure la plus immédiate. Enfin, la trajectoire est ascendante : un rapport ultérieur du même groupe fait état d'un exploit de vulnérabilité inédite dont les analystes estiment avec un haut degré de confiance qu'il a été produit avec l'aide d'un modèle \cite{gtig2026b}.
+
+C'est cette trajectoire, et non l'état des échantillons actuels, qui justifie l'attention défensive.
+
+%---------------------------------------------------------------
+\subsection{L'injection de prompt comme technique d'évasion}
+
+Un cas du même inventaire inverse la relation entre modèle et code malveillant. Un shell inversé écrit en PowerShell y intègre des instructions en langage naturel destinées non pas à un modèle utilisé par l'attaquant, mais aux dispositifs d'analyse pilotés par modèle susceptibles d'examiner l'échantillon, auxquels il enjoint de le déclarer inoffensif \cite{gtigAI}.
+
+L'intérêt du cas dépasse sa sophistication, qui est faible. Il montre que confier à un modèle l'évaluation d'un contenu non fiable revient à hériter du problème, non résolu, de l'injection de prompt indirecte. Pour un travail dont la contribution est défensive et fondée sur l'IA, c'est une contrainte de conception, pas une remarque annexe.
+
+%---------------------------------------------------------------
+\subsection{L'adaptation contextuelle : une capacité déjà présente}
+
+La capacité qui inquiéterait le plus n'est pas la mutation de forme mais l'adaptation à l'environnement : un code qui reconnaîtrait les dispositifs de sécurité en place et ajusterait sa charge en conséquence.
+
+Aucun des échantillons assistés par modèle documentés à ce jour ne présente cette capacité. Mais elle n'est pas hypothétique pour autant, et c'est là que le point de vue Linux change l'analyse : le mécanisme de repli du rootkit eBPF décrit en section \ref{sec:runtime} en est déjà une forme aboutie \cite{synacktiv2025}. Le code y évalue la configuration du noyau et choisit sa technique de dissimulation en conséquence, par une logique de repli programmée à l'avance.
+
+L'adaptation contextuelle est donc une capacité opérationnelle attestée, obtenue sans modèle de langage. Ce que l'intégration d'un modèle changerait n'est pas sa nature mais son étendue : le passage d'un arbre de décision fini, écrit par un développeur et donc énumérable par un analyste, à une génération ouverte dont les branches ne sont pas connues à l'avance. Formulée ainsi, l'hypothèse devient testable, ce qui n'était pas le cas de sa version initiale.
+
+%---------------------------------------------------------------
 \subsection{L'asymétrie économique}
 
-Un facteur aggravant souvent sous-estimé est l'asymétrie du coût : produire une nouvelle mutation via un LLM coûte quelques centimes à l'attaquant, tandis que l'analyser demande plusieurs heures de travail à un expert hautement qualifié. Cette inversion du rapport coût/effort change profondément l'économie de la cybermenace.
+Le déséquilibre entre le coût de production d'une variante et celui de son analyse est souvent avancé. Il est réel, mais il n'est pas propre à l'IA : les services de reconditionnement évoqués en section \ref{sec:economie} produisent déjà cet effet. L'apport des modèles est d'abaisser encore le seuil d'entrée et de supprimer la dépendance à un fournisseur.
 
-\section{État actuel de la détection et ses limites}
+\begin{quote}
+\small\itshape
+Note de rédaction : étayer par un coût par requête relevé sur une grille tarifaire publique et une estimation du temps d'analyse issue de la littérature, plutôt que de laisser ce point à l'état d'assertion.
+\end{quote}
 
-Face à ces menaces, les solutions de cybersécurité reposent sur trois approches complémentaires, chacune présentant des angles morts face aux techniques modernes.
+%===============================================================
+\section{État de l'art de la détection et de ses limites}
+\label{sec:detection}
 
-La détection par signatures est basée sur des empreintes cryptographiques (SHA-256) des fichiers connus. Elle reste efficace pour identifier des malwares déjà répertoriés, mais est totalement inopérante face au polymorphisme ou à la génération par IA.
+Quatre approches coexistent, dont aucune ne suffit isolément.
 
-L'analyse heuristique tente de détecter des structures de code suspectes ou des appels système caractéristiques, sans se fier à une empreinte précise. Elle représente une avancée, mais reste contournable par des techniques d'obfuscation suffisamment sophistiquées.
+%---------------------------------------------------------------
+\subsection{Détection statique par indicateurs}
 
-L'analyse comportementale (EDR/XDR) observe les actions du programme en temps réel : tentative de chiffrement massif de fichiers, injection de code dans des processus légitimes, communications réseau anormales. C'est l'approche la plus robuste, mais elle se heurte à un problème fondamental face à PromptFlux : si le malware change subtilement et en permanence sa manière de se comporter en imitant les patterns de mises à jour logicielles légitimes par exemple il se fond progressivement dans le bruit de fond, rendant la détection par dérive (drift analysis) de plus en plus difficile.
+L'approche ne se réduit pas au condensat cryptographique du fichier. Elle mobilise également des signatures de motifs d'octets, des règles combinant chaînes et conditions structurelles, des empreintes calculées sur des sections ou des tables du binaire, et des fonctions de hachage approché tolérantes aux modifications mineures.
 
-La conclusion de cet état de l'art est sans appel : les défenses actuelles ont été conçues pour un adversaire dont le comportement est modélisable. L'introduction de la génération sémantique par LLM introduit une plasticité fondamentalement nouvelle, qui appelle des réponses défensives tout aussi innovantes notamment l'opposition IA contre IA.
+Cette gradation nuance la critique habituelle. Un condensat exact est effectivement mis en échec par la moindre mutation, mais une règle portant sur une routine de déballage ou un hachage approché résistent à une partie du polymorphisme. Ce qui met réellement l'approche en difficulté est l'effet de volume : le coût marginal de production d'une variante inédite est aujourd'hui inférieur au coût marginal de production d'une règle.
+
+Sur ELF, une difficulté supplémentaire tient à la compilation croisée. Une règle validée sur une compilation x86-64 ne se transpose pas mécaniquement aux compilations ARM ou MIPS du même code source, ce qui multiplie l'effort de couverture.
+
+%---------------------------------------------------------------
+\subsection{Analyse heuristique et émulation}
+
+L'analyse heuristique recherche des structures de code ou des séquences d'appels caractéristiques sans se fier à une empreinte exacte. Elle s'appuie souvent sur une émulation partielle destinée à franchir les couches de déballage.
+
+Les techniques anti-analyse décrites plus haut la visent directement. Sur Linux, elle se heurte de surcroît à la diversité des architectures, l'émulation devant être disponible et fidèle pour chacune d'elles.
+
+%---------------------------------------------------------------
+\subsection{Analyse comportementale}
+
+Les agents de détection observent les actions du programme à l'exécution. Sous Linux, l'outillage contemporain repose massivement sur des sondes eBPF, qui offrent une visibilité fine sur les appels système, les accès fichiers et les connexions réseau, à un coût de performance acceptable.
+
+C'est l'approche la plus robuste face à la variation de forme, puisqu'elle porte sur des invariants d'objectif plutôt que d'implémentation. Ses deux limites ont été exposées plus haut : la source de télémétrie est elle-même attaquable, et un code qui module continûment son comportement en imitant des opérations d'administration légitimes se rapproche progressivement de la distribution normale, ce qui reporte le problème sur la séparation entre dérive légitime et dérive adverse.
+
+%---------------------------------------------------------------
+\subsection{Apprentissage automatique}
+
+L'apprentissage automatique s'est imposé pour la classification de binaires, et une revue systématique récente en dresse le panorama \cite{gaber2024}. Trois difficultés conditionnent la valeur de tout dispositif proposé.
+
+La dérive conceptuelle d'abord. Les performances mesurées en validation se dégradent systématiquement en test sur des échantillons postérieurs, effet du vieillissement des modèles face à l'évolution des familles \cite{bodmas}.
+
+Les contraintes opérationnelles ensuite. Un taux de détection annoncé sans le taux de faux positifs associé n'a pas de signification pratique : à l'échelle d'un parc, un taux de faux positifs de 0,1~\% produit un volume d'alertes ingérable. Les protocoles d'évaluation récents imposent pour cette raison une mesure à très faible taux de faux positifs et une séparation temporelle des jeux d'entraînement et de test \cite{ember2024}.
+
+La disponibilité des données enfin, et c'est ici que le périmètre Linux pèse le plus lourd. Les jeux de données publics de référence portent sur des binaires PE ; les corpus ELF disponibles sont plus petits, moins bien étiquetés et souvent restreints aux familles visant les équipements embarqués \cite{crossArchSurvey}. Reproduire sur ELF les protocoles d'évaluation admis dans le monde PE suppose donc un travail préalable de constitution de corpus, dont ce mémoire devra rendre compte.
+
+%---------------------------------------------------------------
+\subsection{Attaques adversariales}
+
+Un classifieur est lui-même une surface d'attaque. La génération d'exemples adverses dans l'espace des problèmes obéit à une contrainte absente du domaine de la vision par ordinateur : la perturbation doit produire un fichier valide, exécutable, et dont la sémantique malveillante est préservée \cite{pierazzi2020}. S'y ajoutent l'empoisonnement des données d'entraînement et l'extraction de modèle.
+
+Ces travaux fixent la condition de recevabilité d'une contribution défensive fondée sur l'IA : un dispositif évalué uniquement sur des échantillons non adverses ne démontre rien sur sa robustesse.
+
+%===============================================================
+\section{Synthèse et verrou identifié}
+
+Les défenses actuelles reposent sur une hypothèse de modélisabilité : que l'adversaire produise des artefacts identifiables, des comportements caractérisables, ou à défaut une distribution assez stable pour qu'un classifieur entraîné hier reste valide demain. L'évasion statique attaque la première hypothèse, les techniques d'exécution la deuxième, et la dérive conceptuelle érode la troisième indépendamment de toute intention adverse.
+
+Le contexte Linux accentue chacun de ces effets. La compilation croisée multiplie les formes d'un même comportement. L'exécution sans fichier supprime l'objet même de l'analyse statique. La télémétrie repose sur une infrastructure noyau unique, dont la compromission prive l'agent de toute perception. Et la rareté des corpus publics prive le chercheur des protocoles d'évaluation dont dispose son homologue travaillant sur PE.
+
+L'intégration de modèles de langage dans la chaîne offensive n'introduit pas une menace de nature nouvelle. Les échantillons documentés restent expérimentaux, et l'adaptation à l'environnement, souvent présentée comme leur apport spécifique, est déjà attestée sans eux. Ce que ces modèles modifient est le coût de production de la variation, et l'étendue de l'espace des comportements possibles. Une défense dont le coût marginal d'adaptation reste supérieur au coût marginal de mutation de l'adversaire perd du terrain mécaniquement, quelle que soit sa qualité intrinsèque.
+
+Le verrou traité dans la suite de ce mémoire se formule donc ainsi : \emph{comment concevoir, pour des binaires ELF, un dispositif de détection dont le coût d'adaptation à une variation adverse ne croisse pas plus vite que le coût de production de cette variation, et l'évaluer sous des contraintes opérationnelles réalistes, à savoir un taux de faux positifs compatible avec l'exploitation d'un parc et une robustesse mesurée face à des échantillons adverses ?}
+
+\begin{quote}
+\small\itshape
+Note de rédaction : cette formulation est une proposition, à aligner sur la contribution effective du mémoire.
+\end{quote}

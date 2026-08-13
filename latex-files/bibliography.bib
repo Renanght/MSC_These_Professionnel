@@ -1,9 +1,169 @@
+% =====================================================================
+% Bibliographie
+%
+% Conventions : le style @online reprend celui des entrées d'introduction
+% (champ note + macro \shortUrl). Aucune entrée non citée n'est conservée.
+%
+% Statut de vérification :
+%   [OK]  entrée vérifiée contre la source primaire ou plusieurs sources
+%         concordantes — auteurs, lieu de publication et pagination confirmés
+%   [!]   point restant à contrôler, signalé dans le commentaire
+% =====================================================================
+
+
+% =====================================================================
+% Introduction et contexte
+% =====================================================================
+
 @online{avtest,
   author       = {AV-TEST GmbH},
   note         = {\shortUrl{https://www.av-test.org/fr/statistiques/logiciels-malveillants/}},
   organization = {AV-TEST Institute},
   title        = {Statistiques sur les logiciels malveillants},
   year         = {2026}
+}
+
+% [OK] Référence CERT-FR confirmée : CERTFR-2026-CTI-002, publié en mars 2026,
+% portant sur l'exercice 2025. Le titre désigne l'année couverte, pas l'année
+% de publication.
+@online{anssiPanorama,
+  author       = {ANSSI},
+  date         = {2026-03},
+  note         = {Rapport CERTFR-2026-CTI-002. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-002/}},
+  organization = {CERT-FR, Agence nationale de la sécurité des systèmes d'information},
+  title        = {Panorama de la cybermenace 2025}
+}
+
+% [OK] Rapport thématique du CERT-FR sur l'IA générative et les attaques
+% informatiques. Source française directement liée au sujet du mémoire.
+@online{anssiIA,
+  author       = {ANSSI},
+  date         = {2026-02-04},
+  note         = {Rapport CERTFR-2026-CTI-001. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/}},
+  organization = {CERT-FR, Agence nationale de la sécurité des systèmes d'information},
+  title        = {L'intelligence artificielle générative face aux attaques informatiques}
+}
+
+
+% =====================================================================
+% Nomenclature et cadres d'analyse
+% =====================================================================
+
+% [OK] Présenté à la 15e Virus Bulletin International Conference, Dublin,
+% octobre 2005. La version en ligne est tenue à jour par l'auteur.
+@inproceedings{bontchev2005,
+  address   = {Dublin, Irlande},
+  author    = {Bontchev, Vesselin},
+  booktitle = {Proceedings of the 15th Virus Bulletin International Conference},
+  month     = oct,
+  note      = {\shortUrl{https://bontchev.nlcv.bas.bg/papers/naming.html}},
+  title     = {Current Status of the {CARO} Malware Naming Scheme},
+  year      = {2005}
+}
+
+% [OK]
+@online{msnaming,
+  author       = {Microsoft},
+  note         = {\shortUrl{https://learn.microsoft.com/fr-fr/unified-secops/malware-naming}},
+  organization = {Microsoft Learn},
+  title        = {How {Microsoft} names malware},
+  year         = {2025}
+}
+
+% [!] Préciser la version du référentiel retenue dans le mémoire : les
+% identifiants de sous-techniques ont changé d'une version à l'autre.
+@online{attack,
+  author       = {MITRE},
+  note         = {Version à préciser. \shortUrl{https://attack.mitre.org/}},
+  organization = {MITRE Corporation},
+  title        = {{MITRE ATT\&CK} Enterprise Matrix},
+  year         = {2026}
+}
+
+
+% =====================================================================
+% Obfuscation et empaquetage
+% =====================================================================
+
+% [OK] Ouvrage de référence, Addison-Wesley, 2005.
+@book{szor2005,
+  author    = {Sz{\"o}r, P{\'e}ter},
+  isbn      = {978-0321304544},
+  publisher = {Addison-Wesley},
+  title     = {The Art of Computer Virus Research and Defense},
+  year      = {2005}
+}
+
+% [OK] Rapport technique n°148, juillet 1997.
+% Pour les seuls prédicats opaques, la référence plus spécifique serait
+% Collberg, Thomborson, Low, « Manufacturing Cheap, Resilient, and Stealthy
+% Opaque Constructs », POPL 1998, p. 184-196.
+@techreport{collberg1997,
+  author      = {Collberg, Christian and Thomborson, Clark and Low, Douglas},
+  institution = {Department of Computer Science, University of Auckland},
+  month       = jul,
+  number      = {148},
+  title       = {A Taxonomy of Obfuscating Transformations},
+  type        = {Technical Report},
+  year        = {1997}
+}
+
+% [OK] IEEE S&P 2015, p. 659-673, DOI vérifié.
+@inproceedings{ugartepedrero2015,
+  author    = {Ugarte-Pedrero, Xabier and Balzarotti, Davide and Santos, Igor and Bringas, Pablo G.},
+  booktitle = {2015 IEEE Symposium on Security and Privacy},
+  doi       = {10.1109/SP.2015.46},
+  pages     = {659--673},
+  publisher = {IEEE},
+  title     = {{SoK}: Deep Packer Inspection: A Longitudinal Study of the Complexity of Run-Time Packers},
+  year      = {2015}
+}
+
+
+% =====================================================================
+% Menaces et dissimulation sous Linux
+% =====================================================================
+
+% [OK] Analyse de la porte dérobée LinkPro (rootkit eBPF) menée par le CSIRT
+% de Synacktiv sur une infrastructure AWS compromise.
+@online{synacktiv2025,
+  author       = {Synacktiv},
+  date         = {2025-10-14},
+  note         = {\shortUrl{https://www.synacktiv.com/en/publications/linkpro-ebpf-rootkit-analysis}},
+  organization = {Synacktiv},
+  title        = {{LinkPro}: {eBPF} rootkit analysis}
+}
+
+% [OK] Premier volet d'une série en deux parties ; le second porte sur la
+% détection et pourra être cité dans le chapitre consacré à la méthode.
+@online{elasticRootkits,
+  author       = {Elastic Security Labs},
+  date         = {2026-03-05},
+  note         = {Partie 1 sur 2. \shortUrl{https://www.elastic.co/security-labs/linux-rootkits-1-hooked-on-linux}},
+  organization = {Elastic},
+  title        = {Hooked on {Linux}: Rootkit Taxonomy, Hooking Techniques and Tradecraft}
+}
+
+
+% =====================================================================
+% Modèles de langage dans la chaîne offensive
+% =====================================================================
+
+@online{gtigAI,
+  author       = {Google Threat Intelligence Group},
+  date         = {2025-11-05},
+  note         = {\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools}},
+  organization = {Google Cloud},
+  title        = {GTIG AI Threat Tracker: Advances in Threat Actor Usage of AI Tools}
+}
+
+% [OK] URL canonique confirmée sur cloud.google.com.
+@online{gtig2026b,
+  author       = {Google Threat Intelligence Group},
+  date         = {2026-05-11},
+  note         = {\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access}},
+  organization = {Google Cloud},
+  title        = {GTIG AI Threat Tracker: Adversaries Leverage AI for Vulnerability Exploitation, Augmented Operations, and Initial Access}
 }
 
 @online{esetPromptLock,
@@ -14,17 +174,76 @@
   title        = {First known AI-powered ransomware uncovered by ESET Research}
 }
 
-@online{gtigAI,
-  author       = {Google Threat Intelligence Group},
-  date         = {2025-11-05},
-  note         = {\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools}},
-  organization = {Google Cloud},
-  title        = {GTIG AI Threat Tracker: Advances in Threat Actor Usage of AI Tools}
+@online{nyuRansomware,
+  author = {NYU Tandon School of Engineering},
+  date   = {2025-08-27},
+  note   = {\shortUrl{https://engineering.nyu.edu/news/large-language-models-can-execute-complete-ransomware-attacks-autonomously-nyu-tandon-research}},
+  title  = {Large language models can execute complete ransomware attacks autonomously}
 }
 
-@online{nyuRansomware,
-  author       = {NYU Tandon School of Engineering},
-  date         = {2025-08-27},
-  note         = {\shortUrl{https://engineering.nyu.edu/news/large-language-models-can-execute-complete-ransomware-attacks-autonomously-nyu-tandon-research}},
-  title        = {Large language models can execute complete ransomware attacks autonomously}
+
+% =====================================================================
+% Détection, apprentissage automatique et robustesse
+% =====================================================================
+
+% [OK] ACM Computing Surveys, vol. 56, n°6, article 148, p. 1-33.
+% Mise en ligne le 28 décembre 2023, rattachée au volume de 2024.
+@article{gaber2024,
+  articleno = {148},
+  author    = {Gaber, Matthew G. and Ahmed, Mohiuddin and Janicke, Helge},
+  doi       = {10.1145/3638552},
+  journal   = {ACM Computing Surveys},
+  number    = {6},
+  pages     = {1--33},
+  title     = {Malware Detection with Artificial Intelligence: A Systematic Literature Review},
+  volume    = {56},
+  year      = {2024}
+}
+
+% [OK] Forme de citation recommandée par les auteurs sur la page officielle
+% du jeu de données. Atelier co-localisé avec IEEE S&P 2021 ; les actes ne
+% comportent ni pagination ni DOI.
+@inproceedings{bodmas,
+  author    = {Yang, Limin and Ciptadi, Arridhana and Laziuk, Ihar and Ahmadzadeh, Ali and Wang, Gang},
+  booktitle = {4th Deep Learning and Security Workshop (DLS), co-localisé avec IEEE Symposium on Security and Privacy},
+  note      = {\shortUrl{https://whyisyoung.github.io/BODMAS/}},
+  title     = {{BODMAS}: An Open Dataset for Learning based Temporal Analysis of {PE} Malware},
+  year      = {2021}
+}
+
+% [OK] ACM SIGKDD 2025, DOI vérifié.
+@inproceedings{ember2024,
+  author    = {Joyce, Robert J. and Miller, Gideon and Roth, Phil and Zak, Richard and Zaresky-Williams, Elliott and Anderson, Hyrum and Raff, Edward and Holt, James},
+  booktitle = {Proceedings of the 31st ACM SIGKDD Conference on Knowledge Discovery and Data Mining},
+  doi       = {10.1145/3711896.3737431},
+  publisher = {ACM},
+  title     = {{EMBER2024}: A Benchmark Dataset for Holistic Evaluation of Malware Classifiers},
+  year      = {2025}
+}
+
+% [OK] IEEE S&P 2020, p. 1332-1349, DOI vérifié.
+% Une version étendue existe (arXiv:1911.02142) avec une liste d'auteurs
+% différente ; citer la version conférence sauf besoin du contenu ajouté.
+@inproceedings{pierazzi2020,
+  address   = {San Francisco, CA},
+  author    = {Pierazzi, Fabio and Pendlebury, Feargus and Cortellazzi, Jacopo and Cavallaro, Lorenzo},
+  booktitle = {2020 IEEE Symposium on Security and Privacy},
+  doi       = {10.1109/SP40000.2020.00073},
+  pages     = {1332--1349},
+  publisher = {IEEE},
+  title     = {Intriguing Properties of Adversarial {ML} Attacks in the Problem Space},
+  year      = {2020}
+}
+
+% [OK] Auteurs, revue, volume et pagination confirmés par recoupement de
+% plusieurs articles citants. Établit la rareté relative des travaux sur ELF
+% face au corpus PE.
+@article{crossArchSurvey,
+  author  = {Raju, Anandharaju Durai and Abualhaol, Ibrahim Y. and Giagone, Ronnie Salvador and Zhou, Yang and Huang, Shengqiang},
+  journal = {IEEE Access},
+  note    = {Préprint : arXiv:2306.07989},
+  pages   = {91686--91709},
+  title   = {A Survey on Cross-Architectural {IoT} Malware Threat Hunting},
+  volume  = {9},
+  year    = {2021}
 }

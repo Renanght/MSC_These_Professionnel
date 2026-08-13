@@ -728,7 +728,6 @@ INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-msb.cf
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\microtype\mt-msb.cfg
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
@@ -745,6 +744,7 @@ INPUT .\latex-files\remerciements.tex
 INPUT latex-files\remerciements.tex
 INPUT .\latex-files\remerciements.tex
 INPUT latex-files\remerciements.tex
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmcsc10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmcsc10.tfm
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmcsc10.tfm
@@ -754,6 +754,10 @@ INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12
 INPUT .\rapportUTT.lot
 INPUT .\rapportUTT.lot
 INPUT rapportUTT.lot
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt10.tfm
 OUTPUT rapportUTT.lot
 INPUT .\rapportUTT.lof
 INPUT .\rapportUTT.lof
@@ -768,11 +772,7 @@ INPUT latex-files\one.tex
 INPUT .\latex-files\one.tex
 INPUT latex-files\one.tex
 INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbxi10.tfm
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt10.tfm
+INPUT C:\Users\gohau\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri10.tfm
 INPUT .\latex-files\two.tex
 INPUT latex-files\two.tex
 INPUT .\latex-files\two.tex

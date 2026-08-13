@@ -38,27 +38,27 @@
 
 \newcommand{\titletext}{
 
-    Cette alternance s'est déroulée chez Login Sécurité, prestataire de services
-    de sécurité managés (MSSP) du groupe Constellation. J'y ai occupé le poste d'analyste SOC/VOC.
+    Ce mémoire rend compte d'un travail mené en alternance chez Login Sécurité,
+prestataire de services de sécurité managés (MSSP) du groupe Constellation, où
+j'ai occupé le poste d'analyste SOC/VOC.
 
-    Le travail a consisté à caractériser un échantillon malveillant de bout en
-    bout, dans le but de produire des règles de détection réutilisables sur
-    l'ensemble du parc client.
+L'étude n'était pas au programme. Je l'ai engagée en marge de mes activités, sur un
+échantillon dont la classe méritait selon moi une caractérisation complète, et les
+règles qui en sortent peuvent alimenter la base de détection du parc client si
+l'équipe les valide.
 
-    Les différentes phases de travail successivement réalisées sont :
+Le travail s'est déroulé en trois temps :
 
-    \begin{itemize}
-        \item Analyser statiquement l'échantillon, pour en extraire les caractéristiques structurelles
-        \item Analyser dynamiquement son comportement en environnement confiné
-        \item Traduire ces observations en détections : règles YARA, règles Sigma et plugin Volatility
-    \end{itemize}
+\begin{itemize}
+    \item analyse statique du binaire, pour en extraire les caractéristiques structurelles ;
+    \item analyse dynamique de son comportement en environnement confiné ;
+    \item traduction de ces observations en règles YARA et Sigma, puis en plugin Volatility.
+\end{itemize}
 
-    L'étude s'appuie sur la méthode d'analyse de \emph{malware} enseignée au
-    cours de la formation.
-
-    L'enjeu est de rester au contact des techniques d'attaque et de savoir les
-    traduire en détections, sans attendre la signature de l'éditeur. C'est ce qui
-    distingue une défense proactive d'une défense réactive.
+Un SOC qui attend la signature de l'éditeur ne détecte que ce qui est déjà
+répertorié. Entre la découverte d'une menace et sa prise en charge par les produits
+du marché, il s'écoule des jours. Savoir caractériser un binaire soi-même, c'est les
+récupérer.
 }
 
 

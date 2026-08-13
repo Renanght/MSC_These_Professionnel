@@ -1,5 +1,47 @@
-\chapter*{Conclusion et perspectives}
-\markleft{Conclusion et perspectives}
-\addcontentsline{toc}{chapter}{Conclusion et perspectives}
+\chapter*{Conclusion}
+\addcontentsline{toc}{chapter}{Conclusion}
 
-\blindtext[2]
+L'échantillon étudié appartient à une classe de menaces encore peu documentée : les
+codes malveillants qui interrogent un modèle de langage pendant leur propre
+exécution. Le caractériser a demandé de reconstruire un pipeline dont presque rien
+ne se répétait d'une exécution à l'autre. L'analyse statique a livré six tâches
+codées en dur, une clé de session en clair, un chemin de compilation oublié et les
+prompts système embarqués dans le binaire ; l'analyse dynamique a confirmé les noms
+de tâches, les artefacts produits, l'endpoint d'exfiltration et un délai
+d'expiration côté client d'environ 170 secondes. J'en ai tiré un jeu de règles YARA,
+cinq règles Sigma et les fondations d'un plugin Volatility.
+
+Chez PromptLock, la génération varie mais l'orchestrateur non. Le code Lua diffère à
+chaque exécution, la note de rançon aussi, le contenu chiffré ne se répète jamais.
+L'enveloppe qui pilote l'ensemble, elle, ne bouge pas : imports Go, prompts système,
+noms de tâches, chemin de compilation, format des échanges avec l'API. La détection
+reste donc possible, à condition de viser la structure qui produit le contenu plutôt
+que le contenu lui-même.
+
+Cette stabilité n'a rien d'acquis. PromptFlux, documenté par le GTIG en novembre
+2025, vise l'inverse : faire réécrire son propre code source par le modèle. La
+tentative n'aboutit pas, mais l'échantillon analysé ici en est sans doute l'état
+antérieur.
+
+Ni ATT\&CK ni ATLAS ne décrivent l'usage d'un modèle comme outil au sein d'un code
+malveillant, par opposition à l'attaque menée contre un système d'IA. Le GTIG s'est
+lui-même rabattu sur des sous-techniques existantes pour cartographier PromptFlux.
+Tant que ce vocabulaire manque, deux analystes qui observent le même comportement le
+nomment autrement, et le renseignement circule mal.
+
+Un seul échantillon, donc, et probablement un prototype de recherche : adresse
+Bitcoin de test, nom de compilation conservé. Les règles n'ont pas été confrontées à
+des variantes modifiées pour les contourner. Leur taux de faux positifs reste à
+mesurer, et sans cette mesure l'équipe ne reprendra rien : une règle qui bruite sur
+un parc entier finit désactivée, juste ou pas.
+
+Un binaire qui chargerait ses instructions depuis un serveur, ou les dériverait d'un
+modèle local, ne laisserait plus aucune prise à YARA et reporterait l'effort sur la
+télémétrie comportementale. S'y ajoute la baisse du coût d'entrée : le marché des
+outils offensifs assistés par IA s'est structuré en 2025, et ce qui demande
+aujourd'hui de savoir intégrer une API dans un binaire Go sera bientôt vendu clé en
+main.
+
+Les règles écrites ici vieilliront, plus vite que celles d'un rançongiciel
+classique. La question qui les a produites se repose à chaque nouvel échantillon :
+qu'est-ce qui ne peut pas varier sans que la menace cesse de fonctionner ?

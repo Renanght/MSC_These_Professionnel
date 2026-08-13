@@ -7,51 +7,35 @@ malveillants \cite{avtest}. Le chiffre impressionne moins qu'il n'y paraît. Ces
 échantillons ne sont pas 450\,000 menaces distinctes : ce sont, pour l'essentiel,
 des variantes produites par des moteurs de mutation dont la logique demeure finie.
 Un analyste qui reconstitue cette logique neutralise la famille entière. La
-détection par signature tient tout entière sur ce pari.
+détection par signature tient sur ce pari.
 
 Le rapport \emph{AI Threat Tracker} publié le 5 novembre 2025 par le Google Threat
-Intelligence Group (GTIG) documente les premiers programmes qui ne le tiennent
-plus \cite{gtigAI}. GTIG y décrit des familles de \emph{malwares} qui interrogent
-un modèle de langage pendant leur exécution, pour générer des scripts, obscurcir
-leur propre code ou produire des fonctions malveillantes à la demande.
-L'intelligence artificielle générative n'intervient plus seulement en amont, dans
-la rédaction de courriels de \emph{phishing} ou l'écriture assistée de charges
-utiles : elle est appelée par le programme lui-même, sur la machine de la victime.
+Intelligence Group documente les premiers programmes qui ne le tiennent plus
+\cite{gtigAI}. GTIG y décrit des \emph{malwares} qui interrogent un modèle de
+langage pendant leur exécution, pour générer des scripts, obscurcir leur propre
+code ou produire des fonctions malveillantes à la demande. PROMPTSTEAL, employé
+contre des cibles ukrainiennes, interroge un modèle hébergé sur Hugging Face pour
+générer ses commandes Windows au lieu de les coder en dur. PROMPTFLUX sollicite
+l'API Gemini pour se réécrire « \emph{just-in-time} ». PROMPTLOCK, rançongiciel,
+génère à l'exécution les scripts Lua qui parcourent le système de fichiers,
+sélectionnent les données et les chiffrent. L'intelligence artificielle générative
+n'intervient plus seulement en amont, dans la rédaction de courriels de
+\emph{phishing} ou l'écriture assistée de charges utiles : elle est appelée par le
+programme lui-même, sur la machine de la victime.
 
-Trois spécimens jalonnent cette bascule, et leur statut diffère. PROMPTSTEAL,
-employé contre des cibles ukrainiennes, est la première observation par GTIG d'un
-\emph{malware} interrogeant un LLM en opération réelle ; écrit en Python, il
-interroge le modèle Qwen2.5-Coder-32B-Instruct via l'API Hugging Face pour générer
-ses commandes Windows au lieu de les coder en dur. PROMPTFLUX, un \emph{dropper}
-en VBScript identifié en juin 2025, sollicite l'API Gemini pour obtenir des
-techniques d'obscurcissement et d'évasion et se réécrire « \emph{just-in-time} »,
-vraisemblablement pour échapper à la détection statique par signature ; GTIG
-précise toutefois qu'il se trouve en phase de développement et n'est pas, en
-l'état, capable de compromettre un système. Quant à PROMPTLOCK, présenté à l'été
-2025 comme le premier rançongiciel piloté par intelligence artificielle, il s'est
-avéré être un prototype de recherche de la NYU Tandon School of Engineering,
-déposé sur VirusTotal au cours de tests et identifié par ESET sans que son origine
-universitaire soit connue \cite{esetPromptLock}. Un seul de ces trois programmes
-a donc frappé.
-
-Cette distinction importe, mais elle ne désamorce rien. Les chercheurs de la NYU
-relèvent eux-mêmes que l'alerte initiale, fondée sur la conviction erronée qu'il
-s'agissait d'un rançongiciel en circulation, démontre que de tels systèmes sont
-assez aboutis pour tromper des experts en sécurité \cite{nyuRansomware}. Le
-polymorphisme et le métamorphisme classiques restaient déterministes : le code
+Jusqu'ici, le polymorphisme et le métamorphisme restaient déterministes. Le code
 mutait, mais selon des règles finies, qu'un analyste pouvait reconstituer et
 généraliser. C'est ce postulat que la génération à l'exécution abolit. Il n'y a
 plus de moteur de mutation à rétro-concevoir, seulement une invite et un modèle
 dont les sorties varient d'une itération à l'autre.
 
-Ce mémoire est rédigé au terme d'une année d'alternance effectuée chez Login
-Sécurité, \emph{Managed Security Service Provider} (MSSP) et « étoile » du groupe
-Constellation, en qualité d'analyste SOC/VOC (\emph{Security Operations Center} /
-\emph{Vulnerability Operations Center}). J'y qualifie et priorise les alertes
-remontées par les systèmes d'information de nos clients, je conduis les
-investigations forensiques, je participe à la remédiation et à l'amélioration
-continue des règles de détection. C'est depuis ce poste, et sur les outils qu'il
-met entre mes mains, que se pose la question suivante. Nos mécanismes de détection
+Encore faut-il le vérifier ce comportement plutôt que lire ces rapports. Ce mémoire reprend le
+dernier de ces trois échantillons et l'analyse statiquement, puis dynamiquement,
+avant de convertir les observations en règles YARA, en règles Sigma et en
+\emph{plugin} Volatility. Ce parcours, du binaire à la règle, est celui que suit un
+analyste en SOC lorsqu'un échantillon inconnu lui parvient.
+
+Il conduit à la question qui structure ce travail. Nos mécanismes de détection
 supposent un adversaire dont le comportement demeure \emph{in fine} modélisable.
 Que valent-ils face à un code qui change à chaque itération et s'optimise contre
 les défenses qu'il rencontre ?
