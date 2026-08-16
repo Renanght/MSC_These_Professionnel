@@ -1,4 +1,6 @@
 \babel@toc {french}{}\relax 
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Chaîne d'exécution de PromptLock, de \texttt {main.main} jusqu'au chiffrement local conditionnel.}}{17}{figure.caption.7}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Graphe d'appel reconstruit à l'aide de GoReSym et Ghidra, annoté selon le niveau de preuve associé à chaque fonction.}}{19}{figure.caption.8}%
 \addvspace {10\p@ }

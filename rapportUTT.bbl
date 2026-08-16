@@ -43,11 +43,21 @@
       \field{labeltitlesource}{title}
       \field{day}{4}
       \field{month}{2}
-      \field{note}{Rapport CERTFR-2026-CTI-001. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/}}
+      \field{note}{Rapport CERTFR-2026-CTI-001}
       \field{title}{L'intelligence artificielle générative face aux attaques informatiques}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2026}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
       \true{nocite}
+      \verb{urlraw}
+      \verb https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/
+      \endverb
+      \verb{url}
+      \verb https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/
+      \endverb
     \endentry
     \entry{anssiPanorama}{online}{}{}
       \name{author}{1}{}{%
@@ -72,10 +82,20 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{month}{3}
-      \field{note}{Rapport CERTFR-2026-CTI-002. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-002/}}
+      \field{note}{Rapport CERTFR-2026-CTI-002}
       \field{title}{Panorama de la cybermenace 2025}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2026}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-002/
+      \endverb
+      \verb{url}
+      \verb https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-002/
+      \endverb
     \endentry
     \entry{bontchev2005}{inproceedings}{}{}
       \name{author}{1}{}{%
@@ -102,9 +122,18 @@
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the 15th Virus Bulletin International Conference}
       \field{month}{10}
-      \field{note}{\shortUrl{https://bontchev.nlcv.bas.bg/papers/naming.html}}
       \field{title}{Current Status of the {CARO} Malware Naming Scheme}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2005}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://bontchev.nlcv.bas.bg/papers/naming.html
+      \endverb
+      \verb{url}
+      \verb https://bontchev.nlcv.bas.bg/papers/naming.html
+      \endverb
     \endentry
     \entry{collberg1997}{report}{}{}
       \name{author}{3}{}{%
@@ -169,10 +198,19 @@
       \field{labeltitlesource}{title}
       \field{day}{27}
       \field{month}{8}
-      \field{note}{\shortUrl{https://engineering.nyu.edu/news/large-language-models-can-execute-complete-ransomware-attacks-autonomously-nyu-tandon-research}}
       \field{title}{Large language models can execute complete ransomware attacks autonomously}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2025}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://engineering.nyu.edu/news/large-language-models-can-execute-complete-ransomware-attacks-autonomously-nyu-tandon-research
+      \endverb
+      \verb{url}
+      \verb https://engineering.nyu.edu/news/large-language-models-can-execute-complete-ransomware-attacks-autonomously-nyu-tandon-research
+      \endverb
     \endentry
     \entry{gaber2024}{article}{}{}
       \name{author}{3}{}{%
@@ -238,9 +276,18 @@
       \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{\shortUrl{https://www.av-test.org/fr/statistiques/logiciels-malveillants/}}
       \field{title}{Statistiques sur les logiciels malveillants}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.av-test.org/fr/statistiques/logiciels-malveillants/
+      \endverb
+      \verb{url}
+      \verb https://www.av-test.org/fr/statistiques/logiciels-malveillants/
+      \endverb
     \endentry
     \entry{gtigAI}{online}{}{}
       \name{author}{1}{}{%
@@ -268,10 +315,19 @@
       \field{labeltitlesource}{title}
       \field{day}{5}
       \field{month}{11}
-      \field{note}{\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools}}
       \field{title}{GTIG AI Threat Tracker: Advances in Threat Actor Usage of AI Tools}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2025}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools
+      \endverb
+      \verb{url}
+      \verb https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools
+      \endverb
     \endentry
     \entry{gtig2026b}{online}{}{}
       \name{author}{1}{}{%
@@ -299,10 +355,19 @@
       \field{labeltitlesource}{title}
       \field{day}{11}
       \field{month}{5}
-      \field{note}{\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access}}
       \field{title}{GTIG AI Threat Tracker: Adversaries Leverage AI for Vulnerability Exploitation, Augmented Operations, and Initial Access}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2026}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
+      \endverb
+      \verb{url}
+      \verb https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access
+      \endverb
     \endentry
     \entry{ember2024}{inproceedings}{}{}
       \name{author}{8}{}{%
@@ -394,10 +459,20 @@
       \field{labeltitlesource}{title}
       \field{day}{5}
       \field{month}{3}
-      \field{note}{Partie 1 sur 2. \shortUrl{https://www.elastic.co/security-labs/linux-rootkits-1-hooked-on-linux}}
+      \field{note}{Partie 1 sur 2}
       \field{title}{Hooked on {Linux}: Rootkit Taxonomy, Hooking Techniques and Tradecraft}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2026}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.elastic.co/security-labs/linux-rootkits-1-hooked-on-linux
+      \endverb
+      \verb{url}
+      \verb https://www.elastic.co/security-labs/linux-rootkits-1-hooked-on-linux
+      \endverb
     \endentry
     \entry{msnaming}{online}{}{}
       \name{author}{1}{}{%
@@ -420,9 +495,18 @@
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{\shortUrl{https://learn.microsoft.com/fr-fr/unified-secops/malware-naming}}
       \field{title}{How {Microsoft} names malware}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://learn.microsoft.com/fr-fr/unified-secops/malware-naming
+      \endverb
+      \verb{url}
+      \verb https://learn.microsoft.com/fr-fr/unified-secops/malware-naming
+      \endverb
     \endentry
     \entry{attack}{online}{}{}
       \name{author}{1}{}{%
@@ -445,9 +529,19 @@
       \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{note}{Version à préciser. \shortUrl{https://attack.mitre.org/}}
+      \field{note}{Version à préciser}
       \field{title}{{MITRE ATT\&CK} Enterprise Matrix}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://attack.mitre.org/
+      \endverb
+      \verb{url}
+      \verb https://attack.mitre.org/
+      \endverb
     \endentry
     \entry{pierazzi2020}{inproceedings}{}{}
       \name{author}{4}{}{%
@@ -539,13 +633,16 @@
       \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
       \field{journaltitle}{IEEE Access}
-      \field{note}{Préprint : arXiv:2306.07989}
       \field{title}{A Survey on Cross-Architectural {IoT} Malware Threat Hunting}
       \field{volume}{9}
       \field{year}{2021}
       \field{pages}{91686\bibrangedash 91709}
       \range{pages}{24}
+      \verb{eprint}
+      \verb 2306.07989
+      \endverb
     \endentry
     \entry{esetPromptLock}{online}{}{}
       \name{author}{1}{}{%
@@ -572,10 +669,20 @@
       \field{labeltitlesource}{title}
       \field{day}{27}
       \field{month}{8}
-      \field{note}{Mise à jour du 3 septembre 2025. \shortUrl{https://www.welivesecurity.com/en/ransomware/first-known-ai-powered-ransomware-uncovered-eset-research/}}
+      \field{note}{Mise à jour du 3 septembre 2025}
       \field{title}{First known AI-powered ransomware uncovered by ESET Research}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2025}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.welivesecurity.com/en/ransomware/first-known-ai-powered-ransomware-uncovered-eset-research/
+      \endverb
+      \verb{url}
+      \verb https://www.welivesecurity.com/en/ransomware/first-known-ai-powered-ransomware-uncovered-eset-research/
+      \endverb
     \endentry
     \entry{synacktiv2025}{online}{}{}
       \name{author}{1}{}{%
@@ -600,10 +707,19 @@
       \field{labeltitlesource}{title}
       \field{day}{14}
       \field{month}{10}
-      \field{note}{\shortUrl{https://www.synacktiv.com/en/publications/linkpro-ebpf-rootkit-analysis}}
       \field{title}{{LinkPro}: {eBPF} rootkit analysis}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2025}
       \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.synacktiv.com/en/publications/linkpro-ebpf-rootkit-analysis
+      \endverb
+      \verb{url}
+      \verb https://www.synacktiv.com/en/publications/linkpro-ebpf-rootkit-analysis
+      \endverb
     \endentry
     \entry{szor2005}{book}{}{}
       \name{author}{1}{}{%
@@ -720,9 +836,18 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{4th Deep Learning and Security Workshop (DLS), co-localisé avec IEEE Symposium on Security and Privacy}
-      \field{note}{\shortUrl{https://whyisyoung.github.io/BODMAS/}}
       \field{title}{{BODMAS}: An Open Dataset for Learning based Temporal Analysis of {PE} Malware}
+      \field{urlday}{13}
+      \field{urlmonth}{8}
+      \field{urlyear}{2026}
       \field{year}{2021}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://whyisyoung.github.io/BODMAS/
+      \endverb
+      \verb{url}
+      \verb https://whyisyoung.github.io/BODMAS/
+      \endverb
     \endentry
   \enddatalist
 \endrefsection

@@ -24,27 +24,13 @@ Le fonctionnement du malware repose donc sur un pipeline de génération de code
 
 On peut résumer cette chaîne d'exécution de la façon suivante :
 
-\begin{verbatim}
-main.main
-|-- generateRandomKeyHex -> hexKeyToLuaWords
-|     `-- clé de session affichée en clair : "Hex key: %s"
-|-- construction d'un identifiant d'instance ("Runtime Instance: %s")
-`-- boucle sur 6 tâches :
-      |-- main.execTask(tâche[i])
-      |     |-- lecture de la liste de fichiers cibles
-      |     |-- main.invokeLLM          --> API Ollama-compatible (gpt-oss:20b)
-      |     |-- main.extractTag         (extraction du code Lua généré)
-      |     |-- main.buildValidationPrompt  (boucle de feedback si échec)
-      |     `-- main.backupFiles (nom trompeur = exfiltration)
-      |           `-- main.uploadSingleFile (upload, un fichier à la fois)
-      |
-      `-- si condition remplie (drapeau interne + pointeur nul) :
-            main.execSubtasks(...)
-                |-- main.parseTasksFromFile
-                `-- main.runDecryptorGenTask
-                      `-- main.rsaEncrypt(clé_session, RSA-1024, e=65537)
-                            `-- écriture LOCALE du résultat chiffré (os.WriteFile)
-\end{verbatim}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[height=0.40\textheight,keepaspectratio]{fig_promptlock_chaine_execution}
+  \caption{Chaîne d'exécution de PromptLock, de \texttt{main.main} jusqu'au
+           chiffrement local conditionnel.}
+  \label{fig:promptlock-chaine-execution}
+\end{figure}
 
 Il est important de noter que le chemin qui mène au chiffrement local via \texttt{main.execSubtasks} n'est pas systématique : il n'est emprunté que si une condition précise est remplie dans le code (un drapeau interne combiné à un test de pointeur nul), ce qui distingue clairement la phase de reconnaissance et d'exfiltration, qui se répète à chaque tâche, de la phase de chiffrement proprement dite, qui dépend de cette condition.
 
@@ -81,27 +67,13 @@ Même si la table de symboles a été retirée du binaire, le runtime Go conserv
 
 La reconstruction du graphe d'appel du programme met en évidence l'organisation suivante :
 
-\begin{verbatim}
-main.main                                                         [confirmé]
-|-- generateRandomKeyHex -> hexKeyToLuaWords                       [confirmé]
-|     `-- clé affichée en clair : "Hex key: %s"                   [confirmé]
-|-- construction identifiant d'instance ("Runtime Instance: %s")  [confirmé]
-`-- boucle x6 :
-      |-- main.execTask(tâche[i])                                 [confirmé]
-      |     |-- lecture liste de fichiers (ReadFile/genSplit)      [confirmé, contenu exact incertain]
-      |     |-- main.invokeLLM                                    [confirmé]
-      |     |-- main.extractTag                                   [déduit]
-      |     |-- main.buildValidationPrompt                        [confirmé par XREF]
-      |     `-- main.backupFiles (nom trompeur = exfiltration)    [confirmé par XREF]
-      |           `-- main.uploadSingleFile (en boucle)           [confirmé]
-      |
-      `-- SI condition remplie (bit 0x100 + pointeur nul) :
-            main.execSubtasks(...)                                [confirmé, appelée depuis main.main]
-                |-- main.parseTasksFromFile                       [confirmé]
-                `-- main.runDecryptorGenTask                      [confirmé]
-                      `-- main.rsaEncrypt(clé_session, RSA-1024, e=65537)
-                            `-- os.WriteFile(...)  -> écriture LOCALE du résultat chiffré
-\end{verbatim}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[height=0.50\textheight,keepaspectratio]{fig_promptlock_graphe_appel_annote}
+  \caption{Graphe d'appel reconstruit à l'aide de GoReSym et Ghidra, annoté
+           selon le niveau de preuve associé à chaque fonction.}
+  \label{fig:promptlock-graphe-appel}
+\end{figure}
 
 Ce niveau de détail appelle une précision de vocabulaire utile pour la suite du chapitre : un élément dit "confirmé" a été observé directement dans le désassemblage (appel de fonction, référence croisée explicite) ; un élément "confirmé par XREF" repose sur une référence croisée (\emph{cross-reference}) entre deux fonctions, c'est-à-dire la trace laissée dans le code par le fait qu'une fonction en appelle une autre ; un élément "déduit" n'a pas été observé directement mais découle logiquement du comportement environnant (ici, la présence d'un code Lua exploitable juste après la réponse du LLM implique nécessairement une étape d'extraction, même si l'appel exact n'a pas été isolé avec certitude).
 

@@ -10,7 +10,8 @@ Ce choix n'est pas seulement dicté par l'objet d'étude. La littérature dispon
 
 Les sources mobilisées relèvent de trois registres qui n'ont pas la même valeur probante : travaux académiques évalués par les pairs, rapports d'investigation publiés par des équipes de réponse à incident, et documentation de référence des cadres d'analyse. Le texte signale explicitement les cas où une capacité relève de l'hypothèse plutôt que de l'observation.
 
-%===============================================================\section{Définition et taxonomie du malware moderne}
+%===============================================================
+\section{Définition et taxonomie du malware moderne}
 
 Un malware ne se définit plus par sa capacité de réplication, comme pouvaient l'être les premiers virus des années 1980. Ce qui le caractérise est l'intention : tout code conçu pour s'introduire dans un système, en perturber le fonctionnement, en extraire des données ou y maintenir un accès non autorisé, sans le consentement de son propriétaire.
 
@@ -125,7 +126,7 @@ l'exercice 2025, contre 831 en 2022. Le rançongiciel recule légèrement, à 12
 compromissions, et aucune souche ne domine : Qilin pèse 21~\% des cas, Akira 9~\%,
 LockBit 5~\%, et plus d'une dizaine de souches inédites apparaissent sur au moins un
 incident dans l'année. L'exfiltration de données, elle, passe de 130 à 196
-incidents.
+incidents\cite{anssiPanorama}.
 
 Le déplacement le plus gênant pour la détection est ailleurs. Plusieurs courtiers en
 accès, dont TA577, TA571 et TA544, ont abandonné les chargeurs et les botnets au
@@ -296,8 +297,7 @@ C'est cette trajectoire, et non l'état des échantillons actuels, qui justifie 
 
 Un cas du même inventaire inverse la relation entre modèle et code malveillant. Un shell inversé écrit en PowerShell y intègre des instructions en langage naturel destinées non pas à un modèle utilisé par l'attaquant, mais aux dispositifs d'analyse pilotés par modèle susceptibles d'examiner l'échantillon, auxquels il enjoint de le déclarer inoffensif \cite{gtigAI}.
 
-L'intérêt du cas dépasse sa sophistication, qui est faible. Il montre que confier à un modèle l'évaluation d'un contenu non fiable revient à hériter du problème, non résolu, de l'injection de prompt indirecte. Pour un travail dont la contribution est défensive et fondée sur l'IA, c'est une contrainte de conception, pas une remarque annexe.
-
+L'intérêt du cas dépasse sa sophistication, qui est faible. Il montre que confier à un modèle l'évaluation d'un contenu non fiable revient à hériter du problème, non résolu, de l'injection de prompt indirecte. Le point vaut pour tout dispositif de triage qui délègue l'examen d'un fichier suspect à un modèle. Il vaut aussi pour l'analyste : les prompts embarqués dans l'échantillon étudié au chapitre 2 sont du texte écrit par l'attaquant, et rien n'oblige leur auteur à les rédiger à l'intention du seul modèle qu'il interroge.
 %---------------------------------------------------------------
 \subsection{L'adaptation contextuelle : une capacité déjà présente}
 
@@ -306,16 +306,6 @@ La capacité qui inquiéterait le plus n'est pas la mutation de forme mais l'ada
 Aucun des échantillons assistés par modèle documentés à ce jour ne présente cette capacité. Mais elle n'est pas hypothétique pour autant, et c'est là que le point de vue Linux change l'analyse : le mécanisme de repli du rootkit eBPF décrit en section \ref{sec:runtime} en est déjà une forme aboutie \cite{synacktiv2025}. Le code y évalue la configuration du noyau et choisit sa technique de dissimulation en conséquence, par une logique de repli programmée à l'avance.
 
 L'adaptation contextuelle est donc une capacité opérationnelle attestée, obtenue sans modèle de langage. Ce que l'intégration d'un modèle changerait n'est pas sa nature mais son étendue : le passage d'un arbre de décision fini, écrit par un développeur et donc énumérable par un analyste, à une génération ouverte dont les branches ne sont pas connues à l'avance. Formulée ainsi, l'hypothèse devient testable, ce qui n'était pas le cas de sa version initiale.
-
-%---------------------------------------------------------------
-\subsection{L'asymétrie économique}
-
-Le déséquilibre entre le coût de production d'une variante et celui de son analyse est souvent avancé. Il est réel, mais il n'est pas propre à l'IA : les services de reconditionnement évoqués en section \ref{sec:economie} produisent déjà cet effet. L'apport des modèles est d'abaisser encore le seuil d'entrée et de supprimer la dépendance à un fournisseur.
-
-\begin{quote}
-\small\itshape
-Note de rédaction : étayer par un coût par requête relevé sur une grille tarifaire publique et une estimation du temps d'analyse issue de la littérature, plutôt que de laisser ce point à l'état d'assertion.
-\end{quote}
 
 %===============================================================
 \section{État de l'art de la détection et de ses limites}
@@ -355,14 +345,14 @@ La dérive conceptuelle d'abord. Les performances mesurées en validation se dé
 
 Les contraintes opérationnelles ensuite. Un taux de détection annoncé sans le taux de faux positifs associé n'a pas de signification pratique : à l'échelle d'un parc, un taux de faux positifs de 0,1~\% produit un volume d'alertes ingérable. Les protocoles d'évaluation récents imposent pour cette raison une mesure à très faible taux de faux positifs et une séparation temporelle des jeux d'entraînement et de test \cite{ember2024}.
 
-La disponibilité des données enfin, et c'est ici que le périmètre Linux pèse le plus lourd. Les jeux de données publics de référence portent sur des binaires PE ; les corpus ELF disponibles sont plus petits, moins bien étiquetés et souvent restreints aux familles visant les équipements embarqués \cite{crossArchSurvey}. Reproduire sur ELF les protocoles d'évaluation admis dans le monde PE suppose donc un travail préalable de constitution de corpus, dont ce mémoire devra rendre compte.
+La disponibilité des données enfin, et c'est ici que le périmètre Linux pèse le plus lourd. Les jeux de données publics de référence portent sur des binaires PE ; les corpus ELF disponibles sont plus petits, moins bien étiquetés et souvent restreints aux familles visant les équipements embarqués \cite{crossArchSurvey}. Reproduire sur ELF les protocoles admis dans le monde PE suppose donc de constituer d'abord un corpus. Ce travail n'a pas été mené ici. Le chapitre suivant part d'un seul échantillon, le caractérise, et en tire des règles explicites. Un classifieur entraîné sur ce que j'aurais pu réunir n'aurait pas résisté à l'examen.
 
 %---------------------------------------------------------------
 \subsection{Attaques adversariales}
 
 Un classifieur est lui-même une surface d'attaque. La génération d'exemples adverses dans l'espace des problèmes obéit à une contrainte absente du domaine de la vision par ordinateur : la perturbation doit produire un fichier valide, exécutable, et dont la sémantique malveillante est préservée \cite{pierazzi2020}. S'y ajoutent l'empoisonnement des données d'entraînement et l'extraction de modèle.
 
-Ces travaux fixent la condition de recevabilité d'une contribution défensive fondée sur l'IA : un dispositif évalué uniquement sur des échantillons non adverses ne démontre rien sur sa robustesse.
+La condition de recevabilité qu'ils fixent vaut au-delà des classifieurs. Une règle écrite à la main tranche elle aussi entre malveillant et bénin, et une règle validée sur le seul échantillon qui l'a produite ne dit rien de ce qu'elle deviendra face à une variante conçue pour la contourner. Les règles du chapitre 2 n'y échappent pas.
 
 %===============================================================
 \section{Synthèse et verrou identifié}
@@ -372,10 +362,3 @@ Les défenses actuelles reposent sur une hypothèse de modélisabilité : que l'
 Le contexte Linux accentue chacun de ces effets. La compilation croisée multiplie les formes d'un même comportement. L'exécution sans fichier supprime l'objet même de l'analyse statique. La télémétrie repose sur une infrastructure noyau unique, dont la compromission prive l'agent de toute perception. Et la rareté des corpus publics prive le chercheur des protocoles d'évaluation dont dispose son homologue travaillant sur PE.
 
 L'intégration de modèles de langage dans la chaîne offensive n'introduit pas une menace de nature nouvelle. Les échantillons documentés restent expérimentaux, et l'adaptation à l'environnement, souvent présentée comme leur apport spécifique, est déjà attestée sans eux. Ce que ces modèles modifient est le coût de production de la variation, et l'étendue de l'espace des comportements possibles. Une défense dont le coût marginal d'adaptation reste supérieur au coût marginal de mutation de l'adversaire perd du terrain mécaniquement, quelle que soit sa qualité intrinsèque.
-
-Le verrou traité dans la suite de ce mémoire se formule donc ainsi : \emph{comment concevoir, pour des binaires ELF, un dispositif de détection dont le coût d'adaptation à une variation adverse ne croisse pas plus vite que le coût de production de cette variation, et l'évaluer sous des contraintes opérationnelles réalistes, à savoir un taux de faux positifs compatible avec l'exploitation d'un parc et une robustesse mesurée face à des échantillons adverses ?}
-
-\begin{quote}
-\small\itshape
-Note de rédaction : cette formulation est une proposition, à aligner sur la contribution effective du mémoire.
-\end{quote}

@@ -6,62 +6,62 @@
 \contentsline {chapter}{Introduction}{1}{chapter*.3}%
 \contentsline {chapter}{\numberline {1}État de l'art de la menace logicielle et mécanismes d'évasion}{2}{chapter.1}%
 \contentsline {section}{Périmètre}{2}{chapter.1}%
-\contentsline {subsection}{\numberline {1.0.1}Nomenclature et standards d'identification}{3}{subsection.1.0.1}%
+\contentsline {section}{\numberline {1.1}Définition et taxonomie du malware moderne}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Nomenclature et standards d'identification}{3}{subsection.1.1.1}%
 \contentsline {paragraph}{Les limites du schéma.}{3}{table.caption.4}%
-\contentsline {subsection}{\numberline {1.0.2}Tactique, technique, vecteur, capacité et charge utile}{4}{subsection.1.0.2}%
-\contentsline {section}{\numberline {1.1}Classification par objectifs opérationnels}{4}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1.1}L'écosystème économique}{5}{subsection.1.1.1}%
-\contentsline {section}{\numberline {1.2}Évasion statique : rendre le binaire illisible}{6}{section.1.2}%
-\contentsline {subsection}{\numberline {1.2.1}Réduction de la surface d'analyse}{6}{subsection.1.2.1}%
-\contentsline {subsection}{\numberline {1.2.2}Empaquetage}{6}{subsection.1.2.2}%
-\contentsline {subsection}{\numberline {1.2.3}Polymorphisme, métamorphisme et virtualisation}{6}{subsection.1.2.3}%
-\contentsline {section}{\numberline {1.3}Évasion à l'exécution : échapper à l'observation}{7}{section.1.3}%
-\contentsline {subsection}{\numberline {1.3.1}Anti-analyse et conditionnement de l'environnement}{7}{subsection.1.3.1}%
-\contentsline {subsection}{\numberline {1.3.2}Exécution sans fichier}{8}{subsection.1.3.2}%
-\contentsline {subsection}{\numberline {1.3.3}Dissimulation par rootkit : trois couches}{8}{subsection.1.3.3}%
-\contentsline {paragraph}{Un cas instructif.}{8}{subsection.1.3.3}%
-\contentsline {subsection}{\numberline {1.3.4}Neutralisation de la télémétrie}{9}{subsection.1.3.4}%
-\contentsline {subsection}{\numberline {1.3.5}Persistance et mimétisme}{9}{subsection.1.3.5}%
-\contentsline {subsection}{\numberline {1.3.6}Commande, contrôle et exfiltration}{9}{subsection.1.3.6}%
-\contentsline {subsection}{\numberline {1.3.7}Contrepoint : les spécificités Windows}{10}{subsection.1.3.7}%
-\contentsline {section}{\numberline {1.4}Intégration de modèles de langage dans la chaîne offensive}{10}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}Les cas documentés}{10}{subsection.1.4.1}%
-\contentsline {subsection}{\numberline {1.4.2}Ce que ces cas établissent, et ce qu'ils n'établissent pas}{11}{subsection.1.4.2}%
-\contentsline {subsection}{\numberline {1.4.3}L'injection de prompt comme technique d'évasion}{11}{subsection.1.4.3}%
-\contentsline {subsection}{\numberline {1.4.4}L'adaptation contextuelle : une capacité déjà présente}{11}{subsection.1.4.4}%
-\contentsline {subsection}{\numberline {1.4.5}L'asymétrie économique}{12}{subsection.1.4.5}%
-\contentsline {section}{\numberline {1.5}État de l'art de la détection et de ses limites}{12}{section.1.5}%
-\contentsline {subsection}{\numberline {1.5.1}Détection statique par indicateurs}{12}{subsection.1.5.1}%
-\contentsline {subsection}{\numberline {1.5.2}Analyse heuristique et émulation}{12}{subsection.1.5.2}%
-\contentsline {subsection}{\numberline {1.5.3}Analyse comportementale}{13}{subsection.1.5.3}%
-\contentsline {subsection}{\numberline {1.5.4}Apprentissage automatique}{13}{subsection.1.5.4}%
-\contentsline {subsection}{\numberline {1.5.5}Attaques adversariales}{14}{subsection.1.5.5}%
-\contentsline {section}{\numberline {1.6}Synthèse et verrou identifié}{14}{section.1.6}%
+\contentsline {subsection}{\numberline {1.1.2}Tactique, technique, vecteur, capacité et charge utile}{4}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Classification par objectifs opérationnels}{4}{section.1.2}%
+\contentsline {subsection}{\numberline {1.2.1}L'écosystème économique}{5}{subsection.1.2.1}%
+\contentsline {section}{\numberline {1.3}Évasion statique : rendre le binaire illisible}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.3.1}Réduction de la surface d'analyse}{6}{subsection.1.3.1}%
+\contentsline {subsection}{\numberline {1.3.2}Empaquetage}{6}{subsection.1.3.2}%
+\contentsline {subsection}{\numberline {1.3.3}Polymorphisme, métamorphisme et virtualisation}{6}{subsection.1.3.3}%
+\contentsline {section}{\numberline {1.4}Évasion à l'exécution : échapper à l'observation}{7}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Anti-analyse et conditionnement de l'environnement}{7}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Exécution sans fichier}{8}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Dissimulation par rootkit : trois couches}{8}{subsection.1.4.3}%
+\contentsline {paragraph}{Un cas instructif.}{8}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Neutralisation de la télémétrie}{9}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Persistance et mimétisme}{9}{subsection.1.4.5}%
+\contentsline {subsection}{\numberline {1.4.6}Commande, contrôle et exfiltration}{9}{subsection.1.4.6}%
+\contentsline {subsection}{\numberline {1.4.7}Contrepoint : les spécificités Windows}{9}{subsection.1.4.7}%
+\contentsline {section}{\numberline {1.5}Intégration de modèles de langage dans la chaîne offensive}{10}{section.1.5}%
+\contentsline {subsection}{\numberline {1.5.1}Les cas documentés}{10}{subsection.1.5.1}%
+\contentsline {subsection}{\numberline {1.5.2}Ce que ces cas établissent, et ce qu'ils n'établissent pas}{10}{subsection.1.5.2}%
+\contentsline {subsection}{\numberline {1.5.3}L'injection de prompt comme technique d'évasion}{11}{subsection.1.5.3}%
+\contentsline {subsection}{\numberline {1.5.4}L'adaptation contextuelle : une capacité déjà présente}{11}{subsection.1.5.4}%
+\contentsline {section}{\numberline {1.6}État de l'art de la détection et de ses limites}{12}{section.1.6}%
+\contentsline {subsection}{\numberline {1.6.1}Détection statique par indicateurs}{12}{subsection.1.6.1}%
+\contentsline {subsection}{\numberline {1.6.2}Analyse heuristique et émulation}{12}{subsection.1.6.2}%
+\contentsline {subsection}{\numberline {1.6.3}Analyse comportementale}{12}{subsection.1.6.3}%
+\contentsline {subsection}{\numberline {1.6.4}Apprentissage automatique}{13}{subsection.1.6.4}%
+\contentsline {subsection}{\numberline {1.6.5}Attaques adversariales}{13}{subsection.1.6.5}%
+\contentsline {section}{\numberline {1.7}Synthèse et verrou identifié}{13}{section.1.7}%
 \contentsline {chapter}{\numberline {2}Étude de cas : analyse de PromptLock}{15}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Présentation du cas}{15}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Contexte et découverte}{15}{subsection.2.1.1}%
 \contentsline {subsection}{\numberline {2.1.2}Composition et architecture du malware}{16}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}Analyse technique de l'échantillon}{17}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Analyse statique}{17}{subsection.2.2.1}%
-\contentsline {subsubsection}{\numberline {2.2.1.1}Analyse de base}{17}{subsubsection.2.2.1.1}%
+\contentsline {section}{\numberline {2.2}Analyse technique de l'échantillon}{16}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Analyse statique}{16}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.1.1}Analyse de base}{16}{subsubsection.2.2.1.1}%
 \contentsline {subsubsection}{\numberline {2.2.1.2}Analyse avancée}{18}{subsubsection.2.2.1.2}%
-\contentsline {subsection}{\numberline {2.2.2}Analyse dynamique}{20}{subsection.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.2.1}Environnement de laboratoire}{20}{subsubsection.2.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Analyse dynamique}{21}{subsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.2.1}Environnement de laboratoire}{21}{subsubsection.2.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.2.2}Simulation de l'API LLM et premières observations}{21}{subsubsection.2.2.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.2.3}Test avec un modèle de langage réel}{22}{subsubsection.2.2.2.3}%
 \contentsline {section}{\numberline {2.3}Outils de détection développés}{23}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Règle YARA}{23}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Règles Sigma}{24}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Plugin Volatility3}{24}{subsection.2.3.3}%
-\contentsline {subsection}{\numberline {2.3.4}Indices de Compromission}{25}{subsection.2.3.4}%
-\contentsline {subsection}{\numberline {2.3.5}Cartographie MITRE ATT\&CK}{26}{subsection.2.3.5}%
-\contentsline {subsection}{\numberline {2.3.6}Cartographie MITRE ATLAS}{27}{subsection.2.3.6}%
+\contentsline {subsection}{\numberline {2.3.3}Plugin Volatility3}{25}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Indices de Compromission}{26}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Cartographie MITRE ATT\&CK}{27}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Cartographie MITRE ATLAS}{28}{subsection.2.3.6}%
 \contentsline {subsubsection}{\numberline {2.3.6.1}Techniques applicables}{28}{subsubsection.2.3.6.1}%
 \contentsline {subsubsection}{\numberline {2.3.6.2}Une limite de couverture révélée plutôt que comblée}{28}{subsubsection.2.3.6.2}%
-\contentsline {subsubsection}{\numberline {2.3.6.3}Analyse comparative}{28}{subsubsection.2.3.6.3}%
-\contentsline {subsubsection}{\numberline {2.3.6.4}Conséquence pour la cartographie ATT\&CK}{28}{subsubsection.2.3.6.4}%
-\contentsline {chapter}{Conclusion}{30}{chapter*.12}%
-\contentsline {chapter}{Bibliographie}{}{chapter*.14}%
+\contentsline {subsubsection}{\numberline {2.3.6.3}Analyse comparative}{29}{subsubsection.2.3.6.3}%
+\contentsline {subsubsection}{\numberline {2.3.6.4}Conséquence pour la cartographie ATT\&CK}{29}{subsubsection.2.3.6.4}%
+\contentsline {chapter}{Conclusion}{30}{chapter*.14}%
+\contentsline {chapter}{Bibliographie}{}{chapter*.16}%
 \contentsline {chapter}{\numberline {A}Annexes}{I}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Captures d'écran}{I}{section.A.1}%
 \contentsline {section}{\numberline {A.2}Formules chimiques}{I}{section.A.2}%

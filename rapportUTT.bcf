@@ -560,7 +560,6 @@
     <bcf:option datatype="string">datelabel</bcf:option>
     <bcf:option datatype="string">backrefstyle</bcf:option>
     <bcf:option datatype="string">arxiv</bcf:option>
-    <bcf:option datatype="string">citepages</bcf:option>
     <bcf:option datatype="boolean">familyinits</bcf:option>
     <bcf:option datatype="boolean">giveninits</bcf:option>
     <bcf:option datatype="boolean">prefixinits</bcf:option>
@@ -645,6 +644,7 @@
     <bcf:option datatype="boolean">eprint</bcf:option>
     <bcf:option datatype="boolean">related</bcf:option>
     <bcf:option datatype="boolean">subentry</bcf:option>
+    <bcf:option datatype="boolean">subentrycomp</bcf:option>
     <bcf:option datatype="boolean">bibtexcaseprotection</bcf:option>
     <bcf:option datatype="integer">mincrossrefs</bcf:option>
     <bcf:option datatype="integer">minxrefs</bcf:option>
@@ -727,6 +727,7 @@
     <bcf:option datatype="boolean">eprint</bcf:option>
     <bcf:option datatype="boolean">related</bcf:option>
     <bcf:option datatype="boolean">subentry</bcf:option>
+    <bcf:option datatype="boolean">subentrycomp</bcf:option>
     <bcf:option datatype="boolean">bibtexcaseprotection</bcf:option>
     <bcf:option datatype="xml">labelalphatemplate</bcf:option>
     <bcf:option datatype="xml">translit</bcf:option>
@@ -816,6 +817,7 @@
     <bcf:option datatype="boolean" backendout="1">eprint</bcf:option>
     <bcf:option datatype="boolean" backendout="1">related</bcf:option>
     <bcf:option datatype="boolean" backendout="1">subentry</bcf:option>
+    <bcf:option datatype="boolean" backendout="1">subentrycomp</bcf:option>
     <bcf:option datatype="boolean" backendout="1">bibtexcaseprotection</bcf:option>
     <bcf:option datatype="integer" backendin="maxcitenames,maxbibnames,maxsortnames">maxnames</bcf:option>
     <bcf:option datatype="integer" backendin="mincitenames,minbibnames,minsortnames">minnames</bcf:option>
@@ -2382,24 +2384,25 @@
     <bcf:citekey order="6" intorder="1">bontchev2005</bcf:citekey>
     <bcf:citekey order="7" intorder="1">attack</bcf:citekey>
     <bcf:citekey order="8" intorder="1">anssiPanorama</bcf:citekey>
-    <bcf:citekey order="9" intorder="1">ugartepedrero2015</bcf:citekey>
-    <bcf:citekey order="10" intorder="1">szor2005</bcf:citekey>
-    <bcf:citekey order="11" intorder="1">collberg1997</bcf:citekey>
-    <bcf:citekey order="12" intorder="1">elasticRootkits</bcf:citekey>
-    <bcf:citekey order="13" intorder="1">synacktiv2025</bcf:citekey>
-    <bcf:citekey order="14" intorder="1">gtigAI</bcf:citekey>
-    <bcf:citekey order="15" intorder="1">esetPromptLock</bcf:citekey>
-    <bcf:citekey order="16" intorder="1">nyuRansomware</bcf:citekey>
-    <bcf:citekey order="17" intorder="1">gtigAI</bcf:citekey>
-    <bcf:citekey order="18" intorder="1">gtig2026b</bcf:citekey>
-    <bcf:citekey order="19" intorder="1">gtigAI</bcf:citekey>
-    <bcf:citekey order="20" intorder="1">synacktiv2025</bcf:citekey>
-    <bcf:citekey order="21" intorder="1">gaber2024</bcf:citekey>
-    <bcf:citekey order="22" intorder="1">bodmas</bcf:citekey>
-    <bcf:citekey order="23" intorder="1">ember2024</bcf:citekey>
-    <bcf:citekey order="24" intorder="1">crossArchSurvey</bcf:citekey>
-    <bcf:citekey order="25" intorder="1">pierazzi2020</bcf:citekey>
-    <bcf:citekey order="26" intorder="1" nocite="1">*</bcf:citekey>
+    <bcf:citekey order="9" intorder="1">anssiPanorama</bcf:citekey>
+    <bcf:citekey order="10" intorder="1">ugartepedrero2015</bcf:citekey>
+    <bcf:citekey order="11" intorder="1">szor2005</bcf:citekey>
+    <bcf:citekey order="12" intorder="1">collberg1997</bcf:citekey>
+    <bcf:citekey order="13" intorder="1">elasticRootkits</bcf:citekey>
+    <bcf:citekey order="14" intorder="1">synacktiv2025</bcf:citekey>
+    <bcf:citekey order="15" intorder="1">gtigAI</bcf:citekey>
+    <bcf:citekey order="16" intorder="1">esetPromptLock</bcf:citekey>
+    <bcf:citekey order="17" intorder="1">nyuRansomware</bcf:citekey>
+    <bcf:citekey order="18" intorder="1">gtigAI</bcf:citekey>
+    <bcf:citekey order="19" intorder="1">gtig2026b</bcf:citekey>
+    <bcf:citekey order="20" intorder="1">gtigAI</bcf:citekey>
+    <bcf:citekey order="21" intorder="1">synacktiv2025</bcf:citekey>
+    <bcf:citekey order="22" intorder="1">gaber2024</bcf:citekey>
+    <bcf:citekey order="23" intorder="1">bodmas</bcf:citekey>
+    <bcf:citekey order="24" intorder="1">ember2024</bcf:citekey>
+    <bcf:citekey order="25" intorder="1">crossArchSurvey</bcf:citekey>
+    <bcf:citekey order="26" intorder="1">pierazzi2020</bcf:citekey>
+    <bcf:citekey order="27" intorder="1" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nty">

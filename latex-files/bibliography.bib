@@ -1,8 +1,15 @@
 % =====================================================================
 % Bibliographie
 %
-% Conventions : le style @online reprend celui des entrées d'introduction
-% (champ note + macro \shortUrl). Aucune entrée non citée n'est conservée.
+% Destinée à biblatex + biber, style numérique.
+% Préambule attendu :
+%   \usepackage[backend=biber, style=numeric-comp, sorting=none]{biblatex}
+%   \usepackage{xurl}                  % césure propre des URLs longues
+%   \addbibresource{etat_de_lart.bib}
+%
+% Les URLs sont dans le champ url, pas dans note : biblatex les place en fin
+% de référence et ne les remonte jamais dans le corps du texte. Le champ note
+% ne conserve que les précisions éditoriales.
 %
 % Statut de vérification :
 %   [OK]  entrée vérifiée contre la source primaire ou plusieurs sources
@@ -17,9 +24,10 @@
 
 @online{avtest,
   author       = {AV-TEST GmbH},
-  note         = {\shortUrl{https://www.av-test.org/fr/statistiques/logiciels-malveillants/}},
   organization = {AV-TEST Institute},
   title        = {Statistiques sur les logiciels malveillants},
+  url          = {https://www.av-test.org/fr/statistiques/logiciels-malveillants/},
+  urldate      = {2026-08-13},
   year         = {2026}
 }
 
@@ -29,9 +37,11 @@
 @online{anssiPanorama,
   author       = {ANSSI},
   date         = {2026-03},
-  note         = {Rapport CERTFR-2026-CTI-002. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-002/}},
+  note         = {Rapport CERTFR-2026-CTI-002},
   organization = {CERT-FR, Agence nationale de la sécurité des systèmes d'information},
-  title        = {Panorama de la cybermenace 2025}
+  title        = {Panorama de la cybermenace 2025},
+  url          = {https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-002/},
+  urldate      = {2026-08-13}
 }
 
 % [OK] Rapport thématique du CERT-FR sur l'IA générative et les attaques
@@ -39,9 +49,11 @@
 @online{anssiIA,
   author       = {ANSSI},
   date         = {2026-02-04},
-  note         = {Rapport CERTFR-2026-CTI-001. \shortUrl{https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/}},
+  note         = {Rapport CERTFR-2026-CTI-001},
   organization = {CERT-FR, Agence nationale de la sécurité des systèmes d'information},
-  title        = {L'intelligence artificielle générative face aux attaques informatiques}
+  title        = {L'intelligence artificielle générative face aux attaques informatiques},
+  url          = {https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/},
+  urldate      = {2026-08-13}
 }
 
 
@@ -56,17 +68,19 @@
   author    = {Bontchev, Vesselin},
   booktitle = {Proceedings of the 15th Virus Bulletin International Conference},
   month     = oct,
-  note      = {\shortUrl{https://bontchev.nlcv.bas.bg/papers/naming.html}},
   title     = {Current Status of the {CARO} Malware Naming Scheme},
+  url       = {https://bontchev.nlcv.bas.bg/papers/naming.html},
+  urldate   = {2026-08-13},
   year      = {2005}
 }
 
 % [OK]
 @online{msnaming,
   author       = {Microsoft},
-  note         = {\shortUrl{https://learn.microsoft.com/fr-fr/unified-secops/malware-naming}},
   organization = {Microsoft Learn},
   title        = {How {Microsoft} names malware},
+  url          = {https://learn.microsoft.com/fr-fr/unified-secops/malware-naming},
+  urldate      = {2026-08-13},
   year         = {2025}
 }
 
@@ -74,9 +88,11 @@
 % identifiants de sous-techniques ont changé d'une version à l'autre.
 @online{attack,
   author       = {MITRE},
-  note         = {Version à préciser. \shortUrl{https://attack.mitre.org/}},
+  note         = {Version à préciser},
   organization = {MITRE Corporation},
   title        = {{MITRE ATT\&CK} Enterprise Matrix},
+  url          = {https://attack.mitre.org/},
+  urldate      = {2026-08-13},
   year         = {2026}
 }
 
@@ -129,9 +145,10 @@
 @online{synacktiv2025,
   author       = {Synacktiv},
   date         = {2025-10-14},
-  note         = {\shortUrl{https://www.synacktiv.com/en/publications/linkpro-ebpf-rootkit-analysis}},
   organization = {Synacktiv},
-  title        = {{LinkPro}: {eBPF} rootkit analysis}
+  title        = {{LinkPro}: {eBPF} rootkit analysis},
+  url          = {https://www.synacktiv.com/en/publications/linkpro-ebpf-rootkit-analysis},
+  urldate      = {2026-08-13}
 }
 
 % [OK] Premier volet d'une série en deux parties ; le second porte sur la
@@ -139,9 +156,11 @@
 @online{elasticRootkits,
   author       = {Elastic Security Labs},
   date         = {2026-03-05},
-  note         = {Partie 1 sur 2. \shortUrl{https://www.elastic.co/security-labs/linux-rootkits-1-hooked-on-linux}},
+  note         = {Partie 1 sur 2},
   organization = {Elastic},
-  title        = {Hooked on {Linux}: Rootkit Taxonomy, Hooking Techniques and Tradecraft}
+  title        = {Hooked on {Linux}: Rootkit Taxonomy, Hooking Techniques and Tradecraft},
+  url          = {https://www.elastic.co/security-labs/linux-rootkits-1-hooked-on-linux},
+  urldate      = {2026-08-13}
 }
 
 
@@ -152,33 +171,38 @@
 @online{gtigAI,
   author       = {Google Threat Intelligence Group},
   date         = {2025-11-05},
-  note         = {\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools}},
   organization = {Google Cloud},
-  title        = {GTIG AI Threat Tracker: Advances in Threat Actor Usage of AI Tools}
+  title        = {GTIG AI Threat Tracker: Advances in Threat Actor Usage of AI Tools},
+  url          = {https://cloud.google.com/blog/topics/threat-intelligence/threat-actor-usage-of-ai-tools},
+  urldate      = {2026-08-13}
 }
 
 % [OK] URL canonique confirmée sur cloud.google.com.
 @online{gtig2026b,
   author       = {Google Threat Intelligence Group},
   date         = {2026-05-11},
-  note         = {\shortUrl{https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access}},
   organization = {Google Cloud},
-  title        = {GTIG AI Threat Tracker: Adversaries Leverage AI for Vulnerability Exploitation, Augmented Operations, and Initial Access}
+  title        = {GTIG AI Threat Tracker: Adversaries Leverage AI for Vulnerability Exploitation, Augmented Operations, and Initial Access},
+  url          = {https://cloud.google.com/blog/topics/threat-intelligence/ai-vulnerability-exploitation-initial-access},
+  urldate      = {2026-08-13}
 }
 
 @online{esetPromptLock,
   author       = {ESET Research},
   date         = {2025-08-27},
-  note         = {Mise à jour du 3 septembre 2025. \shortUrl{https://www.welivesecurity.com/en/ransomware/first-known-ai-powered-ransomware-uncovered-eset-research/}},
+  note         = {Mise à jour du 3 septembre 2025},
   organization = {WeLiveSecurity},
-  title        = {First known AI-powered ransomware uncovered by ESET Research}
+  title        = {First known AI-powered ransomware uncovered by ESET Research},
+  url          = {https://www.welivesecurity.com/en/ransomware/first-known-ai-powered-ransomware-uncovered-eset-research/},
+  urldate      = {2026-08-13}
 }
 
 @online{nyuRansomware,
-  author = {NYU Tandon School of Engineering},
-  date   = {2025-08-27},
-  note   = {\shortUrl{https://engineering.nyu.edu/news/large-language-models-can-execute-complete-ransomware-attacks-autonomously-nyu-tandon-research}},
-  title  = {Large language models can execute complete ransomware attacks autonomously}
+  author  = {NYU Tandon School of Engineering},
+  date    = {2025-08-27},
+  title   = {Large language models can execute complete ransomware attacks autonomously},
+  url     = {https://engineering.nyu.edu/news/large-language-models-can-execute-complete-ransomware-attacks-autonomously-nyu-tandon-research},
+  urldate = {2026-08-13}
 }
 
 
@@ -206,8 +230,9 @@
 @inproceedings{bodmas,
   author    = {Yang, Limin and Ciptadi, Arridhana and Laziuk, Ihar and Ahmadzadeh, Ali and Wang, Gang},
   booktitle = {4th Deep Learning and Security Workshop (DLS), co-localisé avec IEEE Symposium on Security and Privacy},
-  note      = {\shortUrl{https://whyisyoung.github.io/BODMAS/}},
   title     = {{BODMAS}: An Open Dataset for Learning based Temporal Analysis of {PE} Malware},
+  url       = {https://whyisyoung.github.io/BODMAS/},
+  urldate   = {2026-08-13},
   year      = {2021}
 }
 
@@ -239,11 +264,12 @@
 % plusieurs articles citants. Établit la rareté relative des travaux sur ELF
 % face au corpus PE.
 @article{crossArchSurvey,
-  author  = {Raju, Anandharaju Durai and Abualhaol, Ibrahim Y. and Giagone, Ronnie Salvador and Zhou, Yang and Huang, Shengqiang},
-  journal = {IEEE Access},
-  note    = {Préprint : arXiv:2306.07989},
-  pages   = {91686--91709},
-  title   = {A Survey on Cross-Architectural {IoT} Malware Threat Hunting},
-  volume  = {9},
-  year    = {2021}
+  author     = {Raju, Anandharaju Durai and Abualhaol, Ibrahim Y. and Giagone, Ronnie Salvador and Zhou, Yang and Huang, Shengqiang},
+  eprint     = {2306.07989},
+  eprinttype = {arXiv},
+  journal    = {IEEE Access},
+  pages      = {91686--91709},
+  title      = {A Survey on Cross-Architectural {IoT} Malware Threat Hunting},
+  volume     = {9},
+  year       = {2021}
 }

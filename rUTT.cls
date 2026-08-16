@@ -115,7 +115,7 @@
 \usepackage{blindtext} % Pour générer des textes de test
 
 \usepackage{graphicx} % pour les images
-\graphicspath{{assets/img}}
+\graphicspath{{assets/img/}}
 \usepackage{placeins} % pour bien positionner lesdites images
 \usepackage[export]{adjustbox} % pour le ratio
 \usepackage{subfiles}
@@ -192,8 +192,7 @@
   dateera=secular, % pour avoir des Avant l'Ere Commune et plus av JC
   dateeraauto=100, % Si on le passe à 1000, 1969 deviendra 1970 EC
   maxnames=99,
-  style=numeric,
-  citestyle=verbose,
+  style=numeric-comp,
   sortlocale=auto,
   seconds=true,
   bibencoding=auto,
