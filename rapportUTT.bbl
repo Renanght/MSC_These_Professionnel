@@ -19,46 +19,6 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global/global}
-    \entry{anssiIA}{online}{}{}
-      \name{author}{1}{}{%
-        {{hash=4c13de1b2831555c6563462e5de6942d}{%
-           family={ANSSI},
-           familyi={A\bibinitperiod}}}%
-      }
-      \list{organization}{1}{%
-        {CERT-FR, Agence nationale de la sécurité des systèmes d'information}%
-      }
-      \strng{namehash}{4c13de1b2831555c6563462e5de6942d}
-      \strng{fullhash}{4c13de1b2831555c6563462e5de6942d}
-      \strng{fullhashraw}{4c13de1b2831555c6563462e5de6942d}
-      \strng{bibnamehash}{4c13de1b2831555c6563462e5de6942d}
-      \strng{authorbibnamehash}{4c13de1b2831555c6563462e5de6942d}
-      \strng{authornamehash}{4c13de1b2831555c6563462e5de6942d}
-      \strng{authorfullhash}{4c13de1b2831555c6563462e5de6942d}
-      \strng{authorfullhashraw}{4c13de1b2831555c6563462e5de6942d}
-      \field{extraname}{1}
-      \field{sortinit}{A}
-      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{day}{4}
-      \field{month}{2}
-      \field{note}{Rapport CERTFR-2026-CTI-001}
-      \field{title}{L'intelligence artificielle générative face aux attaques informatiques}
-      \field{urlday}{13}
-      \field{urlmonth}{8}
-      \field{urlyear}{2026}
-      \field{year}{2026}
-      \field{dateera}{ce}
-      \field{urldateera}{ce}
-      \true{nocite}
-      \verb{urlraw}
-      \verb https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/
-      \endverb
-      \verb{url}
-      \verb https://www.cert.ssi.gouv.fr/cti/CERTFR-2026-CTI-001/
-      \endverb
-    \endentry
     \entry{anssiPanorama}{online}{}{}
       \name{author}{1}{}{%
         {{hash=4c13de1b2831555c6563462e5de6942d}{%
@@ -76,7 +36,6 @@
       \strng{authornamehash}{4c13de1b2831555c6563462e5de6942d}
       \strng{authorfullhash}{4c13de1b2831555c6563462e5de6942d}
       \strng{authorfullhashraw}{4c13de1b2831555c6563462e5de6942d}
-      \field{extraname}{2}
       \field{sortinit}{A}
       \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
       \field{labelnamesource}{author}

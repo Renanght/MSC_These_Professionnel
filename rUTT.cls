@@ -148,6 +148,7 @@
 \usepackage{multirow}       % Pour des tableaux fun
 \usepackage{longtable} % pour les longs tableaux
 \usepackage{booktabs} % pour des jolis tableaux
+\usepackage{tabularx}
 \usepackage{siunitx} % pour le typage de tableaux
 
 \usepackage{mathtools}  % Typographie pour les ensembles communs

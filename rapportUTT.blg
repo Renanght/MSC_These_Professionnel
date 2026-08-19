@@ -1,0 +1,15 @@
+[0] Config.pm:328> INFO - This is Biber 2.21
+[1] Config.pm:331> INFO - Logfile is 'rapportUTT.blg'
+[615] biber-MSWIN64:342> INFO - === 
+[884] Biber.pm:421> INFO - Reading 'rapportUTT.bcf'
+[1159] Biber.pm:999> INFO - Using all citekeys in bib section 0
+[1189] Biber.pm:4487> INFO - Processing section 0
+[1231] Biber.pm:4678> INFO - Looking for bibtex file 'latex-files/bibliography.bib' for section 0
+[1408] bibtex.pm:1713> INFO - LaTeX decoding ...
+[1535] bibtex.pm:1519> INFO - Found BibTeX data source 'latex-files/bibliography.bib'
+[2298] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[2299] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[2299] Biber.pm:4307> INFO - Sorting list 'nty/global//global/global/global' of type 'entry' with template 'nty' and locale 'fr-FR'
+[2299] Biber.pm:4313> INFO - No sort tailoring available for locale 'fr-FR'
+[2455] bbl.pm:676> INFO - Writing 'rapportUTT.bbl' with encoding 'UTF-8'
+[2481] bbl.pm:779> INFO - Output to rapportUTT.bbl

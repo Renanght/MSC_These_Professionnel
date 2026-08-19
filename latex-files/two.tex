@@ -1,28 +1,55 @@
+% =====================================================================
+% Chapitre 2 — mise en page des tableaux et du bloc de code corrigée
+%
+% UNE SEULE LIGNE À AJOUTER DANS rUTT.cls, à côté de booktabs :
+%     \usepackage{tabularx}
+%
+% Rien d'autre : booktabs, multirow, ragged2e, listings, xcolor et
+% caption sont déjà chargés par la classe.
+%
+% Ce qui change par rapport à la version précédente :
+%   - tabular  -> tabularx : la largeur totale est fixée à \linewidth,
+%     le tableau ne peut plus sortir de la page ;
+%   - suppression des filets verticaux et des \hline systématiques,
+%     remplacés par toprule/midrule/bottomrule (booktabs). Les | sont
+%     la cause principale du débordement : ils ajoutent une largeur
+%     que LaTeX ne peut pas comprimer ;
+%   - la colonne « Conf. » de la table ATT&CK ne contient plus que le
+%     code (S / D / S+D), les réserves passant en notes sous le tableau ;
+%   - verbatim -> lstlisting pour la règle YARA (breaklines=true est
+%     déjà actif dans le style codestyle de la classe) ;
+%   - captions au-dessus des tableaux (convention pour les tables),
+%     labels ajoutés pour permettre les \ref ;
+%   - \parindent remis à 0 dans chaque environnement table, sinon
+%     l'indentation globale de 1,27 cm décale la première ligne des
+%     cellules multi-lignes.
+% =====================================================================
+
 \chapter{Étude de cas : analyse de PromptLock}
 
 \section{Présentation du cas}
 
 \subsection{Contexte et découverte}
 
-Un mois avant la découverte de PromptLock, le CERT-UA (Computer Emergency Response Team d'Ukraine) avait signalé LameHug, un malware attribué au groupe APT28 et propulsé par un LLM, capable de générer à la volée des commandes Windows malveillantes via l'API Hugging Face. Ce premier cas, bien que limité dans sa sophistication, annonçait déjà la bascule documentée quelques semaines plus tard par un cas autrement plus abouti.
+Un mois avant la découverte de PromptLock, le CERT-UA (Computer Emergency Response Team d'Ukraine) signalait LameHug, un malware attribué au groupe APT28 et piloté par un modèle de langage, capable de générer à la volée des commandes Windows malveillantes via l'interface de programmation de Hugging Face. LameHug reste rudimentaire. Il annonce pourtant la bascule qu'un échantillon autrement plus abouti allait documenter quelques semaines plus tard.
 
-Le 27 août 2025, les chercheurs d'ESET annoncent avoir découvert PromptLock, présenté comme le premier \emph{ransomware} propulsé par l'intelligence artificielle générative jamais observé. L'échantillon, classifié \texttt{Filecoder.PromptLock.A}, a été repéré sur la plateforme d'analyse VirusTotal, où deux variantes, l'une pour Windows, l'autre pour Linux, avaient été téléversées. Anton Cherepanov, chercheur à l'origine de la découverte, souligne d'emblée la portée de cette évolution : l'intelligence artificielle, en abaissant la barrière technique nécessaire à la conception de menaces sophistiquées, rend accessible à un attaquant isolé ce qui nécessitait auparavant une équipe de développeurs expérimentés.
+Le 27 août 2025, les chercheurs d'ESET annoncent la découverte de PromptLock, premier \emph{rançongiciel} propulsé par l'intelligence artificielle générative jamais observé. L'échantillon, classifié \texttt{Filecoder.PromptLock.A}, a été repéré sur VirusTotal, où deux variantes avaient été téléversées, l'une pour Windows, l'autre pour Linux. Anton Cherepanov, à l'origine de la découverte, résume l'enjeu : en abaissant la barrière technique nécessaire à la conception de menaces sophistiquées, l'intelligence artificielle rend accessible à un attaquant isolé ce qui demandait auparavant une équipe de développeurs expérimentés.
 
-Quelques jours plus tard, le 3 septembre 2025, ESET est contacté par les auteurs d'une étude académique intitulée \emph{Ransomware 3.0: Self-Composing and LLM-Orchestrated}, menée par une équipe de doctorants et post-doctorants de la NYU Tandon School of Engineering. Le prototype de recherche qu'ils décrivent présente des similitudes frappantes avec les échantillons découverts sur VirusTotal, ce qui conduit ESET à revoir son interprétation initiale : PromptLock ne serait pas un outil opérationnel déployé par un groupe cybercriminel, mais très probablement le fruit de ce projet académique, destiné à illustrer les risques posés par cette nouvelle classe de malwares. ESET maintient toutefois la validité de sa découverte technique, PromptLock demeurant le premier cas connu de ransomware piloté par IA, qu'il s'agisse ou non d'une menace active.
+Le 3 septembre 2025, ESET est contacté par les auteurs d'une étude académique intitulée \emph{Ransomware 3.0: Self-Composing and LLM-Orchestrated}, menée par des doctorants et post-doctorants de la NYU Tandon School of Engineering. Leur prototype ressemble de très près aux échantillons découverts sur VirusTotal. ESET revoit alors son interprétation : PromptLock ne serait pas un outil opérationnel déployé par un groupe cybercriminel, mais le produit de ce projet académique, destiné à illustrer les risques posés par cette nouvelle classe de malwares. L'éditeur maintient la validité de sa découverte technique. Menace active ou non, PromptLock reste le premier cas connu de rançongiciel piloté par un modèle de langage.
 
-PromptLock sera par la suite mentionné, aux côtés d'autres familles de malwares assistés par IA telles que PromptFlux ou PromptSteal, dans le rapport de synthèse \emph{AI Threat Tracker} publié par le Google Threat Intelligence Group (GTIG) en novembre 2025, rapport qui documente, pour sa part, la découverte de menaces distinctes intégrant des LLM directement dans leur boucle d'exécution.
+PromptLock sera repris en novembre 2025 dans le rapport de synthèse \emph{AI Threat Tracker} du Google Threat Intelligence Group (GTIG), aux côtés de PromptFlux et PromptSteal, rapport qui documente pour sa part des menaces distinctes intégrant des modèles de langage directement dans leur boucle d'exécution.
 
-C'est sur l'échantillon documenté par ESET (SHA-256 : \texttt{09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb769c006f}) que porte l'analyse développée dans ce chapitre.
+L'analyse développée dans ce chapitre porte sur l'échantillon documenté par ESET (SHA-256 : \texttt{09bf891b\allowbreak7b35b208\allowbreak1d3ebca8\allowbreak de715da0\allowbreak7a701512\allowbreak27ab55ae\allowbreak c1da26eb\allowbreak769c006f}).
 
 \subsection{Composition et architecture du malware}
 
-L'échantillon analysé est un binaire écrit en langage \textbf{Go} (compilé avec la version \texttt{go1.24.5}), compilé de manière statique, c'est-à-dire qu'il embarque toutes ses dépendances au lieu de les charger depuis le système au moment de l'exécution. La variante étudiée ici cible l'architecture \textbf{ARM64 sous Linux}, tandis qu'ESET rapporte par ailleurs l'existence d'une variante pour Windows, ce qui confirme une volonté de rendre l'outil multiplateforme.
+L'échantillon est un binaire écrit en Go (version \texttt{go1.24.5}) et compilé statiquement : il embarque toutes ses dépendances au lieu de les charger depuis le système au moment de l'exécution. La variante étudiée ici vise l'architecture ARM64 sous Linux ; ESET rapporte l'existence d'une variante Windows, signe d'une volonté de rendre l'outil multiplateforme.
 
-Ce qui distingue PromptLock d'un ransomware classique, c'est qu'il ne contient à aucun moment de routine de chiffrement écrite en dur dans son code. À la place, le binaire embarque un véritable interpréteur du langage Lua, entièrement réécrit en Go (le projet \texttt{gopher-lua}), accompagné de deux extensions qui lui donnent accès au système de fichiers de la machine infectée et aux opérations de manipulation de bits nécessaires pour implémenter l'algorithme de chiffrement SPECK en 128 bits.
+Ce qui distingue PromptLock d'un rançongiciel classique, c'est l'absence de toute routine de chiffrement écrite en dur. À la place, le binaire embarque un interpréteur Lua complet, réécrit en Go (le projet \texttt{gopher-lua}), avec deux extensions qui lui donnent accès au système de fichiers de la machine infectée et aux opérations de manipulation de bits nécessaires à l'algorithme de chiffrement SPECK en 128 bits.
 
-Le fonctionnement du malware repose donc sur un pipeline de génération de code piloté par une intelligence artificielle locale. Le binaire contient des instructions précises, rédigées en langage naturel et codées en dur, qu'il envoie via une requête HTTP à une API compatible avec Ollama, un logiciel permettant de faire tourner des modèles de langage sur sa propre machine. Le modèle interrogé est explicitement nommé dans le binaire : \texttt{gpt-oss:20b}, un modèle ouvert de vingt milliards de paramètres. Six tâches sont exécutées les unes après les autres : reconnaissance des fichiers présents sur la machine, écriture d'un programme de chiffrement, puis rédaction d'une note de rançon. Pour chacune de ces tâches, le modèle génère un script Lua que le malware extrait de sa réponse et exécute directement en mémoire, sans jamais l'écrire sur le disque. Si l'exécution du script échoue, le résultat est renvoyé au modèle sous forme de nouveau prompt, qui corrige et régénère le code jusqu'à un nombre maximal de tentatives.
+Le malware repose donc sur un pipeline de génération de code piloté par une intelligence artificielle locale. Des instructions précises, rédigées en langage naturel et codées en dur dans le binaire, partent en requête HTTP vers une interface de programmation compatible avec Ollama, logiciel qui permet d'exécuter des modèles de langage sur sa propre machine. Le modèle interrogé est nommé explicitement : \texttt{gpt-oss:20b}, un modèle ouvert de vingt milliards de paramètres. Six tâches s'enchaînent : reconnaissance des fichiers présents sur la machine, écriture d'un programme de chiffrement, rédaction d'une note de rançon. Pour chacune, le modèle renvoie un script Lua que le malware extrait de la réponse et exécute directement en mémoire, sans jamais l'écrire sur le disque. Si l'exécution échoue, le résultat repart vers le modèle sous forme de nouveau prompt, qui corrige et régénère le code, jusqu'à un nombre maximal de tentatives.
 
-On peut résumer cette chaîne d'exécution de la façon suivante :
+La chaîne d'exécution se résume ainsi :
 
 \begin{figure}[htbp]
   \centering
@@ -32,40 +59,41 @@ On peut résumer cette chaîne d'exécution de la façon suivante :
   \label{fig:promptlock-chaine-execution}
 \end{figure}
 
-Il est important de noter que le chemin qui mène au chiffrement local via \texttt{main.execSubtasks} n'est pas systématique : il n'est emprunté que si une condition précise est remplie dans le code (un drapeau interne combiné à un test de pointeur nul), ce qui distingue clairement la phase de reconnaissance et d'exfiltration, qui se répète à chaque tâche, de la phase de chiffrement proprement dite, qui dépend de cette condition.
+Le chemin qui mène au chiffrement local via \texttt{main.execSubtasks} n'est pas systématique : il n'est emprunté que si une condition précise est remplie dans le code, un drapeau interne combiné à un test de pointeur nul. La reconnaissance et l'exfiltration se répètent à chaque tâche ; le chiffrement, lui, dépend de cette condition.
 
 \section{Analyse technique de l'échantillon}
 
 \subsection{Analyse statique}
+\label{subsec:analyse-statique}
 
 \subsubsection{Analyse de base}
 
-Le triage initial de l'échantillon commence par le calcul de ses empreintes cryptographiques, c'est-à-dire des sortes d'"empreintes digitales" numériques qui permettent d'identifier ce fichier précis de façon unique et de le retrouver dans des bases de données de menaces connues (VirusTotal, plateformes de threat intelligence, etc.) :
+Le triage commence par le calcul des condensats cryptographiques de l'échantillon, ces empreintes numériques qui identifient un fichier de façon unique et permettent de le retrouver dans les bases de menaces connues (VirusTotal, plateformes de renseignement sur les menaces) :
 
 \begin{itemize}
-    \item Empreinte MD5 : \texttt{806f5520\allowbreak41f211a3\allowbreak5e434112\allowbreak a0165568}
-    \item Empreinte SHA-256 : \texttt{09bf891b\allowbreak7b35b208\allowbreak1d3ebca8\allowbreak de715da0\allowbreak7a701512\allowbreak27ab55ae\allowbreak c1da26eb\allowbreak769c006f}
+    \item Condensat MD5 : \texttt{806f5520\allowbreak41f211a3\allowbreak5e434112\allowbreak a0165568}
+    \item Condensat SHA-256 : \texttt{09bf891b\allowbreak7b35b208\allowbreak1d3ebca8\allowbreak de715da0\allowbreak7a701512\allowbreak27ab55ae\allowbreak c1da26eb\allowbreak769c006f}
 \end{itemize}
 
-Le fichier lui-même se révèle être un exécutable au format ELF 64 bits pour architecture ARM aarch64. Le format ELF (Executable and Linkable Format) est simplement l'équivalent, sous Linux, de ce qu'est un fichier \texttt{.exe} sous Windows : c'est le format standard des programmes exécutables sur ce système. La mention "64 bits" et "ARM aarch64" précise le type de processeur visé par ce programme : il s'agit ici de processeurs ARM 64 bits, la famille de puces que l'on retrouve typiquement dans les smartphones, les objets connectés, ou des petits ordinateurs comme le Raspberry Pi, par opposition aux processeurs x86\_64 que l'on trouve dans la plupart des PC de bureau classiques. Ce choix d'architecture n'est pas anodin : il oriente déjà l'analyse vers l'hypothèse d'une cible de type IoT ou informatique embarquée, hypothèse qui sera confirmée un peu plus loin dans ce chapitre.
+Le fichier est un exécutable au format ELF 64 bits pour architecture ARM aarch64. Le format ELF (Executable and Linkable Format) est, sous Linux, l'équivalent du fichier \texttt{.exe} de Windows : le format standard des programmes exécutables. La mention « ARM aarch64 » désigne le processeur visé, la famille de puces que l'on trouve dans les smartphones, les objets connectés ou de petits ordinateurs comme le Raspberry Pi, par opposition aux x86\_64 des PC de bureau. Le choix n'est pas anodin : il oriente déjà l'analyse vers une cible embarquée, hypothèse confirmée plus loin dans ce chapitre.
 
-Le binaire est ensuite décrit comme lié statiquement (\emph{statically linked}). Concrètement, cela signifie que toutes les bibliothèques logicielles dont le programme a besoin pour fonctionner sont directement intégrées à l'intérieur du fichier exécutable, plutôt que d'être chargées depuis le système au moment du lancement. Pour un attaquant, l'intérêt est évident : le malware peut s'exécuter sur n'importe quelle machine Linux ARM64, même dépourvue des bibliothèques habituellement nécessaires, sans laisser de dépendance à installer et donc sans laisser cette trace supplémentaire.
+Le binaire est ensuite lié statiquement (\emph{statically linked}) : toutes les bibliothèques dont le programme a besoin sont intégrées au fichier exécutable, plutôt que chargées depuis le système au lancement. L'intérêt pour un attaquant est évident. Le malware s'exécute sur n'importe quelle machine Linux ARM64, même dépourvue des bibliothèques habituelles, sans rien installer et donc sans cette trace supplémentaire.
 
-La mention "non-PIE" fait référence à une protection de sécurité appelée PIE (\emph{Position Independent Executable}), qui consiste à charger un programme à une adresse mémoire différente et aléatoire à chaque exécution, rendant plus difficile l'exploitation de certaines vulnérabilités mémoire. Un binaire non-PIE, comme c'est le cas ici, est au contraire chargé systématiquement à la même adresse en mémoire. Ce choix ne relève pas nécessairement d'une intention offensive particulière : il s'agit simplement d'un comportement de compilation courant pour les binaires Go statiquement liés, et qui n'a pas d'incidence directe sur le comportement malveillant du programme.
+La mention « non-PIE » renvoie à une protection appelée PIE (\emph{Position Independent Executable}), qui charge le programme à une adresse mémoire différente et aléatoire à chaque exécution, ce qui complique l'exploitation de certaines vulnérabilités mémoire. Un binaire non-PIE, comme celui-ci, est toujours chargé à la même adresse. Rien d'offensif là-dedans : c'est le comportement de compilation courant des binaires Go statiquement liés, sans incidence sur le comportement malveillant du programme.
 
-Enfin, le binaire est qualifié de \texttt{stripped}, ce qui signifie que sa table des symboles a été retirée. Cette table associe normalement à chaque fonction du programme un nom lisible par un humain (par exemple \texttt{main.invokeLLM}) ; une fois retirée, l'analyste ne voit plus que des adresses mémoire anonymes et doit reconstruire lui-même la signification de chaque fonction, ce qui complique et ralentit le travail de rétro-ingénierie. C'est précisément ce que permet de contourner l'exploitation des métadonnées internes du runtime Go décrite dans la sous-section suivante.
+Le binaire a enfin été dépouillé de sa table des symboles (\emph{stripped}). Cette table associe à chaque fonction un nom lisible par un humain, \texttt{main.invokeLLM} par exemple ; une fois retirée, l'analyste ne voit plus que des adresses mémoire anonymes et doit reconstruire lui-même la signification de chaque fonction, ce qui ralentit la rétro-ingénierie. La sous-section suivante montre comment contourner l'obstacle en exploitant les métadonnées internes de l'environnement d'exécution Go.
 
-À cela s'ajoute l'absence complète de section dite "dynamique" dans le fichier. Cette section est normalement présente dans les exécutables qui chargent des bibliothèques partagées externes au moment de leur lancement ; son absence confirme, indépendamment de l'observation précédente sur la liaison statique, qu'aucune dépendance externe n'est chargée dynamiquement par ce programme. Cette combinaison de caractéristiques (absence de section dynamique, liaison statique, table des symboles retirée) constitue en réalité une signature reconnaissable : c'est très exactement le profil que produit par défaut le compilateur du langage Go lorsqu'il est configuré pour ne dépendre d'aucune bibliothèque système externe, ce qui a permis aux analystes d'identifier rapidement la nature du binaire avant même de commencer le travail de rétro-ingénierie proprement dit.
+S'y ajoute l'absence complète de section dite « dynamique », normalement présente dans les exécutables qui chargent des bibliothèques partagées externes au lancement : aucune dépendance externe n'est donc chargée dynamiquement, ce que la liaison statique laissait déjà supposer. Ces trois caractéristiques réunies, pas de section dynamique, liaison statique, symboles retirés, sont à elles seules une signature. C'est le profil que produit par défaut le compilateur Go lorsqu'il est configuré pour ne dépendre d'aucune bibliothèque système externe, ce qui a permis aux analystes d'identifier la nature du binaire avant même d'entamer la rétro-ingénierie.
 
-La simple extraction des chaînes de caractères présentes dans le binaire suffit déjà à révéler l'essentiel du fonctionnement du malware, sans qu'aucune routine de chiffrement classique ne soit visible en clair dans le code. On y retrouve l'adresse de l'API interrogée par le malware, le nom du modèle \texttt{gpt-oss:20b}, ainsi que des fragments de prompts explicites tels que la phrase demandant d'implémenter l'algorithme SPECK en 128 bits en Lua pur, ou celle réclamant que le code généré soit encadré par des balises \texttt{<code></code>}. Une adresse Bitcoin apparaît également en clair dans le binaire : il s'agit en réalité de l'adresse historique dite \emph{genesis} de Satoshi Nakamoto, ce qui trahit clairement une valeur de test plutôt qu'une véritable adresse de rançon. Enfin, malgré le retrait des symboles, les chemins de compilation d'origine n'ont pas été effacés et pointent vers un dossier nommé \texttt{Ransomware3.0/go-llm-ransom}, appartenant à un utilisateur nommé \texttt{discover}. Le binaire produit également, lors de son exécution, des fichiers journaux locaux dont les noms apparaissent en clair dans les chaînes extraites, comme \texttt{target\_file\_list.log} ou \texttt{note.txt}.
+La simple extraction des chaînes de caractères révèle déjà l'essentiel du fonctionnement, alors qu'aucune routine de chiffrement classique n'apparaît en clair dans le code. On y trouve l'adresse de l'interface interrogée par le malware, le nom du modèle \texttt{gpt-oss:20b} et des fragments de prompts explicites : la phrase demandant d'implémenter SPECK 128 bits en Lua pur, celle réclamant que le code généré soit encadré par des balises \texttt{<code></code>}. Une adresse Bitcoin figure aussi en clair. C'est l'adresse historique dite \emph{genesis} de Satoshi Nakamoto, valeur de test plutôt que véritable adresse de rançon. Malgré le retrait des symboles, les chemins de compilation d'origine subsistent et pointent vers un dossier \texttt{Ransomware3.0/go-llm-ransom}, chez un utilisateur nommé \texttt{discover}. Les noms des fichiers journaux produits à l'exécution apparaissent également dans les chaînes extraites, comme \texttt{target\_file\_list.log} ou \texttt{note.txt}.
 
-Aucune anomalie d'entropie n'a été relevée sur le fichier, ce qui est cohérent avec une compilation Go standard, sans compression ni technique d'empaquetage destinée à dissimuler le contenu du binaire.
+Aucune anomalie d'entropie sur le fichier, ce qui est cohérent avec une compilation Go standard, sans compression ni empaquetage destiné à dissimuler le contenu du binaire.
 
 \subsubsection{Analyse avancée}
 
-Même si la table de symboles a été retirée du binaire, le runtime Go conserve en interne d'autres métadonnées qui permettent de faire correspondre chaque adresse mémoire au nom de la fonction qu'elle représente. En exploitant ces métadonnées à l'aide de l'outil GoReSym, il a été possible de reconstruire l'intégralité de la table des fonctions du programme, ainsi que plusieurs informations injectées lors de la compilation. On retrouve notamment un nom de build faisant explicitement référence à un environnement de test Raspberry Pi, et une adresse IP privée appartenant à la plage réservée aux réseaux locaux, ce qui confirme qu'il s'agit d'un échantillon utilisé en phase de développement plutôt que déployé en conditions réelles. Les dépendances tierces embarquées dans le binaire, à savoir l'interpréteur Lua \texttt{gopher-lua}, l'extension d'accès au système de fichiers \texttt{gopher-lfs} et l'extension d'opérations binaires \texttt{gluabit32}, confirment l'architecture décrite dans la section précédente.
+La table des symboles a beau avoir été retirée, l'environnement d'exécution Go conserve en interne d'autres métadonnées, qui font correspondre chaque adresse mémoire au nom de la fonction qu'elle représente. En les exploitant avec l'outil GoReSym, j'ai reconstruit l'intégralité de la table des fonctions du programme, ainsi que plusieurs informations injectées lors de la compilation : un nom de compilation qui renvoie explicitement à un environnement de test Raspberry Pi, et une adresse IP privée appartenant à la plage réservée aux réseaux locaux. Un échantillon de développement, donc, pas un outil déployé en conditions réelles. Les dépendances tierces embarquées dans le binaire, l'interpréteur Lua \texttt{gopher-lua}, l'extension d'accès au système de fichiers \texttt{gopher-lfs} et l'extension d'opérations binaires \texttt{gluabit32}, confirment l'architecture décrite dans la section précédente.
 
-La reconstruction du graphe d'appel du programme met en évidence l'organisation suivante :
+La reconstruction du graphe d'appel donne l'organisation suivante :
 
 \begin{figure}[htbp]
   \centering
@@ -75,92 +103,100 @@ La reconstruction du graphe d'appel du programme met en évidence l'organisation
   \label{fig:promptlock-graphe-appel}
 \end{figure}
 
-Ce niveau de détail appelle une précision de vocabulaire utile pour la suite du chapitre : un élément dit "confirmé" a été observé directement dans le désassemblage (appel de fonction, référence croisée explicite) ; un élément "confirmé par XREF" repose sur une référence croisée (\emph{cross-reference}) entre deux fonctions, c'est-à-dire la trace laissée dans le code par le fait qu'une fonction en appelle une autre ; un élément "déduit" n'a pas été observé directement mais découle logiquement du comportement environnant (ici, la présence d'un code Lua exploitable juste après la réponse du LLM implique nécessairement une étape d'extraction, même si l'appel exact n'a pas été isolé avec certitude).
+Un mot de vocabulaire, utile pour la suite du chapitre. « Confirmé » signifie observé directement dans le désassemblage : appel de fonction, référence croisée explicite. « Confirmé par XREF » repose sur une référence croisée (\emph{cross-reference}) entre deux fonctions, la trace que laisse dans le code le fait qu'une fonction en appelle une autre. « Déduit » n'a pas été observé directement, mais découle du comportement environnant : la présence d'un code Lua exploitable juste après la réponse du modèle implique une étape d'extraction, même si l'appel exact n'a pas été isolé avec certitude.
 
-Le décompilateur Ghidra, couplé au module d'analyse spécifique au langage Go, a permis d'aller plus loin dans la compréhension du fonctionnement réel de ces fonctions, et de corriger certaines hypothèses posées lors de l'analyse de chaînes. La fonction chargée d'interroger le modèle de langage sérialise le message envoyé au format JSON, puis ajoute systématiquement à la requête un en-tête nommé \texttt{Cookie}, construit par concaténation de plusieurs segments, dont une variable partagée avec le mécanisme d'exfiltration décrit plus loin. La fonction qui construit le prompt de validation confirme que les six tâches du malware, avec l'intégralité de leurs instructions système et de leurs critères de réussite, sont codées en dur directement dans le binaire, et non chargées depuis un fichier de configuration externe comme cela avait d'abord été supposé.
+Le décompilateur Ghidra, couplé au module d'analyse spécifique au langage Go, a permis d'aller plus loin dans la compréhension de ces fonctions et de corriger certaines hypothèses posées lors de l'analyse de chaînes. La fonction qui interroge le modèle de langage sérialise le message envoyé au format JSON, puis ajoute à chaque requête un en-tête \texttt{Cookie}, construit par concaténation de plusieurs segments, dont une variable partagée avec le mécanisme d'exfiltration décrit plus loin. La fonction qui construit le prompt de validation confirme que les six tâches du malware, avec l'intégralité de leurs instructions système et de leurs critères de réussite, sont codées en dur dans le binaire, et non chargées depuis un fichier de configuration externe comme je l'avais d'abord supposé.
 
-La fonction responsable de l'exécution du code généré crée une machine virtuelle Lua vierge, y charge les deux extensions mentionnées plus haut, puis redéfinit la fonction d'affichage standard du langage Lua pour capturer sa sortie dans une variable interne plutôt que de l'écrire sur la sortie standard classique. Le code est ensuite exécuté directement depuis la mémoire, sans qu'aucun fichier \texttt{.lua} intermédiaire ne soit jamais créé sur le disque. C'est un point important pour la suite de ce chapitre, puisqu'il explique pourquoi les approches classiques d'analyse de fichiers passent à côté de cette étape du comportement malveillant.
+La fonction responsable de l'exécution du code généré crée une machine virtuelle Lua vierge, y charge les deux extensions mentionnées plus haut, puis redéfinit la fonction d'affichage standard de Lua pour capturer sa sortie dans une variable interne au lieu de l'écrire sur la sortie standard. Le code s'exécute ensuite directement depuis la mémoire, sans qu'aucun fichier \texttt{.lua} intermédiaire ne soit créé sur le disque. Le point compte pour la suite : il explique pourquoi les approches classiques d'analyse de fichiers passent à côté de cette étape du comportement malveillant.
 
-L'examen de la fonction principale du programme apporte plusieurs révélations notables. D'abord, la clé de session utilisée pour le chiffrement, longue de seize octets soit cent vingt huit bits, est affichée en clair sur la sortie standard du programme au moment de son exécution, ce qui la rend directement récupérable dans les journaux d'exécution du malware, indépendamment de la solidité du chiffrement RSA appliqué par ailleurs pour la protéger. Ensuite, le champ nommé \texttt{session\_key}, envoyé lors de l'exfiltration des fichiers, ne correspond en réalité pas à cette clé de chiffrement, mais à un simple identifiant d'instance construit à partir du nom de build repéré plus haut.
+La fonction principale réserve deux surprises. La clé de session utilisée pour le chiffrement, seize octets soit cent vingt-huit bits, est affichée en clair sur la sortie standard au moment de l'exécution : elle est donc directement récupérable dans les journaux, quelle que soit la solidité du chiffrement RSA censé la protéger. Et le champ \texttt{session\_key}, envoyé lors de l'exfiltration des fichiers, ne contient pas cette clé, mais un simple identifiant d'instance construit à partir du nom de compilation repéré plus haut.
 
-L'exfiltration elle-même se produit à l'intérieur de la boucle exécutée pour chacune des six tâches : la fonction dont le nom laissait supposer une sauvegarde locale des fichiers avant modification (\texttt{main.backupFiles}) ne réalise en fait aucune sauvegarde. Elle lit la liste des fichiers ciblés par la tâche en cours et appelle, pour chacun d'eux, la fonction \texttt{main.uploadSingleFile}, qui envoie le fichier vers un serveur distant via une requête HTTP classique de type formulaire, avec la vérification du certificat de sécurité vraisemblablement désactivée.
+L'exfiltration se produit à l'intérieur de la boucle exécutée pour chacune des six tâches. La fonction \texttt{main.backupFiles}, dont le nom laissait supposer une sauvegarde locale des fichiers avant modification, ne sauvegarde rien : elle lit la liste des fichiers ciblés par la tâche en cours et appelle, pour chacun, \texttt{main.uploadSingleFile}, qui envoie le fichier vers un serveur distant par une requête HTTP de type formulaire, avec la vérification du certificat vraisemblablement désactivée.
 
-Le chiffrement proprement dit, lui, n'est pas systématique à chaque tâche : il n'intervient que lorsqu'une condition précise est remplie dans le code (repérée sous la forme d'un drapeau interne combiné à un test de pointeur nul), qui déclenche l'appel à \texttt{main.execSubtasks}. Cette fonction relit la liste des tâches, puis invoque \texttt{main.runDecryptorGenTask}, laquelle appelle à son tour \texttt{main.rsaEncrypt} pour chiffrer la clé de session. Ce chiffrement utilise très précisément l'algorithme \textbf{RSA avec une clé de 1024 bits et un exposant public standard de 65537}, une taille de clé aujourd'hui considérée comme insuffisante au regard des standards de sécurité actuels, qui recommandent au minimum 2048 bits pour RSA. Contrairement à ce que l'on pourrait attendre d'un ransomware classique, le résultat de cette opération n'est pas transmis vers l'extérieur mais \textbf{écrit localement sur la machine de la victime}, via un appel direct à la fonction d'écriture de fichier du langage Go. On obtient ainsi un scénario en deux temps bien distincts : une exfiltration systématique des fichiers ciblés à chaque tâche, suivie, sous condition, d'un chiffrement dont le résultat reste local plutôt que d'être renvoyé vers l'attaquant.
+Le chiffrement, lui, n'intervient qu'à la condition évoquée plus haut, ce drapeau interne combiné à un test de pointeur nul, qui déclenche l'appel à \texttt{main.execSubtasks}. Cette fonction relit la liste des tâches, puis invoque \texttt{main.runDecryptorGenTask}, laquelle appelle \texttt{main.rsaEncrypt} pour chiffrer la clé de session. Le chiffrement utilise RSA avec une clé de 1024 bits et l'exposant public standard 65537, taille aujourd'hui insuffisante au regard des standards actuels, qui recommandent 2048 bits au minimum. Contre toute attente pour un rançongiciel, le résultat n'est pas transmis vers l'extérieur mais \textbf{écrit localement sur la machine de la victime}, par un appel direct à la fonction d'écriture de fichier de Go. Le scénario se joue donc en deux temps : exfiltration systématique des fichiers ciblés à chaque tâche, puis, sous condition, un chiffrement dont le résultat reste sur place.
 
-Cette clé de session RSA étant reconstruite à partir de grands nombres exprimés en hexadécimal plutôt qu'à partir d'une clé publique au format habituel, cela explique pourquoi aucune chaîne de type \texttt{"BEGIN PUBLIC KEY"} n'a pu être retrouvée par une simple recherche de motifs dans les chaînes du binaire lors de l'analyse de base.
+La clé publique RSA est reconstruite à partir de grands nombres exprimés en hexadécimal, et non depuis une clé au format habituel. D'où l'absence de chaîne \texttt{"BEGIN PUBLIC KEY"} lors de la recherche de motifs menée pendant l'analyse de base.
 
-Plusieurs indices convergent enfin vers une hypothèse d'attribution assez claire. Les chemins de compilation embarqués dans le binaire, le nom de build faisant référence à un Raspberry Pi, l'adresse IP privée utilisée comme serveur, et l'adresse Bitcoin factice identifiée plus haut, forment un faisceau cohérent en faveur d'un échantillon de recherche ou de preuve de concept, plutôt que d'un outil réellement déployé dans une campagne active. Cette hypothèse rejoint celle évoquée dans la section précédente, selon laquelle PromptLock serait très probablement issu du projet académique mené à la NYU Tandon School of Engineering.
+Plusieurs indices convergent enfin vers une attribution : les chemins de compilation embarqués, le nom de compilation qui renvoie à un Raspberry Pi, l'adresse IP privée utilisée comme serveur, l'adresse Bitcoin factice. Le faisceau plaide pour un échantillon de recherche ou une preuve de concept, pas pour un outil déployé dans une campagne active. Il rejoint l'hypothèse évoquée plus haut d'un travail issu de la NYU Tandon School of Engineering.
 
 \subsection{Analyse dynamique}
+\label{subsec:analyse-dynamique}
 
-Les hypothèses posées lors de l'analyse statique ont ensuite été confrontées à une exécution contrôlée de l'échantillon en laboratoire isolé, ce qui a permis d'en confirmer une grande partie et d'en corriger certaines.
+J'ai ensuite confronté les hypothèses de l'analyse statique à une exécution contrôlée de l'échantillon en laboratoire isolé. La plupart ont tenu, quelques-unes ont dû être corrigées.
 
 \subsubsection{Environnement de laboratoire}
 
-L'échantillon étant un binaire ELF ARM64 lié statiquement, deux machines virtuelles VirtualBox ont été mises en place et reliées par un segment réseau strictement isolé :
+L'échantillon étant un binaire ELF ARM64 lié statiquement, j'ai monté deux machines virtuelles VirtualBox, reliées par un segment réseau strictement isolé :
 
 \begin{itemize}
-    \item une VM \textbf{Kali Linux} (x86\_64), chargée d'héberger le sample et les outils de télémétrie. L'exécution d'un binaire ARM64 sur une machine x86\_64 a été rendue possible par émulation transparente à l'aide de \texttt{qemu-user}, qui enregistre automatiquement l'interpréteur ARM64 auprès du noyau dès qu'un exécutable portant la signature ELF aarch64 est lancé ;
-    \item une VM \textbf{REMnux}, hébergeant INetSim afin de simuler les services réseau attendus par le malware (DNS, HTTP/HTTPS) sans jamais exposer l'échantillon à une infrastructure réelle.
+    \item Kali Linux (x86\_64) héberge l'échantillon et les outils de télémétrie. Exécuter un binaire ARM64 sur une machine x86\_64 est rendu possible par émulation transparente à l'aide de \texttt{qemu-user}, qui enregistre automatiquement l'interpréteur ARM64 auprès du noyau dès qu'un exécutable portant la signature ELF aarch64 est lancé ;
+    \item REMnux héberge INetSim, qui simule les services réseau attendus par le malware (DNS, HTTP/HTTPS) sans jamais l'exposer à une infrastructure réelle.
 \end{itemize}
 
-Les deux machines ont été reliées par un adaptateur de type \emph{réseau interne}, c'est-à-dire un segment virtuel totalement coupé de la machine hôte et d'Internet, par opposition au mode \emph{host-only} qui conserve un accès à l'hôte. Le DNS de Kali a été pointé explicitement vers REMnux, qui répond à toute résolution via INetSim, et l'isolation a été vérifiée avant chaque lancement du sample en constatant qu'une requête vers une adresse publique échoue systématiquement depuis les deux machines.
+Les deux machines communiquent par un adaptateur de type \emph{réseau interne}, un segment virtuel totalement coupé de la machine hôte et d'Internet, à la différence du mode \emph{host-only} qui conserve un accès à l'hôte. Le DNS de Kali pointe explicitement vers REMnux, qui répond à toute résolution via INetSim. Avant chaque lancement de l'échantillon, j'ai vérifié l'isolation en constatant qu'une requête vers une adresse publique échoue depuis les deux machines.
 
-Comme l'adresse du serveur LLM est codée en dur à la compilation (\texttt{192.168.1.1}, une adresse privée), il n'a pas été nécessaire de modifier le binaire pour intercepter son trafic : un alias IP correspondant à cette adresse a simplement été ajouté sur l'interface réseau de REMnux, complété par une route statique équivalente côté Kali. Cette approche, plus simple qu'une redirection NAT, a permis de capturer l'intégralité du trafic destiné au C2 sans toucher à l'échantillon.
+L'adresse du serveur de modèle étant codée en dur à la compilation (\texttt{192.168.1.1}, une adresse privée), inutile de modifier le binaire pour intercepter son trafic : un alias IP correspondant sur l'interface réseau de REMnux, une route statique équivalente côté Kali, et tout le trafic destiné au serveur de commande et contrôle est capturé sans toucher à l'échantillon. Plus simple qu'une redirection NAT.
 
-\subsubsection{Simulation de l'API LLM et premières observations}
+\subsubsection{Simulation de l'interface de programmation du modèle et premières observations}
 
-INetSim a été configuré pour répondre à toute requête HTTPS par une réponse JSON statique. La détermination du format exact attendu par le malware s'est faite de façon empirique, en observant ses propres messages d'erreur : un premier essai au format natif d'Ollama a échoué au moment du décodage JSON, avant qu'un second essai ne révèle, via le message \texttt{"LLM returned no choices"}, que le format réellement attendu correspond à celui de l'API OpenAI, c'est-à-dire un champ \texttt{choices[0].message.content} — cohérent avec le chemin \texttt{/v1/chat/completions} déjà repéré en statique. Une réponse fixe contenant un code Lua de test (\texttt{print("test execution successful")}) a ensuite été servie à chaque requête.
+INetSim répond d'abord à toute requête HTTPS par une réponse JSON statique. J'ai déterminé le format exact attendu par le malware de façon empirique, en lisant ses propres messages d'erreur : un premier essai au format natif d'Ollama échoue au moment du décodage JSON ; un second révèle, via le message \texttt{"LLM returned no choices"}, que le format attendu est celui de l'interface OpenAI, avec un champ \texttt{choices[0].message.content}, cohérent avec le chemin \texttt{/v1/chat/completions} déjà repéré en statique. J'ai ensuite servi à chaque requête une réponse fixe contenant un code Lua de test (\texttt{print("test execution successful")}).
 
-Cette première exécution contrôlée, bien que reposant sur une réponse figée et donc incapable de déclencher le comportement différencié attendu à chaque tâche, a permis de confirmer un nombre substantiel d'éléments déduits de l'analyse statique :
+Cette première exécution repose sur une réponse figée, incapable donc de déclencher le comportement différencié attendu à chaque tâche. Elle confirme malgré tout une bonne part de ce que l'analyse statique avait déduit :
 
 \begin{itemize}
-    \item les six tâches portent effectivement les noms \texttt{probe}, \texttt{scan}, \texttt{target}, \texttt{extract}, \texttt{decide} et \texttt{note}, ce qui confirme la structure à six étapes déduite du désassemblage de \texttt{main.main} ;
-    \item la clé de session est bien affichée en clair sur la sortie standard à chaque lancement, au format \texttt{"Hex key: <32 caractères hexadécimaux>"} ;
-    \item l'identifiant d'instance suit le format \texttt{"Runtime Instance: rpi\_env2\_linux\_<horodatage>"}, confirmant qu'il s'agit bien d'un identifiant de machine et non d'une clé cryptographique ;
-    \item le moteur Lua embarqué exécute réellement le code renvoyé par le LLM, la sortie capturée via la redéfinition de \texttt{print} apparaissant telle quelle dans les journaux ;
-    \item la boucle de validation fonctionne concrètement : un échec de validation entraîne une nouvelle itération avec un prompt de feedback intégrant le code précédemment généré ;
-    \item les fichiers \texttt{scan.log}, \texttt{payloads.txt} et \texttt{note.txt} sont bien produits par le malware lui-même en cours d'exécution, tandis que deux fichiers, \texttt{sysinfo} et \texttt{payloads.txt}, sont en réalité attendus \emph{en entrée} dans le répertoire de travail dès le lancement ;
-    \item la tâche \texttt{decide} pilote la sélection d'une sous-tâche via \texttt{main.execSubtasks} en utilisant la réponse du LLM comme un identifiant (vraisemblablement \texttt{encrypt}, \texttt{exfiltrate} ou \texttt{destroy}) plutôt que comme du code exécutable, ce que confirme l'échec attendu de recherche de sous-tâche observé avec la réponse de test utilisée.
+    \item les six tâches portent bien les noms \texttt{probe}, \texttt{scan}, \texttt{target}, \texttt{extract}, \texttt{decide} et \texttt{note}, ce qui valide la structure à six étapes déduite du désassemblage de \texttt{main.main} ;
+    \item la clé de session s'affiche en clair sur la sortie standard à chaque lancement, au format \texttt{"Hex key: <32 caractères hexadécimaux>"} ;
+    \item l'identifiant d'instance suit le format \texttt{"Runtime Instance: rpi\_env2\_linux\_<horodatage>"} : il s'agit bien d'un identifiant de machine, pas d'une clé cryptographique ;
+    \item le moteur Lua embarqué exécute réellement le code renvoyé par le modèle, la sortie capturée par la redéfinition de \texttt{print} apparaissant telle quelle dans les journaux ;
+    \item la boucle de validation fonctionne : un échec entraîne une nouvelle itération, avec un prompt de correction qui reprend le code précédemment généré ;
+    \item les fichiers \texttt{scan.log}, \texttt{payloads.txt} et \texttt{note.txt} sont bien produits par le malware en cours d'exécution, tandis que deux fichiers, \texttt{sysinfo} et \texttt{payloads.txt}, sont en réalité attendus \emph{en entrée} dans le répertoire de travail dès le lancement ;
+    \item la tâche \texttt{decide} pilote la sélection d'une sous-tâche via \texttt{main.execSubtasks} en traitant la réponse du modèle comme un identifiant (vraisemblablement \texttt{encrypt}, \texttt{exfiltrate} ou \texttt{destroy}) et non comme du code exécutable ; l'échec de recherche de sous-tâche observé avec la réponse de test le confirme.
 \end{itemize}
 
 \subsubsection{Test avec un modèle de langage réel}
+\label{subsubsec:test-llm-reel}
 
-Une seconde phase a consisté à remplacer la réponse JSON statique par un véritable modèle de langage exécuté localement via Ollama, afin d'observer le pipeline face à un LLM réel plutôt qu'à une réponse figée. Le binaire référence explicitement le modèle \texttt{gpt-oss:20b}, dont l'exécution nécessite typiquement 16 Go de RAM ou plus ; la VM de laboratoire ne disposant que de 4 Go, un modèle nettement plus modeste, \texttt{qwen2.5:0.5b}, a été substitué. Cette substitution dégrade la qualité du code généré mais n'affecte pas la validité de l'observation du pipeline logiciel lui-même, qui dépend du comportement du malware et non de la capacité du modèle interrogé.
+La seconde phase remplace la réponse JSON statique par un véritable modèle de langage exécuté localement via Ollama, pour observer le pipeline face à un modèle réel plutôt qu'à une réponse figée. Le binaire référence \texttt{gpt-oss:20b}, dont l'exécution demande 16 Go de RAM ou plus ; la machine de laboratoire n'en a que 4. J'ai donc substitué un modèle nettement plus modeste, \texttt{qwen2.5:0.5b}. La substitution dégrade la qualité du code généré, mais pas la validité de l'observation : ce que j'observe est le pipeline logiciel, qui dépend du comportement du malware et non de la capacité du modèle interrogé.
 
-Un proxy HTTPS développé pour l'occasion a remplacé INetSim sur le port 8443 : il reçoit la requête du malware, réécrit le champ \texttt{model} pour cibler \texttt{qwen2.5:0.5b}, puis relaie la requête vers l'API OpenAI-compatible native d'Ollama en local, sans qu'aucune reformulation de la réponse ne soit nécessaire.
+Un relais HTTPS écrit pour l'occasion remplace INetSim sur le port 8443. Il reçoit la requête du malware, réécrit le champ \texttt{model} pour cibler \texttt{qwen2.5:0.5b}, puis la transmet à l'interface OpenAI-compatible native d'Ollama, en local, sans avoir à reformuler la réponse.
 
-Ce test a permis plusieurs découvertes qui n'étaient pas accessibles lors du premier passage :
+Ce second passage donne trois éléments que le premier ne pouvait pas donner :
 
 \begin{itemize}
-    \item un second endpoint HTTP a été observé, distinct de celui de génération de code : \texttt{POST /backup/scripts}. La requête, d'environ 3~ko et ne correspondant pas au format JSON attendu par le proxy, est cohérente avec le format \texttt{multipart/form-data} identifié en désassemblage pour \texttt{main.uploadSingleFile} ; il s'agit très vraisemblablement de l'endpoint d'exfiltration, point resté non résolu jusque-là ;
-    \item le délai avant abandon du client HTTP du malware a pu être estimé empiriquement à environ 166 à 170 secondes ;
-    \item une génération de code Lua réelle par un modèle de langage a été observée de bout en bout : le code produit par \texttt{qwen2.5:0.5b} pour la tâche \texttt{probe} a été transmis à l'interpréteur Lua embarqué, dont l'exécution a échoué avec une erreur de syntaxe. Cette erreur a été correctement réinjectée dans le prompt de feedback, confirmant en conditions réelles la boucle de correction itérative décrite plus haut.
+    \item un second point de terminaison HTTP, distinct de celui de génération de code : \texttt{POST /backup/scripts}. La requête, d'environ 3~ko, ne correspond pas au format JSON attendu par le relais et rejoint le format \texttt{multipart/form-data} identifié en désassemblage pour \texttt{main.uploadSingleFile}. C'est très vraisemblablement la route d'exfiltration, restée introuvable jusque-là ;
+    \item le délai avant abandon du client HTTP du malware, estimé empiriquement entre 166 et 170 secondes ;
+    \item une génération de code Lua par un modèle réel, observée de bout en bout : le code produit par \texttt{qwen2.5:0.5b} pour la tâche \texttt{probe} part vers l'interpréteur Lua embarqué, dont l'exécution échoue sur une erreur de syntaxe. L'erreur est correctement réinjectée dans le prompt de correction. La boucle itérative décrite plus haut fonctionne donc en conditions réelles.
 \end{itemize}
 
-Une anomalie a par ailleurs été relevée : lors d'une itération où la validation était pourtant remontée comme réussie, le pipeline a poursuivi son exécution vers une itération supplémentaire au lieu de clore la tâche. Deux hypothèses restent ouvertes pour l'expliquer — un critère de validation composite non satisfait en parallèle, ou une continuation systématique indépendante du résultat de validation — qui nécessiteraient un examen plus approfondi du désassemblage de \texttt{main.execTask}.
+J'ai relevé une anomalie. Lors d'une itération où la validation remontait pourtant comme réussie, le pipeline a poursuivi vers une itération supplémentaire au lieu de clore la tâche. Deux explications restent ouvertes : un critère de validation composite non satisfait en parallèle, ou une continuation systématique indépendante du résultat de validation. Trancher demanderait un examen plus poussé du désassemblage de \texttt{main.execTask}.
 
-Enfin, aucune tâche n'a abouti à un chiffrement de fichier observable au cours de ce test : le modèle utilisé, quarante fois plus petit que celui visé par le malware, n'a produit aucun code Lua syntaxiquement valide dans le délai imparti pour les prompts les plus complexes, notamment l'implémentation de SPECK en Lua pur. Cette limite illustre une contrainte opérationnelle réelle du malware — l'infrastructure qu'il attend est significativement plus capable que celle du laboratoire — plutôt qu'un défaut de méthodologie. Un modèle intermédiaire ou une infrastructure plus généreuse en ressources constituerait la prochaine étape logique pour observer un chiffrement SPECK réellement fonctionnel de bout en bout.
+Aucune tâche n'a abouti à un chiffrement de fichier observable au cours de ce test. Le modèle utilisé, quarante fois plus petit que celui visé par le malware, n'a produit aucun code Lua syntaxiquement valide dans le délai imparti sur les prompts les plus complexes, à commencer par l'implémentation de SPECK en Lua pur. La limite est celle du laboratoire, pas celle de la méthode : le malware attend une infrastructure sensiblement plus capable. Un modèle intermédiaire, ou une machine mieux dotée, serait la prochaine étape pour observer un chiffrement SPECK fonctionnel de bout en bout.
 
 \section{Outils de détection développés}
 
 \subsection{Règle YARA}
 
-La détection proposée ici ne cherche pas à identifier le code Lua généré par le modèle de langage, puisque celui-ci varie par construction d'un échantillon à l'autre. Elle cible plutôt l'enveloppe qui pilote sa génération, c'est-à-dire le binaire Go lui-même, dont l'empreinte reste stable : le nom du modèle utilisé, des fragments de prompts codés en dur, et les bibliothèques Lua embarquées. C'est précisément ce que souligne Anton Cherepanov lorsqu'il présente la découverte de PromptLock : même lorsque la charge finale est composée dynamiquement par une intelligence artificielle, le programme qui orchestre cette génération conserve des marqueurs stables et détectables.
+La détection proposée ici ne vise pas le code Lua généré par le modèle de langage, qui varie par construction d'une exécution à l'autre. Elle vise l'enveloppe qui pilote cette génération, le binaire Go lui-même, dont l'empreinte reste stable : le nom du modèle utilisé, les fragments de prompts codés en dur, les bibliothèques Lua embarquées. C'est le point que soulève Anton Cherepanov en présentant sa découverte. La charge finale a beau être composée dynamiquement par une intelligence artificielle, le programme qui orchestre cette génération, lui, laisse des marqueurs stables et détectables.
 
-\begin{verbatim}
+% Le style codestyle de la classe active déjà breaklines : les lignes
+% longues sont coupées au lieu de déborder. La chaîne "reference" a été
+% scindée en deux champs pour rester lisible.
+\begin{lstlisting}[caption={Règle YARA ciblant l'enveloppe Go de PromptLock},
+                   label={lst:yara-promptlock}]
 rule Filecoder_PromptLock_A
 {
     meta:
-        description = "Detecte le wrapper Go de PromptLock (Filecoder.PromptLock.A)"
-        author       = "GOHAUT Renan"
-        reference    = "ESET - Filecoder.PromptLock.A (SHA-256: 09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb769c006f)"
-        date         = "2025"
+        description = "Detecte l'enveloppe Go de PromptLock"
+        family      = "Filecoder.PromptLock.A"
+        author      = "GOHAUT Renan"
+        reference   = "ESET - Filecoder.PromptLock.A"
+        hash        = "09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb769c006f"
+        date        = "2025"
 
     strings:
         $model      = "gpt-oss:20b" ascii
         $ollama_api = "/ollama/v1/chat/completions" ascii
-        $prompt_1   = "Implement the SPECK 128bit encryption algorithm in ECB mode in pure Lua" ascii
+        $prompt_1   = "Implement the SPECK 128bit encryption algorithm" ascii
         $prompt_2   = "Please provide Lua code wrapped in <code></code> tags" ascii
         $lua_dep    = "yuin/gopher-lua" ascii
         $lfs_dep    = "layeh.com/gopher-lfs" ascii
@@ -175,245 +211,379 @@ rule Filecoder_PromptLock_A
         ( $ollama_api or 1 of ($prompt_*) ) and
         2 of ($lua_dep, $lfs_dep, $bit32_dep, $log_1)
 }
-\end{verbatim}
+\end{lstlisting}
 
-Cette règle repose volontairement sur une combinaison de plusieurs chaînes de caractères plutôt que sur un seul marqueur, afin de limiter le risque de faux positifs sur d'autres binaires Go qui embarqueraient également l'interpréteur \texttt{gopher-lua} pour un usage tout à fait légitime, par exemple du scripting applicatif. Un test contre un corpus de binaires bénins reste néanmoins nécessaire pour valider en conditions réelles le taux de faux positifs de cette règle.
+La règle repose volontairement sur une combinaison de chaînes plutôt que sur un marqueur unique, pour limiter les faux positifs sur d'autres binaires Go qui embarqueraient \texttt{gopher-lua} à des fins parfaitement légitimes, l'écriture de scripts applicatifs par exemple. Reste qu'un test contre un corpus de binaires bénins est nécessaire pour mesurer ce taux de faux positifs en conditions réelles.
 
 \subsection{Règles Sigma}
 
-Une règle YARA, aussi solide soit-elle, ne couvre qu'une partie du problème : elle détecte le binaire orchestrateur au repos, sur disque ou à l'écriture, mais ne dit rien du comportement observé une fois le programme lancé. Les résultats de l'analyse dynamique ont permis de dériver un second jeu de règles, au format Sigma, ciblant cette fois les traces laissées dans les journaux système, applicatifs et réseau. Aucune de ces deux couches n'est suffisante prise isolément : le contenu généré par le LLM étant polymorphe par construction, la détection doit reposer sur les invariants du mécanisme — l'enveloppe — plutôt que sur le contenu variable qu'il produit.
+Une règle YARA, aussi solide soit-elle, ne couvre qu'une moitié du problème : elle détecte le binaire orchestrateur au repos, sur disque ou à l'écriture, et ne dit rien du comportement observé une fois le programme lancé. Les résultats de l'analyse dynamique m'ont permis de dériver un second jeu de règles, au format Sigma, qui vise cette fois les traces laissées dans les journaux système, applicatifs et réseau. Ni l'une ni l'autre de ces couches ne suffit seule. Le contenu généré par le modèle étant polymorphe par construction, la détection doit porter sur les invariants du mécanisme, l'enveloppe, et non sur le contenu variable qu'il produit.
 
 \begin{itemize}
-    \item \textbf{Création séquentielle des artefacts du pipeline} (confiance moyenne) : détecte l'apparition des fichiers \texttt{scan.log}, \texttt{payloads.txt}, \texttt{note.txt}, \texttt{target\_file\_list.log}, \texttt{target\_file\_info.log} et \texttt{target\_file\_summary.log}, des noms peu susceptibles d'être générés par une application légitime standard et confirmés en laboratoire comme produits par le malware lui-même.
-    \item \textbf{Fuite de la clé de session en clair} (confiance haute) : recherche le motif \texttt{"Hex key:"} ou \texttt{"Runtime Instance:"} dans la sortie standard collectée des processus. C'est la règle la plus fiable du jeu, cette chaîne exacte étant extrêmement peu susceptible d'apparaître dans un contexte légitime — à condition toutefois que l'environnement de journalisation capture effectivement la sortie standard des processus, ce qui n'est pas le cas par défaut de nombreuses configurations.
-    \item \textbf{Connexions HTTPS répétées vers un port non standard} (confiance moyenne) : déclenche un seuil au-delà de cinq connexions vers le port 8443 en cinq minutes, cohérent avec le pattern observé de six tâches pouvant chacune itérer jusqu'à huit fois.
-    \item \textbf{Corrélation entre lancement d'exécutable et rafale réseau} (confiance moyenne) : corrèle temporellement le démarrage d'un binaire ELF avec l'ouverture rapprochée de plusieurs connexions TLS sortantes ; son efficacité dépend du support des corrélations temporelles par le backend Sigma utilisé.
-    \item \textbf{Processus enfant \texttt{curl}} (confiance faible) : s'appuie sur le mécanisme de repli identifié dans les prompts codés en dur, qui instruit le LLM sur la conduite à tenir si \texttt{curl} n'est pas disponible. Volontairement classée en confiance basse, cette règle sert de renfort de corroboration plutôt que de détection autonome, \texttt{curl} étant un outil légitime omniprésent.
+    \item \textbf{Création séquentielle des artefacts du pipeline} (confiance moyenne) : détecte l'apparition des fichiers \texttt{scan.log}, \texttt{payloads.txt}, \texttt{note.txt}, \texttt{target\_file\_list.log}, \texttt{target\_file\_info.log} et \texttt{target\_file\_summary.log}. Des noms qu'une application légitime standard a peu de raisons de produire, et que le laboratoire a confirmés comme venant du malware lui-même.
+    \item \textbf{Fuite de la clé de session en clair} (confiance haute) : recherche le motif \texttt{"Hex key:"} ou \texttt{"Runtime Instance:"} dans la sortie standard collectée des processus. La règle la plus fiable du jeu, cette chaîne exacte ayant peu de chances d'apparaître dans un contexte légitime. Encore faut-il que l'environnement de journalisation capture la sortie standard des processus, ce que beaucoup de configurations ne font pas par défaut.
+    \item \textbf{Connexions HTTPS répétées vers un port non standard} (confiance moyenne) : déclenche un seuil au-delà de cinq connexions vers le port 8443 en cinq minutes, cohérent avec le schéma observé de six tâches pouvant chacune itérer jusqu'à huit fois.
+    \item \textbf{Corrélation entre lancement d'exécutable et rafale réseau} (confiance moyenne) : corrèle temporellement le démarrage d'un binaire ELF avec l'ouverture rapprochée de plusieurs connexions TLS sortantes. Son efficacité dépend de la prise en charge des corrélations temporelles par le moteur de conversion Sigma employé.
+    \item \textbf{Processus enfant \texttt{curl}} (confiance faible) : s'appuie sur le mécanisme de repli identifié dans les prompts codés en dur, qui indique au modèle la conduite à tenir si \texttt{curl} n'est pas disponible. Classée volontairement en confiance basse, puisque \texttt{curl} est un outil légitime omniprésent : la règle sert de corroboration, pas de détection autonome.
 \end{itemize}
 
 \subsection{Plugin Volatility3}
 
-Dans le cadre d'un projet de groupe mené au sein de nos cours, nous avons développé un plugin pour le framework Volatility 3, orienté vers la détection de traces d'intelligences artificielles locales en mémoire vive. Ce projet a été l'occasion de faire converger deux axes de travail : d'une part les enseignements dispensés en analyse forensique mémoire, et d'autre part les travaux menés dans le cadre de ma thèse portant sur l'analyse du ransomware PromptLock, qui exploite des modèles de langage locaux pour générer dynamiquement une partie de son comportement malveillant.
+Dans le cadre d'un projet de groupe mené au sein de nos cours, nous avons développé un plugin pour Volatility 3, orienté vers la détection en mémoire vive des traces d'intelligences artificielles locales. Le projet fait converger deux axes de travail : d'un côté les enseignements dispensés en analyse forensique mémoire, de l'autre les travaux menés pour ce mémoire sur PromptLock, rançongiciel qui exploite des modèles de langage locaux pour générer une partie de son comportement malveillant.
 
-Ce rapprochement a permis de concevoir un outil, nommé LlmFinder, répondant à un besoin concret identifié durant l'analyse de PromptLock : la difficulté, en réponse à incident, de mettre en évidence qu'un LLM local tel qu'Ollama, LM Studio, GPT4All, Jan ou llama.cpp a été utilisé sur une machine compromise, alors même que ce type d'usage laisse peu de traces disque persistantes et n'est couvert par aucun des plugins Volatility 3 existants.
+L'outil, nommé LlmFinder, répond à un besoin repéré pendant l'analyse : en réponse à incident, il est difficile de montrer qu'un modèle de langage local a été exécuté sur une machine compromise, que ce soit par Ollama, LM Studio, GPT4All, Jan ou llama.cpp. Ce type d'usage laisse peu de traces disque persistantes, et aucun plugin Volatility 3 existant ne le couvre.
 
-L'émergence de menaces s'appuyant sur des modèles de langage exécutés localement, à l'image de PromptLock, change en effet la donne pour l'investigation numérique. La logique malveillante n'est plus figée dans un binaire, mais générée à la volée par un LLM interrogé en local, ce qui limite fortement l'intérêt des approches classiques d'analyse statique et de détection par signature de fichier.
+Les menaces qui s'appuient sur des modèles exécutés localement, à l'image de PromptLock, changent la donne pour l'investigation numérique. La logique malveillante n'est plus figée dans un binaire : elle est générée à la volée par un modèle interrogé en local, ce qui réduit fortement le rendement de l'analyse statique et de la détection par signature de fichier.
 
-Dans ce contexte, la mémoire vive devient une source de preuve particulièrement précieuse, car elle peut conserver, au moment de l'acquisition, des éléments qui n'existent jamais sous forme persistante sur le disque : le prompt envoyé au modèle, la réponse générée, l'endpoint local interrogé, ou encore le processus ayant servi d'interface avec le LLM. LlmFinder a été conçu pour exploiter cette fenêtre d'observation et fournir à l'analyste en réponse à incident des indices exploitables rapidement lors d'une investigation.
+La mémoire vive devient alors la source de preuve principale. Elle peut conserver, au moment de l'acquisition, ce qui n'existe jamais sous forme persistante sur le disque : le prompt envoyé au modèle, la réponse générée, le point de terminaison local interrogé, le processus qui a servi d'interface. LlmFinder exploite cette fenêtre d'observation pour donner à l'analyste des indices utilisables rapidement.
 
-Le plugin structure ses résultats autour de quatre axes complémentaires, pensés pour couvrir l'ensemble de la chaîne d'usage d'un LLM local sur un système compromis. Le premier concerne les processus, avec l'identification de ceux associés à des applications d'IA locale connues, ce qui permet de confirmer la présence effective d'un moteur de génération sur la machine analysée. Le second concerne les modèles eux-mêmes, à travers la détection de chemins de modèles présents en mémoire, donnant une indication sur ceux réellement chargés et utilisés au moment de la compromission. Le troisième axe porte sur le réseau, en mettant en évidence les endpoints locaux liés aux API d'intelligence artificielle, ce qui révèle des communications internes entre un processus tiers et le moteur LLM, souvent caractéristiques d'une utilisation programmatique plutôt qu'interactive. Le dernier axe, enfin, concerne l'extraction des prompts eux-mêmes, qu'ils aient été soumis via une interface graphique, une API locale ou un terminal, ce qui constitue l'élément de preuve le plus directement exploitable pour reconstituer l'intention et le comportement du code malveillant.
+Le plugin structure ses résultats sur quatre axes, qui suivent la chaîne d'usage d'un modèle local sur un système compromis. Les processus d'abord, avec l'identification de ceux qui correspondent à des applications d'intelligence artificielle locale connues, ce qui établit la présence d'un moteur de génération sur la machine analysée. Les modèles ensuite, par la détection en mémoire de chemins de modèles, qui indiquent lesquels étaient réellement chargés au moment de la compromission. Le réseau, avec les points de terminaison locaux liés aux interfaces de programmation d'intelligence artificielle : des communications internes entre un processus tiers et le moteur de génération signalent souvent un usage programmatique plutôt qu'interactif. Les prompts enfin, qu'ils aient été soumis par une interface graphique, une interface de programmation locale ou un terminal. C'est la pièce la plus directement exploitable pour reconstituer l'intention et le comportement du code malveillant.
 
-L'articulation de ces quatre familles d'informations permet de reconstituer, à partir d'une simple image mémoire, une chaîne cohérente : quel processus a sollicité quel modèle, via quel canal, avec quel contenu. Cette approche transversale est particulièrement adaptée à l'analyse de menaces de type PromptLock, où la preuve de compromission ne réside pas dans un artefact statique mais dans l'interaction dynamique entre un binaire et un LLM local.
+Mises bout à bout, ces quatre familles d'informations reconstituent une chaîne cohérente à partir d'une simple image mémoire : quel processus a sollicité quel modèle, par quel canal, avec quel contenu. L'approche convient bien aux menaces de type PromptLock, où la preuve de compromission ne réside pas dans un artefact statique mais dans l'interaction dynamique entre un binaire et un modèle local.
 
-Il faut néanmoins souligner que LlmFinder fournit des indices forensiques et non des conclusions automatiques. Il ne doit pas être utilisé seul pour affirmer qu'une action malveillante a eu lieu : les résultats qu'il produit doivent systématiquement être corrélés avec d'autres artefacts, tels que la timeline des événements, les processus en cours, les fichiers présents et les connexions réseau, puis replacés dans le contexte global de l'investigation.
+LlmFinder fournit des indices forensiques, pas des conclusions automatiques. Il ne suffit pas à établir qu'une action malveillante a eu lieu : ses résultats doivent être corrélés avec les autres artefacts, chronologie des événements, processus en cours, fichiers présents, connexions réseau, puis replacés dans le contexte global de l'investigation.
 
-\subsection{Indices de Compromission}
+\subsection{Indices de compromission}
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Catégorie} & \textbf{Indicateur} & \textbf{Commentaire} \\
-\hline
-Hash & \texttt{09bf891b...c006f} (SHA-256) & Échantillon ELF ARM64 analysé (ESET) \\
-\hline
-Hash & \texttt{806f552041f21...0165568} (MD5) & \\
-\hline
-Fichier hôte & \texttt{target\_file\_list.log} & Liste des fichiers cibles (reconnaissance) \\
-\hline
-Fichier hôte & \texttt{target\_file\_info.log} & \\
-\hline
-Fichier hôte & \texttt{target\_file\_summary.log} & \\
-\hline
-Fichier hôte & \texttt{scan.log} & \\
-\hline
-Fichier hôte & \texttt{note.txt} & Note de rançon générée par le LLM \\
-\hline
-Chemin de build & \texttt{/home/discover/Ransomware3.0/go-llm-ransom/} & Indice d'attribution (PoC de recherche) \\
-\hline
-Réseau & \texttt{<serverIP>:8443/ollama/v1/chat/completions} & Port non standard (Ollama par défaut : 11434) \\
-\hline
-Rançon & \texttt{1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa} & Adresse Bitcoin genesis, placeholder non opérationnel \\
-\hline
-Processus/Modèle & \texttt{gpt-oss:20b} & Modèle LLM invoqué via l'API Ollama-compatible \\
-\hline
-Logs & \texttt{"Hex key: \%s"} & Clé de session affichée en clair sur stdout \\
-\hline
-\end{tabular}
-\caption{Indices de compromission identifiés lors de l'analyse statique de PromptLock}
+% ---------------------------------------------------------------------
+% TABLE — Indices de compromission (analyse statique)
+% ---------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \small
+  \setlength{\parindent}{0pt}
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.25}
+  \caption{Indices de compromission identifiés lors de l'analyse statique de PromptLock}
+  \label{tab:ioc-statique}
+  \begin{tabularx}{\linewidth}{@{}
+      >{\RaggedRight\arraybackslash}p{2.4cm}
+      >{\ttfamily\RaggedRight\arraybackslash}p{4.4cm}
+      >{\RaggedRight\arraybackslash}X @{}}
+    \toprule
+    \textbf{Catégorie} & \normalfont\bfseries Indicateur & \textbf{Commentaire} \\
+    \midrule
+    \multirow{2}{2.4cm}{Condensat}
+      & 09bf891b\allowbreak\ldots c006f \normalfont(SHA-256)
+      & Échantillon ELF ARM64 analysé (ESET) \\
+      & 806f5520\allowbreak41f21\allowbreak\ldots 0165568 \normalfont(MD5)
+      & Même échantillon \\
+    \addlinespace
+    \multirow{4}{2.4cm}{Fichier hôte}
+      & target\_file\_list.log      & Liste des fichiers cibles (reconnaissance) \\
+      & target\_file\_info.log      & Métadonnées des fichiers ciblés \\
+      & target\_file\_summary.log   & Synthèse produite en fin de tâche \\
+      & scan.log                    & Journal de la tâche \texttt{scan} \\
+    \addlinespace
+    Fichier hôte
+      & note.txt                    & Note de rançon générée par le modèle \\
+    \addlinespace
+    Chemin de compilation
+      & /home/discover/\allowbreak Ransomware3.0/\allowbreak go-llm-ransom/
+      & Indice d'attribution (preuve de concept de recherche) \\
+    \addlinespace
+    Réseau
+      & <serverIP>:8443/\allowbreak ollama/v1/\allowbreak chat/completions
+      & Port non standard (Ollama par défaut : 11434) \\
+    \addlinespace
+    Rançon
+      & 1A1zP1eP5QGefi2\allowbreak DMPTfTL5SLmv7\allowbreak DivfNa
+      & Adresse Bitcoin \emph{genesis}, valeur de remplacement non opérationnelle \\
+    \addlinespace
+    Processus / Modèle
+      & gpt-oss:20b
+      & Modèle invoqué via l'interface compatible Ollama \\
+    \addlinespace
+    Journaux
+      & "Hex key: \%s"
+      & Clé de session affichée en clair sur la sortie standard \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
-Ce tableau illustre bien la remarque d'Anton Cherepanov évoquée en introduction de ce chapitre. Le code Lua exécuté varie certes d'une exécution à l'autre puisqu'il est régénéré par le modèle de langage à chaque fois, mais l'enveloppe qui l'orchestre, à savoir le nom du modèle, l'adresse de l'API, les artefacts de journalisation et les chemins de compilation, conserve une empreinte statique constante. C'est précisément cette empreinte qui rend possible la détection du malware, indépendamment du polymorphisme introduit par la génération de code assistée par intelligence artificielle.
+Le tableau donne raison à la remarque d'Anton Cherepanov citée plus haut. Le code Lua exécuté varie d'une exécution à l'autre, puisque le modèle le régénère à chaque fois. L'enveloppe qui l'orchestre, elle, garde une empreinte statique constante : nom du modèle, adresse de l'interface, artefacts de journalisation, chemins de compilation. C'est cette empreinte qui rend la détection possible, malgré le polymorphisme qu'introduit la génération de code assistée.
 
-L'analyse dynamique a permis de compléter ce tableau par des indicateurs réseau supplémentaires, absents de l'analyse statique seule :
+L'analyse dynamique a complété ce tableau par des indicateurs réseau que l'analyse statique seule ne donnait pas :
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|l|l|}
-\hline
-\textbf{Catégorie} & \textbf{Indicateur} & \textbf{Contexte / confiance} \\
-\hline
-Port & 8443/TCP (HTTPS) & Confirmé statique et dynamique ; non standard (Ollama par défaut : 11434) \\
-\hline
-Endpoint & \texttt{POST /ollama/v1/chat/completions} & Génération de code, confirmé dynamique \\
-\hline
-Endpoint & \texttt{POST /backup/scripts} & Exfiltration, \texttt{multipart/form-data}, confirmé dynamique \\
-\hline
-Champ multipart & \texttt{session\_key} & Identifiant d'instance, pas la clé de chiffrement \\
-\hline
-Champ multipart & \texttt{file} & Contenu du fichier exfiltré \\
-\hline
-Comportement & Timeout client HTTP $\approx$ 166--170~s & Mesuré empiriquement, non extrait du désassemblage \\
-\hline
-Format requête & JSON compatible OpenAI (\texttt{model}, \texttt{messages[]}) & \\
-\hline
-Format réponse & \texttt{choices[0].message.content} & Déduit du message d'erreur \texttt{"LLM returned no choices"} \\
-\hline
-\end{tabular}
-\caption{Indicateurs réseau complémentaires confirmés lors de l'analyse dynamique}
+% ---------------------------------------------------------------------
+% TABLE — Indicateurs réseau (analyse dynamique)
+% ---------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \small
+  \setlength{\parindent}{0pt}
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.25}
+  \caption{Indicateurs réseau complémentaires confirmés lors de l'analyse dynamique}
+  \label{tab:ioc-dynamique}
+  \begin{tabularx}{\linewidth}{@{}
+      >{\RaggedRight\arraybackslash}p{2.4cm}
+      >{\ttfamily\RaggedRight\arraybackslash}p{4.4cm}
+      >{\RaggedRight\arraybackslash}X @{}}
+    \toprule
+    \textbf{Catégorie} & \normalfont\bfseries Indicateur & \textbf{Contexte / confiance} \\
+    \midrule
+    Port
+      & \normalfont 8443/TCP (HTTPS)
+      & Confirmé en statique et en dynamique ; non standard (Ollama par défaut : 11434) \\
+    \addlinespace
+    \multirow{2}{2.4cm}{Point de terminaison}
+      & POST /ollama/v1/\allowbreak chat/completions
+      & Génération de code, confirmé en dynamique \\
+      & POST /backup/scripts
+      & Exfiltration, \texttt{multipart/form-data}, confirmé en dynamique \\
+    \addlinespace
+    \multirow{2}{2.4cm}{Champ multipart}
+      & session\_key
+      & Identifiant d'instance, et non la clé de chiffrement \\
+      & file
+      & Contenu du fichier exfiltré \\
+    \addlinespace
+    Comportement
+      & \normalfont Délai d'expiration du client HTTP $\approx$ 166--170~s
+      & Mesuré empiriquement, non extrait du désassemblage \\
+    \addlinespace
+    Format requête
+      & \normalfont JSON compatible OpenAI (\texttt{model}, \texttt{messages[]})
+      & Confirmé en dynamique \\
+    \addlinespace
+    Format réponse
+      & choices[0].\allowbreak message.content
+      & Déduit du message d'erreur \texttt{"LLM returned no choices"} \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
-\noindent Il faut souligner que l'adresse IP \texttt{192.168.1.1} est injectée à la compilation et propre à cet échantillon particulier : elle ne doit pas être généralisée à d'éventuelles autres variantes, qui pourraient être compilées avec une adresse ou un nom de domaine différent. Les chemins d'endpoint et le format d'échange JSON, en revanche, sont susceptibles d'être plus stables entre variantes puisqu'ils sont liés au code source plutôt qu'aux paramètres de compilation.
+\noindent L'adresse IP \texttt{192.168.1.1} est injectée à la compilation et propre à cet échantillon. Elle ne se généralise pas à d'éventuelles variantes, qui pourraient être compilées avec une autre adresse ou un nom de domaine. Les chemins de terminaison et le format d'échange JSON, en revanche, devraient être plus stables d'une variante à l'autre, puisqu'ils tiennent au code source et non aux paramètres de compilation.
 
 \subsection{Cartographie MITRE ATT\&CK}
+\label{subsec:attack}
 
-Les techniques observées ou déduites de l'analyse ont été classées selon le référentiel MITRE ATT\&CK, avec un niveau de confiance indiquant si la technique a été confirmée dynamiquement (D), déduite du seul désassemblage statique (S), ou les deux (S+D).
+J'ai classé les techniques observées ou déduites selon le référentiel MITRE ATT\&CK, avec un niveau de confiance : confirmée dynamiquement (D), déduite du seul désassemblage statique (S), ou les deux (S+D).
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|l|p{6cm}|l|}
-\hline
-\textbf{Tactique} & \textbf{Technique} & \textbf{Description} & \textbf{Conf.} \\
-\hline
-Execution & T1059 & Exécution de code Lua généré dynamiquement via l'interpréteur \texttt{gopher-lua} embarqué & S+D \\
-\hline
-Defense Evasion & T1027 & Binaire Go compilé statiquement et partiellement strippé ; logique malveillante générée à l'exécution plutôt qu'écrite en dur, rendant la signature de contenu peu pertinente & S \\
-\hline
-Discovery & T1082 & Collecte d'informations système (tâche \texttt{probe}, fichier \texttt{sysinfo}) & S+D \\
-\hline
-Discovery & T1083 & Énumération de fichiers et répertoires via le module \texttt{lfs} exposé à Lua (tâche \texttt{scan}) & S+D \\
-\hline
-Collection & T1005 & Lecture du contenu de fichiers locaux pour analyse (tâches \texttt{extract}/\texttt{decide}) & S \\
-\hline
-Command and Control & T1071.001 & Communication HTTPS applicative vers l'API LLM (port 8443, \texttt{/ollama/v1/chat/completions}) & S+D \\
-\hline
-Exfiltration & T1041 & Upload des fichiers cibles vers le serveur distant (\texttt{POST /backup/scripts}) avant tout chiffrement, logique de double extorsion & S+D \\
-\hline
-Impact & T1486 & Chiffrement des fichiers cibles via un chiffreur SPECK 128 bits généré dynamiquement en Lua & S (non observé fonctionnel en dynamique) \\
-\hline
-Impact & T1657 & Génération d'une note de rançon adaptée au contexte via un prompt dédié & S+D \\
-\hline
-Persistence & --- & Aucun mécanisme de persistance identifié dans les fonctions analysées & Non confirmé (couverture partielle) \\
-\hline
-\end{tabular}
-\caption{Cartographie des techniques observées ou déduites selon le référentiel MITRE ATT\&CK}
+% ---------------------------------------------------------------------
+% TABLE — Cartographie MITRE ATT&CK
+% La colonne "Conf." ne contient plus que le code : les réserves passent
+% en notes sous le tableau. C'est ce qui faisait déborder la version
+% précédente. T1027 est affinée en T1027.014, cf. section 2.3.6.4.
+% ---------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \small
+  \setlength{\parindent}{0pt}
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.25}
+  \caption{Cartographie des techniques observées ou déduites selon le référentiel
+           MITRE ATT\&CK}
+  \label{tab:attack}
+  \begin{tabularx}{\linewidth}{@{}
+      >{\RaggedRight\arraybackslash}p{2.7cm}
+      >{\ttfamily\RaggedRight\arraybackslash}p{1.9cm}
+      >{\RaggedRight\arraybackslash}X
+      >{\centering\arraybackslash}p{1.1cm} @{}}
+    \toprule
+    \textbf{Tactique} & \normalfont\bfseries Technique & \textbf{Description} & \textbf{Conf.} \\
+    \midrule
+    Execution
+      & T1059
+      & Exécution de code Lua généré dynamiquement via l'interpréteur
+        \texttt{gopher-lua} embarqué
+      & S+D \\
+    \addlinespace
+    Defense Evasion
+      & T1027.014
+      & Binaire Go compilé statiquement et partiellement dépouillé de ses
+        symboles ; logique malveillante générée à l'exécution plutôt qu'écrite
+        en dur (\emph{Polymorphic Code}), ce qui rend la signature de contenu
+        peu pertinente
+      & S \\
+    \addlinespace
+    Discovery
+      & T1082
+      & Collecte d'informations système (tâche \texttt{probe}, fichier
+        \texttt{sysinfo})
+      & S+D \\
+    Discovery
+      & T1083
+      & Énumération de fichiers et répertoires via le module \texttt{lfs}
+        exposé à Lua (tâche \texttt{scan})
+      & S+D \\
+    \addlinespace
+    Collection
+      & T1005
+      & Lecture du contenu de fichiers locaux pour analyse
+        (tâches \texttt{extract} / \texttt{decide})
+      & S \\
+    \addlinespace
+    Command and Control
+      & T1071.001
+      & Communication HTTPS applicative vers l'interface du modèle
+        (port 8443, \texttt{/ollama/v1/chat/completions})
+      & S+D \\
+    \addlinespace
+    Exfiltration
+      & T1041
+      & Téléversement des fichiers cibles vers le serveur distant
+        (\texttt{POST /backup/scripts}) avant tout chiffrement, logique de
+        double extorsion
+      & S+D \\
+    \addlinespace
+    Impact
+      & T1486
+      & Chiffrement des fichiers cibles via un chiffreur SPECK 128 bits
+        généré dynamiquement en Lua
+      & S\textsuperscript{a} \\
+    Impact
+      & T1657
+      & Génération d'une note de rançon adaptée au contexte via un prompt dédié
+      & S+D \\
+    \addlinespace
+    Persistence
+      & \normalfont---
+      & Aucun mécanisme de persistance identifié dans les fonctions analysées
+      & ---\textsuperscript{b} \\
+    \bottomrule
+  \end{tabularx}
+
+  \vspace{2pt}
+  {\footnotesize\RaggedRight
+   S : déduit du désassemblage statique \textbullet{} D : confirmé dynamiquement
+   \textbullet{} S+D : les deux.\\
+   \textsuperscript{a} Chaîne reconstituée en statique, non observée fonctionnelle
+   en laboratoire (cf.\ section~\ref{subsubsec:test-llm-reel}).\\
+   \textsuperscript{b} Couverture partielle du désassemblage : l'absence n'est pas
+   établie.\par}
 \end{table}
 
-L'absence de technique de persistance documentée reflète ici une limite de couverture de l'analyse — certaines fonctions n'ont pas été intégralement désassemblées — plutôt qu'une conclusion négative définitivement établie ; ce point mériterait d'être vérifié explicitement si une couverture exhaustive du binaire venait à être requise.
-
-% --- Modification suggérée dans la table ATT&CK ci-dessus ---
-% Ligne "Defense Evasion" : remplacer T1027 par T1027.014, cf. justification en 2.3.6
-% Defense Evasion & T1027.014 & Binaire Go compilé statiquement et partiellement strippé ;
-% logique malveillante générée à l'exécution plutôt qu'écrite en dur (Polymorphic Code),
-% rendant la signature de contenu peu pertinente & S \\
+L'absence de technique de persistance traduit une limite de couverture : certaines fonctions n'ont pas été intégralement désassemblées. Ce n'est pas un résultat négatif établi, et le point mériterait une vérification explicite si une couverture exhaustive du binaire devenait nécessaire.
 
 \subsection{Cartographie MITRE ATLAS}
 
-Publié par MITRE sur le même modèle structurel qu'ATT\&CK, le référentiel \textbf{ATLAS}
-(\textit{Adversarial Threat Landscape for Artificial-Intelligence Systems}) documente,
-à travers quatorze tactiques et des techniques identifiées par le préfixe \texttt{AML.T},
-les surfaces d'attaque propres aux systèmes d'intelligence artificielle : jeux de données
-d'entraînement, poids des modèles, API d'inférence, espaces d'embedding. Sa pertinence
-pour ce mémoire est immédiate : PromptLock ne se contente pas d'être \textit{développé}
-à l'aide d'une IA, il en interroge une \textit{au cours de son exécution même}, ce qui
-invite à vérifier si ATLAS en capture le comportement plus finement qu'ATT\&CK.
+Publié par MITRE sur le même modèle structurel qu'ATT\&CK, le référentiel ATLAS
+(\textit{Adversarial Threat Landscape for Artificial-Intelligence Systems}) documente les
+surfaces d'attaque propres aux systèmes d'intelligence artificielle, à travers quatorze
+tactiques et des techniques préfixées \texttt{AML.T} : jeux de données d'entraînement,
+poids des modèles, interfaces d'inférence, espaces de représentation vectorielle.
+PromptLock interroge un modèle pendant son exécution même, et pas seulement pendant son
+développement. Reste à savoir si ATLAS décrit ce comportement plus finement qu'ATT\&CK.
 
 \subsubsection{Techniques applicables}
 
 Deux techniques ATLAS se rattachent directement au comportement observé lors de
-l'analyse statique et dynamique (sections 2.2.1 et 2.2.2) :
+l'analyse statique et dynamique (sections~\ref{subsec:analyse-statique}
+et~\ref{subsec:analyse-dynamique}) :
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|l|p{6cm}|}
-\hline
-\textbf{Tactique} & \textbf{Technique} & \textbf{Application à PromptLock} \\
-\hline
-ML Model Access (\texttt{AML.TA0000}) & \texttt{AML.T0040} --- AI Model Inference API Access &
-Interrogation systématique de l'API compatible Ollama (\texttt{/ollama/v1/chat/completions})
-pour chacune des six tâches \\
-\hline
-Execution (\texttt{AML.TA0005}) & \texttt{AML.T0050} --- Command and Scripting Interpreter &
-Transformation directe de la sortie du modèle en code Lua exécuté par l'interpréteur
-embarqué \\
-\hline
-\end{tabular}
-\caption{Techniques MITRE ATLAS applicables à PromptLock}
+% ---------------------------------------------------------------------
+% TABLE — Techniques MITRE ATLAS
+% ---------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \small
+  \setlength{\parindent}{0pt}
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.25}
+  \caption{Techniques MITRE ATLAS applicables à PromptLock}
+  \label{tab:atlas}
+  \begin{tabularx}{\linewidth}{@{}
+      >{\RaggedRight\arraybackslash}p{3.0cm}
+      >{\RaggedRight\arraybackslash}p{4.2cm}
+      >{\RaggedRight\arraybackslash}X @{}}
+    \toprule
+    \textbf{Tactique} & \textbf{Technique} & \textbf{Application à PromptLock} \\
+    \midrule
+    ML Model Access\newline\texttt{AML.TA0000}
+      & \texttt{AML.T0040}\newline AI Model Inference API Access
+      & Interrogation systématique de l'interface compatible Ollama
+        (\texttt{/ollama/v1/\allowbreak chat/completions}) pour chacune des six
+        tâches \\
+    \addlinespace
+    Execution\newline\texttt{AML.TA0005}
+      & \texttt{AML.T0050}\newline Command and Scripting Interpreter
+      & Transformation directe de la sortie du modèle en code Lua exécuté par
+        l'interpréteur embarqué \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
 \subsubsection{Une limite de couverture révélée plutôt que comblée}
 
-Au-delà de ces deux correspondances, la tentative de cartographie complète se heurte
-à une limite structurelle du référentiel : la quasi-totalité des techniques ATLAS suppose
-un scénario où le système d'IA constitue la \textit{cible} de l'attaque --- extraction de
-modèle par requêtes répétées, empoisonnement de données d'entraînement, contournement
-par prompt injection d'un modèle tiers. Le cas de PromptLock est inverse : le modèle de
-langage n'est pas attaqué, il est \textit{instrumentalisé} comme ressource légitime au
-service d'un autre objectif malveillant, au même titre qu'un malware pourrait s'appuyer
-sur une API cloud publique sans en exploiter de faille.
+Au-delà de ces deux correspondances, la cartographie bute sur une limite structurelle du
+référentiel. La quasi-totalité des techniques ATLAS suppose que le système d'intelligence
+artificielle est la \textit{cible} de l'attaque : extraction de modèle par requêtes
+répétées, empoisonnement des données d'entraînement, contournement d'un modèle tiers par
+injection de prompt. Avec PromptLock, c'est l'inverse. Le modèle n'est pas attaqué, il est
+\textit{instrumentalisé} comme ressource légitime au service d'un autre objectif
+malveillant, au même titre qu'un malware s'appuierait sur un service en ligne légitime
+sans en exploiter la moindre faille.
 
 Ce constat n'est pas isolé. Le rapport \textit{AI Threat Tracker} de novembre 2025 du
-Google Threat Intelligence Group (GTIG), qui documente pourtant PromptFlux et PromptSteal
---- deux familles reposant sur le même principe d'appel à un LLM en cours d'exécution ---
-ne les cartographie pas sur ATLAS, mais sur des sous-techniques ATT\&CK précises :
+Google Threat Intelligence Group (GTIG) documente PromptFlux et PromptSteal, deux familles
+fondées sur le même principe d'appel à un modèle de langage en cours d'exécution, et ne
+les cartographie pourtant pas sur ATLAS. Il retient des sous-techniques ATT\&CK précises :
 \texttt{T1027.014} (\textit{Polymorphic Code}) pour la réécriture dynamique de PromptFlux,
-et \texttt{T1027.016} (\textit{Junk Code Insertion}) pour ses motifs de code leurre. Ce
-choix, fait par l'équipe même à l'origine de la découverte de ces menaces, confirme
-empiriquement que le référentiel ATLAS, dans son état actuel, ne propose pas encore de
-vocabulaire dédié à ce schéma précis de « logiciel malveillant utilisant une IA comme
-composant d'exécution », par opposition à son cœur de cible historique, le « système
-d'IA en tant que victime ».
+\texttt{T1027.016} (\textit{Junk Code Insertion}) pour ses motifs de code leurre. Le choix
+vient de l'équipe même qui a découvert ces menaces, ce qui vaut confirmation empirique :
+ATLAS, en l'état, n'offre pas de vocabulaire pour ce schéma précis, le « logiciel
+malveillant qui utilise une intelligence artificielle comme composant d'exécution », par
+opposition à son cœur de cible historique, le « système d'intelligence artificielle en
+tant que victime ».
 
 \subsubsection{Analyse comparative}
 
-Les deux référentiels s'avèrent en réalité complémentaires plutôt que concurrents,
-chacun modélisant une couche distincte de la même chaîne d'attaque.
+Les deux référentiels sont complémentaires plutôt que concurrents : chacun modélise une
+couche distincte de la même chaîne d'attaque.
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|l|p{5cm}|p{5cm}|}
-\hline
-\textbf{Critère} & \textbf{MITRE ATT\&CK} & \textbf{MITRE ATLAS} \\
-\hline
-Objet modélisé & Le comportement de l'attaquant, indépendamment de l'outillage utilisé &
-La surface d'attaque propre aux systèmes d'IA \\
-\hline
-Pertinence pour PromptLock & Élevée --- couvre l'intégralité de la chaîne (section 2.3.5) &
-Partielle --- seules deux techniques s'appliquent (accès API, exécution de commandes) \\
-\hline
-Cas d'usage idéal & Malware générique, y compris à composant IA &
-Attaque \textit{contre} un modèle (extraction, empoisonnement, jailbreak) \\
-\hline
-Limite observée & Aucune sous-technique dédiée à la génération de code par LLM au
-moment de la rédaction & Absence de technique couvrant l'IA comme \textit{outil}
-plutôt que comme \textit{cible} \\
-\hline
-\end{tabular}
-\caption{Analyse comparative ATT\&CK / ATLAS appliquée à PromptLock}
+% ---------------------------------------------------------------------
+% TABLE — Analyse comparative ATT&CK / ATLAS
+% ---------------------------------------------------------------------
+\begin{table}[htbp]
+  \centering
+  \small
+  \setlength{\parindent}{0pt}
+  \setlength{\tabcolsep}{5pt}
+  \renewcommand{\arraystretch}{1.25}
+  \caption{Analyse comparative ATT\&CK / ATLAS appliquée à PromptLock}
+  \label{tab:attack-vs-atlas}
+  \begin{tabularx}{\linewidth}{@{}
+      >{\RaggedRight\arraybackslash}p{3.1cm}
+      >{\RaggedRight\arraybackslash}X
+      >{\RaggedRight\arraybackslash}X @{}}
+    \toprule
+    \textbf{Critère} & \textbf{MITRE ATT\&CK} & \textbf{MITRE ATLAS} \\
+    \midrule
+    Objet modélisé
+      & Le comportement de l'attaquant, indépendamment de l'outillage utilisé
+      & La surface d'attaque propre aux systèmes d'intelligence artificielle \\
+    \addlinespace
+    Pertinence pour PromptLock
+      & Élevée : couvre l'intégralité de la chaîne (table~\ref{tab:attack})
+      & Partielle : seules deux techniques s'appliquent (accès à l'interface
+        d'inférence, exécution de commandes) \\
+    \addlinespace
+    Cas d'usage idéal
+      & Malware générique, y compris à composant d'intelligence artificielle
+      & Attaque \textit{contre} un modèle (extraction, empoisonnement,
+        contournement des garde-fous) \\
+    \addlinespace
+    Limite observée
+      & Aucune sous-technique dédiée à la génération de code par modèle de
+        langage au moment de la rédaction
+      & Absence de technique couvrant l'intelligence artificielle comme
+        \textit{outil} plutôt que comme \textit{cible} \\
+    \bottomrule
+  \end{tabularx}
 \end{table}
 
 \subsubsection{Conséquence pour la cartographie ATT\&CK}
 
-Cette comparaison invite à affiner la technique \texttt{T1027} (Defense Evasion) déjà
-recensée en table 2.3 : le comportement observé --- code malveillant généré à l'exécution
-plutôt qu'écrit en dur --- correspond plus précisément à la sous-technique
-\texttt{T1027.014} (\textit{Polymorphic Code}), reprenant ainsi la même classification
-que celle retenue par le GTIG pour PromptFlux et renforçant la cohérence de cette
-cartographie avec la littérature de référence.
+D'où une correction apportée à la table~\ref{tab:attack}. La technique \texttt{T1027}
+(Defense Evasion) gagne à être affinée en \texttt{T1027.014} (\textit{Polymorphic Code}) :
+le comportement observé, du code malveillant généré à l'exécution plutôt qu'écrit en dur,
+correspond à cette sous-technique, et c'est la classification que le GTIG a retenue pour
+PromptFlux.
 
-En définitive, l'exercice de cartographie ATLAS constitue moins un enrichissement direct
-de la table d'indicateurs qu'un résultat méthodologique à part entière : il objective, à
-partir d'un cas concret, un angle mort documenté du référentiel face à cette classe
-émergente de menaces --- angle mort que seule l'évolution future d'ATLAS, ou
-l'introduction de nouvelles sous-techniques ATT\&CK dédiées à la génération de code par
-LLM, permettrait de combler.
+La cartographie ATLAS n'enrichit donc pas la table d'indicateurs. Elle produit autre
+chose, un résultat méthodologique : la mesure, à partir d'un cas concret, d'un angle mort
+du référentiel face à cette classe émergente de menaces. Seule une évolution d'ATLAS, ou
+de nouvelles sous-techniques ATT\&CK consacrées à la génération de code par modèle de
+langage, le comblerait.
