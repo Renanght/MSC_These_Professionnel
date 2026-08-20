@@ -41,22 +41,22 @@
 \contentsline {section}{\numberline {2.1}Présentation du cas}{15}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Contexte et découverte}{15}{subsection.2.1.1}%
 \contentsline {subsection}{\numberline {2.1.2}Composition et architecture du malware}{15}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}Analyse technique de l'échantillon}{16}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Analyse technique de l'échantillon}{17}{section.2.2}%
 \contentsline {subsection}{\numberline {2.2.1}Analyse statique}{17}{subsection.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.1.1}Analyse de base}{17}{subsubsection.2.2.1.1}%
 \contentsline {subsubsection}{\numberline {2.2.1.2}Analyse avancée}{18}{subsubsection.2.2.1.2}%
 \contentsline {subsection}{\numberline {2.2.2}Analyse dynamique}{20}{subsection.2.2.2}%
 \contentsline {subsubsection}{\numberline {2.2.2.1}Environnement de laboratoire}{20}{subsubsection.2.2.2.1}%
 \contentsline {subsubsection}{\numberline {2.2.2.2}Simulation de l'interface de programmation du modèle et premières observations}{21}{subsubsection.2.2.2.2}%
-\contentsline {subsubsection}{\numberline {2.2.2.3}Test avec un modèle de langage réel}{22}{subsubsection.2.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.2.3}Test avec un modèle de langage réel}{21}{subsubsection.2.2.2.3}%
 \contentsline {section}{\numberline {2.3}Outils de détection développés}{22}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}Règle YARA}{22}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Règles Sigma}{23}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}Plugin Volatility3: LlmFinder}{23}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.3}Plugin Volatility 3 : LlmFinder}{23}{subsection.2.3.3}%
 \contentsline {subsection}{\numberline {2.3.4}Indices de compromission}{25}{subsection.2.3.4}%
 \contentsline {subsection}{\numberline {2.3.5}Cartographie MITRE ATT\&CK}{26}{subsection.2.3.5}%
 \contentsline {subsection}{\numberline {2.3.6}Cartographie MITRE ATLAS}{26}{subsection.2.3.6}%
-\contentsline {subsubsection}{\numberline {2.3.6.1}Techniques applicables}{28}{subsubsection.2.3.6.1}%
+\contentsline {subsubsection}{\numberline {2.3.6.1}Techniques applicables}{26}{subsubsection.2.3.6.1}%
 \contentsline {subsubsection}{\numberline {2.3.6.2}Une limite de couverture révélée plutôt que comblée}{28}{subsubsection.2.3.6.2}%
 \contentsline {subsubsection}{\numberline {2.3.6.3}Analyse comparative}{28}{subsubsection.2.3.6.3}%
 \contentsline {subsubsection}{\numberline {2.3.6.4}Conséquence pour la cartographie ATT\&CK}{28}{subsubsection.2.3.6.4}%

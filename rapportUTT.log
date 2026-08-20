@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  20 AUG 2026 22:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  20 AUG 2026 23:13
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2201,10 +2201,10 @@ Chapitre 2.
 <assets/img/fig_promptlock_chaine_execution.jpg, id=325, 491.436pt x 715.473pt>
 File: assets/img/fig_promptlock_chaine_execution.jpg Graphic file (type jpg)
 <use assets/img/fig_promptlock_chaine_execution.jpg>
-Package pdftex.def Info: assets/img/fig_promptlock_chaine_execution.jpg  used on input line 56.
+Package pdftex.def Info: assets/img/fig_promptlock_chaine_execution.jpg  used on input line 54.
 (pdftex.def)             Requested size: 192.45413pt x 280.19861pt.
  [16 <./assets/img/fig_promptlock_chaine_execution.jpg>]
-Overfull \hbox (17.60316pt too wide) in paragraph at lines 75--76
+Overfull \hbox (17.60316pt too wide) in paragraph at lines 73--74
 []\T1/lmr/m/n/10.95 (-20) Condensat SHA-256 : \T1/lmtt/m/n/10.95 09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb
  []
 
@@ -2212,39 +2212,39 @@ Overfull \hbox (17.60316pt too wide) in paragraph at lines 75--76
 <assets/img/fig_promptlock_graphe_appel_annote.jpg, id=338, 491.436pt x 946.737pt>
 File: assets/img/fig_promptlock_graphe_appel_annote.jpg Graphic file (type jpg)
 <use assets/img/fig_promptlock_graphe_appel_annote.jpg>
-Package pdftex.def Info: assets/img/fig_promptlock_graphe_appel_annote.jpg  used on input line 100.
-(pdftex.def)             Requested size: 309.0889pt x 595.4507pt.
+Package pdftex.def Info: assets/img/fig_promptlock_graphe_appel_annote.jpg  used on input line 96.
+(pdftex.def)             Requested size: 147.11122pt x 283.40211pt.
  [18] [19 <./assets/img/fig_promptlock_graphe_appel_annote.jpg>] [20]
-Overfull \hbox (37.59248pt too wide) in paragraph at lines 149--150
+Overfull \hbox (37.59248pt too wide) in paragraph at lines 151--152
 []\T1/lmr/m/n/10.95 (-20) l'identifiant d'ins-tance suit le for-mat \T1/lmtt/m/n/10.95 "Runtime Instance: rpi_env2_linux_<horodatage>" \T1/lmr/m/n/10.95 (-20) :
  []
 
 [21] [22]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 192.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 194.
  [23] [24]
-Underfull \hbox (badness 1033) in paragraph at lines 313--313
+Underfull \hbox (badness 1033) in paragraph at lines 315--315
 []|\T1/lmtt/m/n/10 /home/discover/ 
  []
 
 
-Underfull \hbox (badness 1418) in paragraph at lines 313--313
+Underfull \hbox (badness 1418) in paragraph at lines 315--315
 \T1/lmtt/m/n/10 Ransomware3.0/ 
  []
 
 
-Underfull \hbox (badness 3872) in paragraph at lines 313--313
+Underfull \hbox (badness 3872) in paragraph at lines 315--315
 \T1/lmtt/m/n/10 ollama/v1/ 
  []
 
 
-Underfull \hbox (badness 3471) in paragraph at lines 366--366
+Underfull \hbox (badness 3471) in paragraph at lines 368--368
 []|\T1/lmtt/m/n/10 choices[0]. 
  []
 
 [25]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 464.
+(Font)              <9> on input line 466.
  [26] [27]) [28] [29] (latex-files/conclusion.tex) [30
 
 
@@ -2696,15 +2696,15 @@ Package logreq Info: Writing requests to 'rapportUTT.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 67085 strings out of 467871
- 1440754 string characters out of 5418376
+ 67089 strings out of 467871
+ 1440796 string characters out of 5418376
  2979038 words of memory out of 5000000
  94436 multiletter control sequences out of 15000+600000
- 742272 words of font info for 235 fonts, out of 8000000 for 9000
+ 742516 words of font info for 237 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  114i,14n,131p,2522b,2954s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt8.pfb>
-Output written on rapportUTT.pdf (43 pages, 3480009 bytes).
+Output written on rapportUTT.pdf (43 pages, 3482646 bytes).
 PDF statistics:
  765 PDF objects out of 1000 (max. 8388607)
  159 named destinations out of 1000 (max. 500000)
