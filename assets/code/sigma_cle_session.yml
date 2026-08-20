@@ -1,0 +1,13 @@
+title: PromptLock - Fuite de cle de session en clair dans les journaux
+description: >
+  Detecte la presence du motif de fuite de cle de session confirme en
+  analyse statique et dynamique : le malware affiche sa cle de chiffrement
+  symetrique en clair sur stdout au demarrage, au format "Hex key: <32 hex>".
+  Necessite que la sortie standard des processus soit collectee par
+  l'environnement de journalisation (journald, EDR avec capture stdout).
+detection:
+  selection_keyleak:
+    Message|contains: 'Hex key:'
+  selection_instance:
+    Message|contains: 'Runtime Instance:'
+  condition: 1 of selection_*

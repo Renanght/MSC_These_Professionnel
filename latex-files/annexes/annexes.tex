@@ -1,8 +1,62 @@
 \appendix
 \chapter{Annexes}
 
-\section{Captures d'écran}
+\section{Règle YARA de détection de l'enveloppe Go}
+\label{sec:annexe-yara}
 
-\section{Formules chimiques}
+\lstinputlisting[style=codestyle,
+                 caption={Règle YARA \texttt{Filecoder\_PromptLock\_A}},
+                 label={lst:annexe-yara}]{assets/code/promptlock.yar}
 
-\section{Extraits de code source}
+\FloatBarrier
+\section{Règles Sigma}
+\label{sec:annexe-sigma}
+
+Les cinq règles dérivées de l'analyse dynamique (section~\ref{subsec:analyse-dynamique})
+sont reproduites ici dans leur forme YAML native.
+
+\lstinputlisting[style=codestyle,
+                 caption={Artefacts du pipeline},
+                 label={lst:sigma-artefacts}]{assets/code/sigma_artefacts_pipeline.yml}
+
+\clearpage
+
+\lstinputlisting[style=codestyle,
+                 caption={Clé de session en clair},
+                 label={lst:sigma-cle}]{assets/code/sigma_cle_session.yml}
+
+\lstinputlisting[style=codestyle,
+                 caption={Rafale HTTPS vers le port 8443},
+                 label={lst:sigma-port}]{assets/code/sigma_port_8443.yml}
+
+\lstinputlisting[style=codestyle,
+                 caption={Corrélation processus / réseau},
+                 label={lst:sigma-correlation}]{assets/code/sigma_correlation_reseau.yml}
+
+\lstinputlisting[style=codestyle,
+                 caption={Processus enfant \texttt{curl}},
+                 label={lst:sigma-curl}]{assets/code/sigma_curl_enfant.yml}
+
+\section{Plugin Volatility: LlmFinder}
+
+Exemple d'execution du plugin Volatility dérivé de l’analyse dynamique (section 2.2.2).
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{prompt}
+  \caption{Execution du Plugin filtré sur la recherche de prompts}
+  \label{fig:prompt}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{model}
+  \caption{Execution du Plugin filtré sur la recherche de modèles locaux}
+  \label{fig:model}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{network}
+  \caption{Execution du Plugin filtré sur la recherche d'artefacts réseaux}
+  \label{fig:network}
+\end{figure}

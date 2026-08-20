@@ -1,0 +1,12 @@
+title: PromptLock - Connexions HTTPS repetees vers port non standard
+description: >
+  Detecte un pattern de connexions HTTPS sortantes repetees vers le port
+  8443, coherent avec le pipeline invokeLLM qui interroge une API Ollama
+  a chaque iteration de chaque tache (6 taches x 8 iterations maximum
+  observees en laboratoire).
+detection:
+  selection:
+    DestinationPort: 8443
+    Initiated: 'true'
+  timeframe: 5m
+  condition: selection | count() by DestinationIp > 5

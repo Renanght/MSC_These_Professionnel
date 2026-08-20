@@ -97,7 +97,7 @@ La reconstruction du graphe d'appel donne l'organisation suivante :
 
 \begin{figure}[htbp]
   \centering
-  \includegraphics[height=0.50\textheight,keepaspectratio]{fig_promptlock_graphe_appel_annote}
+  \includegraphics[width=\linewidth,height=0.85\textheight,keepaspectratio]{fig_promptlock_graphe_appel_annote}
   \caption{Graphe d'appel reconstruit à l'aide de GoReSym et Ghidra, annoté
            selon le niveau de preuve associé à chaque fonction.}
   \label{fig:promptlock-graphe-appel}
@@ -178,41 +178,6 @@ Aucune tâche n'a abouti à un chiffrement de fichier observable au cours de ce 
 
 La détection proposée ici ne vise pas le code Lua généré par le modèle de langage, qui varie par construction d'une exécution à l'autre. Elle vise l'enveloppe qui pilote cette génération, le binaire Go lui-même, dont l'empreinte reste stable : le nom du modèle utilisé, les fragments de prompts codés en dur, les bibliothèques Lua embarquées. C'est le point que soulève Anton Cherepanov en présentant sa découverte. La charge finale a beau être composée dynamiquement par une intelligence artificielle, le programme qui orchestre cette génération, lui, laisse des marqueurs stables et détectables.
 
-% Le style codestyle de la classe active déjà breaklines : les lignes
-% longues sont coupées au lieu de déborder. La chaîne "reference" a été
-% scindée en deux champs pour rester lisible.
-\begin{lstlisting}[caption={Règle YARA ciblant l'enveloppe Go de PromptLock},
-                   label={lst:yara-promptlock}]
-rule Filecoder_PromptLock_A
-{
-    meta:
-        description = "Detecte l'enveloppe Go de PromptLock"
-        family      = "Filecoder.PromptLock.A"
-        author      = "GOHAUT Renan"
-        reference   = "ESET - Filecoder.PromptLock.A"
-        hash        = "09bf891b7b35b2081d3ebca8de715da07a70151227ab55aec1da26eb769c006f"
-        date        = "2025"
-
-    strings:
-        $model      = "gpt-oss:20b" ascii
-        $ollama_api = "/ollama/v1/chat/completions" ascii
-        $prompt_1   = "Implement the SPECK 128bit encryption algorithm" ascii
-        $prompt_2   = "Please provide Lua code wrapped in <code></code> tags" ascii
-        $lua_dep    = "yuin/gopher-lua" ascii
-        $lfs_dep    = "layeh.com/gopher-lfs" ascii
-        $bit32_dep  = "PeerDB-io/gluabit32" ascii
-        $log_1      = "target_file_list.log" ascii
-        $go_magic   = { 47 6F 20 62 75 69 6C 64 69 6E 66 3A }
-
-    condition:
-        uint32(0) == 0x464c457f and
-        $go_magic and
-        $model and
-        ( $ollama_api or 1 of ($prompt_*) ) and
-        2 of ($lua_dep, $lfs_dep, $bit32_dep, $log_1)
-}
-\end{lstlisting}
-
 La règle repose volontairement sur une combinaison de chaînes plutôt que sur un marqueur unique, pour limiter les faux positifs sur d'autres binaires Go qui embarqueraient \texttt{gopher-lua} à des fins parfaitement légitimes, l'écriture de scripts applicatifs par exemple. Reste qu'un test contre un corpus de binaires bénins est nécessaire pour mesurer ce taux de faux positifs en conditions réelles.
 
 \subsection{Règles Sigma}
@@ -227,21 +192,68 @@ Une règle YARA, aussi solide soit-elle, ne couvre qu'une moitié du problème :
     \item \textbf{Processus enfant \texttt{curl}} (confiance faible) : s'appuie sur le mécanisme de repli identifié dans les prompts codés en dur, qui indique au modèle la conduite à tenir si \texttt{curl} n'est pas disponible. Classée volontairement en confiance basse, puisque \texttt{curl} est un outil légitime omniprésent : la règle sert de corroboration, pas de détection autonome.
 \end{itemize}
 
-\subsection{Plugin Volatility3}
+\subsection{Plugin Volatility3: LlmFinder}
 
-Dans le cadre d'un projet de groupe mené au sein de nos cours, nous avons développé un plugin pour Volatility 3, orienté vers la détection en mémoire vive des traces d'intelligences artificielles locales. Le projet fait converger deux axes de travail : d'un côté les enseignements dispensés en analyse forensique mémoire, de l'autre les travaux menés pour ce mémoire sur PromptLock, rançongiciel qui exploite des modèles de langage locaux pour générer une partie de son comportement malveillant.
+Dans le cadre d'un projet de groupe mené au sein du Mastère, j'ai développé un plugin
+pour Volatility~3 orienté vers la détection en mémoire vive des traces d'intelligences
+artificielles locales. Le projet part de deux constats accumulés pendant l'année : ce
+qu'on apprend en forensique mémoire, et ce qu'on découvre en analysant PromptLock, un
+rançongiciel qui exploite un modèle de langage local pour générer une partie de son
+comportement malveillant.
 
-L'outil, nommé LlmFinder, répond à un besoin repéré pendant l'analyse : en réponse à incident, il est difficile de montrer qu'un modèle de langage local a été exécuté sur une machine compromise, que ce soit par Ollama, LM Studio, GPT4All, Jan ou llama.cpp. Ce type d'usage laisse peu de traces disque persistantes, et aucun plugin Volatility 3 existant ne le couvre.
+\subsubsection*{Pourquoi ce plugin}
 
-Les menaces qui s'appuient sur des modèles exécutés localement, à l'image de PromptLock, changent la donne pour l'investigation numérique. La logique malveillante n'est plus figée dans un binaire : elle est générée à la volée par un modèle interrogé en local, ce qui réduit fortement le rendement de l'analyse statique et de la détection par signature de fichier.
+En travaillant sur PromptLock, j'ai buté sur un problème concret : il est difficile, en
+réponse à incident, de montrer qu'un modèle de langage local a été exécuté sur une
+machine compromise. Qu'il s'agisse d'Ollama, LM Studio, GPT4All, Jan ou llama.cpp, ce
+type d'usage laisse peu de traces disque persistantes, et aucun plugin Volatility~3
+existant ne le couvre.
 
-La mémoire vive devient alors la source de preuve principale. Elle peut conserver, au moment de l'acquisition, ce qui n'existe jamais sous forme persistante sur le disque : le prompt envoyé au modèle, la réponse générée, le point de terminaison local interrogé, le processus qui a servi d'interface. LlmFinder exploite cette fenêtre d'observation pour donner à l'analyste des indices utilisables rapidement.
+Ce n'est pas un problème marginal. Les menaces qui s'appuient sur des modèles locaux
+changent la donne pour l'analyste : la logique malveillante n'est plus figée dans un
+binaire, elle est générée à la volée par un modèle interrogé en local, ce qui réduit
+fortement le rendement de l'analyse statique et de la détection par signature. La mémoire
+vive devient alors la source de preuve principale. Elle peut contenir, au moment de
+l'acquisition, ce qui n'a jamais existé de façon persistante sur le disque.
 
-Le plugin structure ses résultats sur quatre axes, qui suivent la chaîne d'usage d'un modèle local sur un système compromis. Les processus d'abord, avec l'identification de ceux qui correspondent à des applications d'intelligence artificielle locale connues, ce qui établit la présence d'un moteur de génération sur la machine analysée. Les modèles ensuite, par la détection en mémoire de chemins de modèles, qui indiquent lesquels étaient réellement chargés au moment de la compromission. Le réseau, avec les points de terminaison locaux liés aux interfaces de programmation d'intelligence artificielle : des communications internes entre un processus tiers et le moteur de génération signalent souvent un usage programmatique plutôt qu'interactif. Les prompts enfin, qu'ils aient été soumis par une interface graphique, une interface de programmation locale ou un terminal. C'est la pièce la plus directement exploitable pour reconstituer l'intention et le comportement du code malveillant.
+\subsubsection*{Ce que LlmFinder extrait}
 
-Mises bout à bout, ces quatre familles d'informations reconstituent une chaîne cohérente à partir d'une simple image mémoire : quel processus a sollicité quel modèle, par quel canal, avec quel contenu. L'approche convient bien aux menaces de type PromptLock, où la preuve de compromission ne réside pas dans un artefact statique mais dans l'interaction dynamique entre un binaire et un modèle local.
+Le plugin structure l'investigation autour de trois familles d'informations, qui suivent
+la chaîne d'usage d'un modèle local sur un système compromis.
 
-LlmFinder fournit des indices forensiques, pas des conclusions automatiques. Il ne suffit pas à établir qu'une action malveillante a eu lieu : ses résultats doivent être corrélés avec les autres artefacts, chronologie des événements, processus en cours, fichiers présents, connexions réseau, puis replacés dans le contexte global de l'investigation.
+\textbf{Les modèles} LlmFinder détecte en mémoire les chemins de fichiers de modèles
+(\texttt{.gguf}, \texttt{.bin} ou équivalents) et identifie les processus correspondant
+à des applications d'IA locale connues. On sait ainsi qu'un moteur de génération était
+présent sur la machine, et lesquels étaient réellement chargés au moment de
+l'acquisition.
+
+\textbf{Les échanges réseau locaux} Le plugin repère les points de terminaison liés
+aux interfaces d'IA locale (\texttt{localhost:11434}, \texttt{localhost:1234}, etc.).
+Quand un processus tiers communique avec un moteur de génération local, c'est rarement
+un usage interactif. C'est précisément le schéma observé avec PromptLock.
+
+\textbf{Les prompts} C'est la pièce la plus directement exploitable. LlmFinder
+recherche en mémoire les chaînes de caractères correspondant à des échanges avec le
+modèle, qu'ils aient transité par une interface graphique, une API locale ou un terminal.
+Retrouver le prompt envoyé au modèle permet de reconstituer ce qui a été demandé, et
+donc l'intention réelle du code malveillant.
+
+\subsubsection*{Utilisation}
+
+Le plugin s'utilise de deux façons. Sans argument de filtre, il restitue les trois
+familles en une seule passe. C'est le mode par défaut, adapté à une première exploration
+d'une image mémoire inconnue. On peut aussi cibler une famille précise --- modèles,
+réseau ou prompts --- pour concentrer l'investigation ou réduire le bruit sur une machine
+où plusieurs applications d'IA coexistent.
+
+\subsubsection*{Ce que LlmFinder ne fait pas}
+
+LlmFinder fournit des indices forensiques, pas des conclusions. Ses résultats doivent
+être corrélés avec les autres artefacts de l'investigation : chronologie, processus
+actifs, fichiers présents, connexions réseau. Ce n'est qu'une fois replacés dans ce
+contexte qu'ils deviennent utilisables. Mis bout à bout, les trois familles donnent
+néanmoins une chaîne cohérente à partir d'une simple image mémoire : quel processus a
+sollicité quel modèle, par quel canal, avec quel contenu.
 
 \subsection{Indices de compromission}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  19 AUG 2026 22:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.3.12)  20 AUG 2026 22:32
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -2198,7 +2198,7 @@ Chapitre 2.
 [15
 
 ]
-<assets/img/fig_promptlock_chaine_execution.jpg, id=319, 491.436pt x 715.473pt>
+<assets/img/fig_promptlock_chaine_execution.jpg, id=325, 491.436pt x 715.473pt>
 File: assets/img/fig_promptlock_chaine_execution.jpg Graphic file (type jpg)
 <use assets/img/fig_promptlock_chaine_execution.jpg>
 Package pdftex.def Info: assets/img/fig_promptlock_chaine_execution.jpg  used on input line 56.
@@ -2209,55 +2209,43 @@ Overfull \hbox (17.60316pt too wide) in paragraph at lines 75--76
  []
 
 [17]
-<assets/img/fig_promptlock_graphe_appel_annote.jpg, id=332, 491.436pt x 946.737pt>
+<assets/img/fig_promptlock_graphe_appel_annote.jpg, id=338, 491.436pt x 946.737pt>
 File: assets/img/fig_promptlock_graphe_appel_annote.jpg Graphic file (type jpg)
 <use assets/img/fig_promptlock_graphe_appel_annote.jpg>
 Package pdftex.def Info: assets/img/fig_promptlock_graphe_appel_annote.jpg  used on input line 100.
-(pdftex.def)             Requested size: 181.81348pt x 350.25362pt.
+(pdftex.def)             Requested size: 309.0889pt x 595.4507pt.
  [18] [19 <./assets/img/fig_promptlock_graphe_appel_annote.jpg>] [20]
 Overfull \hbox (37.59248pt too wide) in paragraph at lines 149--150
 []\T1/lmr/m/n/10.95 (-20) l'identifiant d'ins-tance suit le for-mat \T1/lmtt/m/n/10.95 "Runtime Instance: rpi_env2_linux_<horodatage>" \T1/lmr/m/n/10.95 (-20) :
  []
 
 [21] [22]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 185.
-LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 189.
- (C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmtt.fd
-File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: TS1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-Package microtype Info: Character `texttrademark ' is missing
-(microtype)             in font `TS1/lmtt/m/n/8'.
-(microtype)             Ignoring protrusion settings for this character.
- [23]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 227.
- [24]
-Underfull \hbox (badness 1033) in paragraph at lines 301--301
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 192.
+ [23] [24]
+Underfull \hbox (badness 1033) in paragraph at lines 313--313
 []|\T1/lmtt/m/n/10 /home/discover/ 
  []
 
 
-Underfull \hbox (badness 1418) in paragraph at lines 301--301
+Underfull \hbox (badness 1418) in paragraph at lines 313--313
 \T1/lmtt/m/n/10 Ransomware3.0/ 
  []
 
 
-Underfull \hbox (badness 3872) in paragraph at lines 301--301
+Underfull \hbox (badness 3872) in paragraph at lines 313--313
 \T1/lmtt/m/n/10 ollama/v1/ 
  []
 
-[25]
-Underfull \hbox (badness 3471) in paragraph at lines 354--354
+
+Underfull \hbox (badness 3471) in paragraph at lines 366--366
 []|\T1/lmtt/m/n/10 choices[0]. 
  []
 
+[25]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 452.
-[26] [27]) [28] [29] (latex-files/conclusion.tex) [30
+(Font)              <9> on input line 464.
+ [26] [27]) [28] [29] (latex-files/conclusion.tex) [30
 
 
 ]
@@ -2275,10 +2263,407 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has be
 l.183     \clearpage
                      [2] (latex-files/annexes/annexes.tex
 Annexe A.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 9.
+(assets/code/promptlock.yar) (assets/code/sigma_artefacts_pipeline.yml
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 5.
+ (C:\Users\gohau\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmtt.fd
+File: ts1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package microtype Info: Character `texttrademark ' is missing
+(microtype)             in font `TS1/lmtt/m/n/8'.
+(microtype)             Ignoring protrusion settings for this character.
 ) [1
 
 
+
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.4}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.5}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.6}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.7}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.8}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.9}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.10}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.11}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.12}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.13}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.14}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.15}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.16}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.22 \clearpage
+               ] (assets/code/sigma_cle_session.yml
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 title:
+           PromptLock - Fuite de cle de session en clair dans les journaux
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 description:
+                 >
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.3  
+      Detecte la presence du motif de fuite de cle de session confirme en
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4  
+      analyse statique et dynamique : le malware affiche sa cle de chiffrement
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.5  
+      symetrique en clair sur stdout au demarrage, au format "Hex key: <32 h...
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.6}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6  
+      Necessite que la sortie standard des processus soit collectee par
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.7}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.7  
+      l'environnement de journalisation (journald, EDR avec capture stdout).
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.8}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.8 detection:
+              
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.9}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.9  
+      selection_keyleak:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.10}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.10  
+         Message|contains: 'Hex key:'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.11}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.11  
+       selection_instance:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.12}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.12  
+         Message|contains: 'Runtime Instance:'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.13}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.13  
+       condition: 1 of selection_*) (assets/code/sigma_port_8443.yml
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 title:
+           PromptLock - Connexions HTTPS repetees vers port non standard
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 description:
+                 >
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.3  
+      Detecte un pattern de connexions HTTPS sortantes repetees vers le port
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4  
+      8443, coherent avec le pipeline invokeLLM qui interroge une API Ollama
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.5  
+      a chaque iteration de chaque tache (6 taches x 8 iterations maximum
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.6}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6  
+      observees en laboratoire).
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.7}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.7 detection:
+              
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.8}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.8  
+      selection:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.9}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.9  
+        DestinationPort: 8443
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.10}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.10  
+         Initiated: 'true'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.11}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.11  
+       timeframe: 5m
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.12}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.12  
+       condition: selection | count() by DestinationIp > 5) (assets/code/sigma_correlation_reseau.yml
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 title:
+           PromptLock - Execution ELF suivie d'une rafale de connexions TLS
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 description:
+                 >
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.3  
+      Correlation temporelle entre le lancement d'un processus ELF et
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4  
+      l'ouverture de multiples connexions TLS sortantes en quelques secondes,
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.5  
+      coherent avec main.main lancant sequentiellement 6 taches invoquant
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.6}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6  
+      chacune l'API LLM. Necessite un backend Sigma supportant les
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.7}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.7  
+      correlations temporelles (near).
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.8}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.8 detection:
+              
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.9}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.9  
+      selection_proc:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.10}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.10  
+         category: process_creation
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.11}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.11  
+         Image|endswith: '.elf'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.12}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.12  
+       selection_net:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.13}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.13  
+         category: network_connection
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.14}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.14  
+         DestinationPort: 8443
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.15}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.15  
+       condition: selection_proc | near selection_net) (assets/code/sigma_curl_enfant.yml
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.1 title:
+           PromptLock - Processus enfant curl depuis binaire non standard
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.2}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.2 description:
+                 >
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.3}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.3  
+      Detecte le lancement de curl comme fils d'un binaire non identifie
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.4}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.4  
+      comme utilitaire systeme, coherent avec le fallback "nocurl" observe
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.5}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.5  
+      dans les prompts codes en dur : le code Lua genere peut invoquer curl
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.6}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.6  
+      pour des operations de reconnaissance ou de transmission. A utiliser
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.7}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.7  
+      uniquement en corroboration d'autres regles -- jamais seul.
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.8}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.8 detection:
+              
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.9}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.9  
+      selection_child:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.10}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.10  
+         Image|endswith: '/curl'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.11}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.11  
+       filter_common_parents:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.12}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.12  
+         ParentImage|endswith:
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.13}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.13  
+           - '/bash'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.14}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.14  
+           - '/sh'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.15}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.15  
+           - '/systemd'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.16}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.16  
+           - '/cron'
+pdfTeX warning (ext4): destination with the same identifier (name{lstnumber.17}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.17  
+       condition: selection_child and not filter_common_parents)
+<assets/img/prompt.png, id=494, 1904.11375pt x 639.38875pt>
+File: assets/img/prompt.png Graphic file (type png)
+<use assets/img/prompt.png>
+Package pdftex.def Info: assets/img/prompt.png  used on input line 45.
+(pdftex.def)             Requested size: 452.95808pt x 152.10031pt.
+ [2
+
 ]
+<assets/img/model.png, id=504, 1894.07625pt x 301.125pt>
+File: assets/img/model.png Graphic file (type png)
+<use assets/img/model.png>
+Package pdftex.def Info: assets/img/model.png  used on input line 52.
+(pdftex.def)             Requested size: 452.96912pt x 72.01416pt.
+<assets/img/network.png, id=505, 1596.96625pt x 271.0125pt>
+File: assets/img/network.png Graphic file (type png)
+<use assets/img/network.png>
+Package pdftex.def Info: assets/img/network.png  used on input line 59.
+(pdftex.def)             Requested size: 452.97139pt x 76.8713pt.
+) [3 <./assets/img/prompt.png (PNG copy)> <./assets/img/model.png (PNG copy)> <./assets/img/network.png (PNG copy)>]
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
@@ -2311,17 +2696,17 @@ Package logreq Info: Writing requests to 'rapportUTT.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 66819 strings out of 467871
- 1436005 string characters out of 5418376
- 2797367 words of memory out of 5000000
- 94198 multiletter control sequences out of 15000+600000
- 742178 words of font info for 234 fonts, out of 8000000 for 9000
+ 67085 strings out of 467871
+ 1440754 string characters out of 5418376
+ 2979038 words of memory out of 5000000
+ 94436 multiletter control sequences out of 15000+600000
+ 742272 words of font info for 235 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  114i,14n,131p,2522b,2954s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/gohau/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt8.pfb>
-Output written on rapportUTT.pdf (41 pages, 3164180 bytes).
+Output written on rapportUTT.pdf (43 pages, 3480009 bytes).
 PDF statistics:
- 747 PDF objects out of 1000 (max. 8388607)
- 157 named destinations out of 1000 (max. 500000)
- 66425 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 765 PDF objects out of 1000 (max. 8388607)
+ 159 named destinations out of 1000 (max. 500000)
+ 66440 words of extra memory for PDF output out of 74296 (max. 10000000)
 

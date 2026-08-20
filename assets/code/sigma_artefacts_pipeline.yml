@@ -1,0 +1,16 @@
+title: PromptLock - Creation sequentielle des artefacts du pipeline LLM
+description: >
+  Detecte la creation, dans une fenetre de temps courte et dans un meme
+  repertoire, de plusieurs fichiers caracteristiques du pipeline
+  d'orchestration de PromptLock.
+date: 2026-08-04
+detection:
+  selection:
+    TargetFilename|endswith:
+      - 'target_file_list.log'
+      - 'target_file_info.log'
+      - 'target_file_summary.log'
+      - 'scan.log'
+      - 'payloads.txt'
+      - 'note.txt'
+  condition: selection

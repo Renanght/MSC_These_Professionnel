@@ -1,0 +1,17 @@
+title: PromptLock - Processus enfant curl depuis binaire non standard
+description: >
+  Detecte le lancement de curl comme fils d'un binaire non identifie
+  comme utilitaire systeme, coherent avec le fallback "nocurl" observe
+  dans les prompts codes en dur : le code Lua genere peut invoquer curl
+  pour des operations de reconnaissance ou de transmission. A utiliser
+  uniquement en corroboration d'autres regles -- jamais seul.
+detection:
+  selection_child:
+    Image|endswith: '/curl'
+  filter_common_parents:
+    ParentImage|endswith:
+      - '/bash'
+      - '/sh'
+      - '/systemd'
+      - '/cron'
+  condition: selection_child and not filter_common_parents

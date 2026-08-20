@@ -1,0 +1,15 @@
+title: PromptLock - Execution ELF suivie d'une rafale de connexions TLS
+description: >
+  Correlation temporelle entre le lancement d'un processus ELF et
+  l'ouverture de multiples connexions TLS sortantes en quelques secondes,
+  coherent avec main.main lancant sequentiellement 6 taches invoquant
+  chacune l'API LLM. Necessite un backend Sigma supportant les
+  correlations temporelles (near).
+detection:
+  selection_proc:
+    category: process_creation
+    Image|endswith: '.elf'
+  selection_net:
+    category: network_connection
+    DestinationPort: 8443
+  condition: selection_proc | near selection_net
